@@ -55,3 +55,4 @@ dkms.conf
 *.DS_Store
 *.zip
 *.bz2
+.DS_Store

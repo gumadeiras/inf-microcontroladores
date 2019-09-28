@@ -56,7 +56,7 @@ int main(int argc,char * argv[])
         puts("Waiting for interrupt... (button, then touch)");
 
         pputs("/sys/class/gpio/gpio6/edge","falling");
-        pputs("/sys/class/gpio/gpio62/edge","both");
+        pputs("/sys/class/gpio/gpio62/edge","falling");
 
         int interrupts_b = 0;
         int interrupts_t = 0;

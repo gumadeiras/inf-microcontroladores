@@ -1,0 +1,1 @@
+printup.o: printup.s

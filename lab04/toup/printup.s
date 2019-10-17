@@ -41,6 +41,7 @@ printup:
 	xor	ah,'a
 	not	ah
 	cld
+
 L1:	lods	al,byte ptr[esi]
 	and	al,ah
 	jz	strend
@@ -49,7 +50,6 @@ L1:	lods	al,byte ptr[esi]
 	jmp	L1
 
 strend:
-
 	push	ecx		# message length
 	push	[ebp+8]		# pointer to message to write
 

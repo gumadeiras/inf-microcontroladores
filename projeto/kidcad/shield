@@ -1,0 +1,9 @@
+Reference, Quantity, Value, Footprint, Datasheet
+C1 C2 C3 C4 ,4,"22pF","Capacitor_THT:C_Disc_D3.8mm_W2.6mm_P2.50mm","~"
+J1 J2 ,2,"Conn_01x04_Male","Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical","~"
+J3 ,1,"Conn_01x03_Male","Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical","~"
+R1 R2 ,2,"1M","Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal","~"
+U1 U2 ,2,"LS7366R","Package_DIP:DIP-14_W7.62mm",""
+U4 ,1,"IBT-2","Connector_PinSocket_2.54mm:PinSocket_2x04_P2.54mm_Horizontal",""
+XA1 ,1,"Galileo_Gen2_Shield","Arduino:Arduino_Uno_Shield","https://store.arduino.cc/arduino-uno-rev3"
+Y1 Y2 ,2,"30MHz","Crystal:Crystal_HC49-U_Vertical","~"

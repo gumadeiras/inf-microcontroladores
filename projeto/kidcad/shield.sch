@@ -404,8 +404,6 @@ Wire Wire Line
 	4500 6650 4750 6650
 Wire Wire Line
 	4500 6800 4750 6800
-NoConn ~ 4500 6350
-NoConn ~ 4500 6500
 Text GLabel 4750 6200 2    50   Input ~ 0
 EN_PWM_L
 Text GLabel 4750 6050 2    50   Input ~ 0
@@ -492,16 +490,10 @@ F 3 "" H 6400 1750 50  0001 C CNN
 	1    6400 1750
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	6400 4450 6400 4700
 Text GLabel 7350 1700 2    50   Input ~ 0
 A_ENC1
 Text GLabel 7350 1800 2    50   Input ~ 0
 B_ENC1
-NoConn ~ 3750 6350
-NoConn ~ 3750 6500
-NoConn ~ 3750 6650
-NoConn ~ 3750 6800
 Text Notes 3650 6350 2    50   ~ 0
 PWR_GND
 Text Notes 3650 6500 2    50   ~ 0
@@ -524,14 +516,7 @@ NoConn ~ 9500 4850
 NoConn ~ 6900 4050
 NoConn ~ 9500 4450
 NoConn ~ 9500 4550
-Wire Wire Line
-	6900 4450 6400 4450
-Wire Wire Line
-	6900 4450 6900 4550
-Connection ~ 6900 4450
 NoConn ~ 9500 4750
-Wire Wire Line
-	6900 4350 6900 4450
 NoConn ~ 6900 3050
 NoConn ~ 9500 4250
 NoConn ~ 6900 3150
@@ -634,7 +619,7 @@ U 1 1 5DC9D2F8
 P 7150 1800
 F 0 "J1" H 7258 2081 50  0000 C CNN
 F 1 "Conn_01x04_Male" H 7258 1990 50  0000 C CNN
-F 2 "" H 7150 1800 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 7150 1800 50  0001 C CNN
 F 3 "~" H 7150 1800 50  0001 C CNN
 	1    7150 1800
 	1    0    0    -1  
@@ -645,7 +630,7 @@ U 1 1 5DC9E500
 P 8000 1800
 F 0 "J2" H 8108 2081 50  0000 C CNN
 F 1 "Conn_01x04_Male" H 8108 1990 50  0000 C CNN
-F 2 "" H 8000 1800 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 8000 1800 50  0001 C CNN
 F 3 "~" H 8000 1800 50  0001 C CNN
 	1    8000 1800
 	1    0    0    -1  
@@ -654,4 +639,20 @@ Text GLabel 7350 2000 2    50   Input ~ 0
 VCC
 Text GLabel 8200 2000 2    50   Input ~ 0
 VCC
+Wire Wire Line
+	6400 4550 6400 4700
+Wire Wire Line
+	6400 4550 6800 4550
+Wire Wire Line
+	6900 4450 6800 4450
+Wire Wire Line
+	6800 4450 6800 4550
+Connection ~ 6800 4550
+Wire Wire Line
+	6800 4550 6900 4550
+Wire Wire Line
+	6900 4350 6800 4350
+Wire Wire Line
+	6800 4350 6800 4450
+Connection ~ 6800 4450
 $EndSCHEMATC

@@ -494,20 +494,9 @@ F 3 "" H 6400 1750 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	6400 4450 6400 4700
-$Comp
-L Connector:Conn_01x03_Male J1
-U 1 1 5DC66049
-P 7100 1800
-F 0 "J1" H 7208 2081 50  0000 C CNN
-F 1 "Conn_01x03_Male" H 7208 1990 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 7100 1800 50  0001 C CNN
-F 3 "~" H 7100 1800 50  0001 C CNN
-	1    7100 1800
-	1    0    0    -1  
-$EndComp
-Text GLabel 7300 1700 2    50   Input ~ 0
+Text GLabel 7350 1700 2    50   Input ~ 0
 A_ENC1
-Text GLabel 7300 1800 2    50   Input ~ 0
+Text GLabel 7350 1800 2    50   Input ~ 0
 B_ENC1
 NoConn ~ 3750 6350
 NoConn ~ 3750 6500
@@ -521,24 +510,13 @@ Text Notes 3650 6650 2    50   ~ 0
 MOTOR_VDD
 Text Notes 3650 6800 2    50   ~ 0
 MOTOR_GND
-Text GLabel 7300 1900 2    50   Input ~ 0
+Text GLabel 7350 1900 2    50   Input ~ 0
 GND
-$Comp
-L Connector:Conn_01x03_Male J2
-U 1 1 5DC76E8E
-P 7950 1800
-F 0 "J2" H 8058 2081 50  0000 C CNN
-F 1 "Conn_01x03_Male" H 8058 1990 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 7950 1800 50  0001 C CNN
-F 3 "~" H 7950 1800 50  0001 C CNN
-	1    7950 1800
-	1    0    0    -1  
-$EndComp
-Text GLabel 8150 1700 2    50   Input ~ 0
+Text GLabel 8200 1700 2    50   Input ~ 0
 A_ENC2
-Text GLabel 8150 1800 2    50   Input ~ 0
+Text GLabel 8200 1800 2    50   Input ~ 0
 B_ENC2
-Text GLabel 8150 1900 2    50   Input ~ 0
+Text GLabel 8200 1900 2    50   Input ~ 0
 GND
 NoConn ~ 9500 4050
 NoConn ~ 9500 4150
@@ -636,18 +614,44 @@ Wire Wire Line
 $Comp
 L Connector:Conn_01x03_Male J3
 U 1 1 5DC8B140
-P 8750 1800
-F 0 "J3" H 8858 2081 50  0000 C CNN
-F 1 "Conn_01x03_Male" H 8858 1990 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 8750 1800 50  0001 C CNN
-F 3 "~" H 8750 1800 50  0001 C CNN
-	1    8750 1800
+P 8850 1800
+F 0 "J3" H 8958 2081 50  0000 C CNN
+F 1 "Conn_01x03_Male" H 8958 1990 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 8850 1800 50  0001 C CNN
+F 3 "~" H 8850 1800 50  0001 C CNN
+	1    8850 1800
 	1    0    0    -1  
 $EndComp
-Text GLabel 8950 1700 2    50   Input ~ 0
+Text GLabel 9050 1700 2    50   Input ~ 0
 LIMIT_1
-Text GLabel 8950 1800 2    50   Input ~ 0
+Text GLabel 9050 1800 2    50   Input ~ 0
 LIMIT_2
-Text GLabel 8950 1900 2    50   Input ~ 0
+Text GLabel 9050 1900 2    50   Input ~ 0
 GND
+$Comp
+L Connector:Conn_01x04_Male J1
+U 1 1 5DC9D2F8
+P 7150 1800
+F 0 "J1" H 7258 2081 50  0000 C CNN
+F 1 "Conn_01x04_Male" H 7258 1990 50  0000 C CNN
+F 2 "" H 7150 1800 50  0001 C CNN
+F 3 "~" H 7150 1800 50  0001 C CNN
+	1    7150 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x04_Male J2
+U 1 1 5DC9E500
+P 8000 1800
+F 0 "J2" H 8108 2081 50  0000 C CNN
+F 1 "Conn_01x04_Male" H 8108 1990 50  0000 C CNN
+F 2 "" H 8000 1800 50  0001 C CNN
+F 3 "~" H 8000 1800 50  0001 C CNN
+	1    8000 1800
+	1    0    0    -1  
+$EndComp
+Text GLabel 7350 2000 2    50   Input ~ 0
+VCC
+Text GLabel 8200 2000 2    50   Input ~ 0
+VCC
 $EndSCHEMATC

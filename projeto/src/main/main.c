@@ -29,8 +29,15 @@
 
 #include <galileo2io.h>
 
-#define PWM_PERIOD "1000000" // 1000Hz
+#define PWM_PERIOD "1000000" // 1kHz
 #define PWM_HALF_P "500000"
+
+#define PIN_PWM_PERIOD  "/sys/class/pwm/pwmchip0/device/pwm_period"
+#define PIN_PWM_ENABLE  "/sys/class/pwm/pwmchip0/pwm1/enable"
+#define PIN_PWM_DUTY    "/sys/class/pwm/pwmchip0/pwm1/duty_cycle"
+#define PIN_PWM_EN_L    "/sys/class/gpio/gpio6/value"
+#define PIN_PWM_EN_R    "/sys/class/gpio/gpio13/value"
+
 
 int main(int argc, char const *argv[])
 {
@@ -58,8 +65,6 @@ int main(int argc, char const *argv[])
     }
 
     pputs(PIN_PWM_PERIOD, PWM_PERIOD);
-
-
 
     /* SET DUTY TO ZERO (OPEN CIRCUIT)*/
     /* SET ENABLE SIGNALS*/

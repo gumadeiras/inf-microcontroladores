@@ -23,7 +23,7 @@
 */
 
 
-#include <ibt.h>
+#include <motor.h>
 
 int set_motor_stop()
 {

@@ -29,20 +29,14 @@
 
 #include <galileo2io.h>
 
-#define PWM_PERIOD 1000000 // 1000Hz
-#define PWM_HALF_P 500000
-
-#define PIN_PWM_PERIOD  "/sys/class/pwm/pwmchip0/device/pwm_period"
-#define PIN_PWM_ENABLE  "/sys/class/pwm/pwmchip0/pwm1/enable"
-#define PIN_PWM_DUTY    "/sys/class/pwm/pwmchip0/pwm1/duty_cycle"
-#define PIN_PWM_EN_L    "/sys/class/gpio/gpio6/value"
-#define PIN_PWM_EN_R    "/sys/class/gpio/gpio13/value"
-
+#define PWM_PERIOD "1000000" // 1000Hz
+#define PWM_HALF_P "500000"
 
 int main(int argc, char const *argv[])
 {
     int duty_cycle;
     char str[100];
+    int scale;
         
     if(argc != 2)
     {
@@ -50,57 +44,62 @@ int main(int argc, char const *argv[])
         return -1;
     }
 
-    duty_cycle = atof(argv[1]) * 10000
+    duty_cycle = atof(argv[1]);
+    scale      = 10000.;
 
     if (duty_cycle < 0)
     {
         puts("duty cycle value has to be in the range (0-100); setting to 0");
         duty_cycle = 0;
-    } else if (duty_cycle > 100)
+    } else if (duty_cycle > 100 )
     {
         puts("duty cycle value has to be in the range (0-100); setting to 100");
         duty_cycle = 100;
     }
 
-    pputs(PIN_PWM_PERIOD, itoa(PWM_PERIOD));
+    pputs(PIN_PWM_PERIOD, PWM_PERIOD);
 
 
-    snprintf(str, sizeof str, "%d\n", duty_cycle);
 
     /* SET DUTY TO ZERO (OPEN CIRCUIT)*/
     /* SET ENABLE SIGNALS*/
     /* SET REAL DUTY*/
 
+    pputs(PIN_PWM_ENABLE,"1");
     if (duty_cycle < 50)
     {
         /* set motor_ccw */
-        pputs(PIN_PWM_DUTY, itoa(0));
-        pputs(PIN_PWM_EN_L, itoa(0));
-        pputs(PIN_PWM_EN_R, itoa(1));
+
+        snprintf(str, sizeof str, "%d\n", duty_cycle * 2 * scale);
+        pputs(PIN_PWM_DUTY, "0");
+        pputs(PIN_PWM_EN_L, "0");
+        pputs(PIN_PWM_EN_R, "1");
         pputs(PIN_PWM_DUTY, str);
-        pputs(PIN_PWM_ENABLE,"1");
         sleep(5);
 
     } else if (duty_cycle > 50)
     {
         /* set motor_cw */
-        pputs(PIN_PWM_DUTY, itoa(0));
-        pputs(PIN_PWM_EN_R, itoa(0));
-        pputs(PIN_PWM_EN_L, itoa(1));
+
+        snprintf(str, sizeof str, "%d\n", (duty_cycle - 51) * 2 * scale);
+        pputs(PIN_PWM_DUTY, "0");
+        pputs(PIN_PWM_EN_R, "0");
+        pputs(PIN_PWM_EN_L, "1");
         pputs(PIN_PWM_DUTY, str);
-        pputs(PIN_PWM_ENABLE,"1");
         sleep(5);
 
     } else
     {
         /* set motor_stop */
-        pputs(PIN_PWM_DUTY, itoa(0));
-        pputs(PIN_PWM_EN_L, itoa(0));
-        pputs(PIN_PWM_EN_R, itoa(0));
+
+        snprintf(str, sizeof str, "%d\n", 0);
+        pputs(PIN_PWM_DUTY, "0");
+        pputs(PIN_PWM_EN_L, "0");
+        pputs(PIN_PWM_EN_R, "0");
         pputs(PIN_PWM_DUTY, str);
-        pputs(PIN_PWM_ENABLE,"1");
         sleep(5);
     }
+    pputs(PIN_PWM_ENABLE,"0");
 
     return 0;
 }

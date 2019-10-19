@@ -1,7 +1,7 @@
 /*
-  ibt.h: helper functions to operate the motor through the IBT-2 H-Bridge
+  motor.h: helper functions to operate the motor using the IBT-2 H-Bridge
   
-  Copyright (c) 2019 Gustavo Santana <wgmsantana@inf.ufrgs.br>
+  Copyright (c) 2019 Gustavo Madeira Santana <gmsantana@inf.ufrgs.br>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,19 +22,33 @@
 
 */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <unistd.h>
 
+#include <galileo2io.h>
+
+#define PWM_PERIOD "1000000" // 1kHz
+#define PWM_HALF_P "500000"
+
+#define PIN_PWM_PERIOD  "/sys/class/pwm/pwmchip0/device/pwm_period"
+#define PIN_PWM_ENABLE  "/sys/class/pwm/pwmchip0/pwm1/enable"
+#define PIN_PWM_DUTY    "/sys/class/pwm/pwmchip0/pwm1/duty_cycle"
+#define PIN_PWM_EN_L    "/sys/class/gpio/gpio6/value"
+#define PIN_PWM_EN_R    "/sys/class/gpio/gpio13/value"
 
 // set motor direction as stop
 int set_motor_stop();
 
 // set motor direction to clockwise
-int set_motor_cw();
+int set_motor_cw(char str)
 
 // set motor direction to counterclockwise
-int set_motor_ccw();
-
-// set motor voltage
-int set_motor_voltage();
+int set_motor_ccw(char str)
 
 // set duty cycle
-int set_pwm_duty_cycle();
+int set_pwm_duty_cycle_percentage(int percentage)
+
+// set motor voltage
+int set_motor_voltage(int voltage)

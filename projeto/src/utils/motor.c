@@ -1,5 +1,5 @@
 /*
-  ibt.c: helper functions to operate the motor through the IBT-2 H-Bridge
+  motor.c: helper functions to operate the motor using the IBT-2 H-Bridge
   
   Copyright (c) 2019 Gustavo Santana <wgmsantana@inf.ufrgs.br>
 
@@ -23,21 +23,6 @@
 */
 
 #include <motor.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <unistd.h>
-
-#include <galileo2io.h>
-
-#define PWM_PERIOD "1000000" // 1kHz
-#define PWM_HALF_P "500000"
-
-#define PIN_PWM_PERIOD  "/sys/class/pwm/pwmchip0/device/pwm_period"
-#define PIN_PWM_ENABLE  "/sys/class/pwm/pwmchip0/pwm1/enable"
-#define PIN_PWM_DUTY    "/sys/class/pwm/pwmchip0/pwm1/duty_cycle"
-#define PIN_PWM_EN_L    "/sys/class/gpio/gpio6/value"
-#define PIN_PWM_EN_R    "/sys/class/gpio/gpio13/value"
 
 int set_motor_stop()
 {

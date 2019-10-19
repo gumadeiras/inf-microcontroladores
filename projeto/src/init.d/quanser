@@ -13,17 +13,17 @@
 case "$1" in
     start|restart|force-reload)
 
-	########################################################
-	#######
-	#######		vanila
- 	#######		  _____ _____ _____ ____
- 	#######		 / ____|  __ \_   _/ __ \
- 	#######		| |  __| |__) || || |  | |
- 	#######		| | |_ |  ___/ | || |  | |
- 	#######		| |__| | |    _| || |__| |
- 	#######		 \_____|_|   |_____\____/
-	#######
-	########################################################
+	#-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
+	#x
+	#x		vanila
+ 	#x		  _____ _____ _____ ____
+ 	#x		 / ____|  __ \_   _/ __ \
+ 	#x		| |  __| |__) || || |  | |
+ 	#x		| | |_ |  ___/ | || |  | |
+ 	#x		| |__| | |    _| || |__| |
+ 	#x		 \_____|_|   |_____\____/
+	#x
+	#-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
 
 	#######		 ___ ___ ___
 	#######		|_ _/ _ \_  )
@@ -61,8 +61,6 @@ case "$1" in
 	fi
 	echo -n "0" > /sys/class/gpio/gpio77/value
 
-
-
 	#######		 ___ ___  _ _
 	#######		|_ _/ _ \| | |
 	#######		 | | (_) |_  _|
@@ -93,18 +91,17 @@ case "$1" in
 	fi
 	echo -n "in" > /sys/class/gpio/gpio37/direction
 
-
-	########################################################
-	#######
- 	#######      _______          ____  __
- 	#######     |  __ \ \        / /  \/  |
- 	#######     | |__) \ \  /\  / /| \  / |
- 	#######     |  ___/ \ \/  \/ / | |\/| |
- 	#######     | |      \  /\  /  | |  | |
- 	#######     |_|       \/  \/   |_|  |_|
- 	#######		and associated pins
-	#######
-	########################################################
+	#-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
+	#x
+ 	#x      _______          ____  __
+ 	#x     |  __ \ \        / /  \/  |
+ 	#x     | |__) \ \  /\  / /| \  / |
+ 	#x     |  ___/ \ \/  \/ / | |\/| |
+ 	#x     | |      \  /\  /  | |  | |
+ 	#x     |_|       \/  \/   |_|  |_|
+ 	#x		and associated pins
+	#x
+	#-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
 
  	####### 	 ___ ___ ____
  	####### 	|_ _/ _ \__ /
@@ -148,93 +145,67 @@ case "$1" in
 	fi
 	echo -n "1" > /sys/class/gpio/gpio64/value
 
-	########################################################
-	#######
- 	#######		  _____ _____ _____
- 	#######		 / ____|  __ \_   _|
- 	#######		| (___ | |__) || |
- 	#######		 \___ \|  ___/ | |
- 	#######		 ____) | |    _| |_
- 	#######		|_____/|_|   |_____|
- 	#######		and associated pins
-	#######
-	########################################################
+	#-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
+	#x
+ 	#x		  _____ _____ _____
+ 	#x		 / ____|  __ \_   _|
+ 	#x		| (___ | |__) || |
+ 	#x		 \___ \|  ___/ | |
+ 	#x		 ____) | |    _| |_
+ 	#x		|_____/|_|   |_____|
+ 	#x		and associated pins
+	#x
+	#-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
 
-
-
-	# gpio49 = in = neither pull-up nor pull-down
-	if [ ! -d /sys/class/gpio/gpio49 ] ; then
-	    echo -n "49" > /sys/class/gpio/export
-	fi
-	echo -n "in" > /sys/class/gpio/gpio49/direction
-
-	# gpio51 = in = neither pull-up nor pull-down
-	if [ ! -d /sys/class/gpio/gpio51 ] ; then
-	    echo -n "51" > /sys/class/gpio/export
-	fi
-	echo -n "in" > /sys/class/gpio/gpio51/direction
-
-	# gpio53 = in = neither pull-up nor pull-down
-	if [ ! -d /sys/class/gpio/gpio53 ] ; then
-	    echo -n "53" > /sys/class/gpio/export
-	fi
-	echo -n "in" > /sys/class/gpio/gpio53/direction
-
-	# gpio55 = in = neither pull-up nor pull-down
-	if [ ! -d /sys/class/gpio/gpio55 ] ; then
-	    echo -n "55" > /sys/class/gpio/export
-	fi
-	echo -n "in" > /sys/class/gpio/gpio55/direction
-
-        for i in {0..3} ; do
-        	chgrp adc /sys/bus/iio/devices/iio:device0/in_voltage"$i"_scale
-        	chmod g+r /sys/bus/iio/devices/iio:device0/in_voltage"$i"_scale
-
-        	chgrp adc /sys/bus/iio/devices/iio:device0/scan_elements/in_voltage"$i"_en
-		chmod g+rw /sys/bus/iio/devices/iio:device0/scan_elements/in_voltage"$i"_en
-        done;
-
-	chgrp adc /sys/bus/iio/devices/iio:device0/scan_elements/in_timestamp_en
-	chmod g+rw /sys/bus/iio/devices/iio:device0/scan_elements/in_timestamp_en
-
-        chgrp adc /sys/bus/iio/devices/iio:device0/buffer/enable
-        chmod g+rw /sys/bus/iio/devices/iio:device0/buffer/enable
-        chgrp adc /sys/bus/iio/devices/iio:device0/buffer/length
-	chmod g+rw /sys/bus/iio/devices/iio:device0/buffer/length
-
-        modprobe iio-trig-sysfs
-        echo -n "0" > /sys/bus/iio/devices/iio_sysfs_trigger/add_trigger
-
-        chgrp adc /sys/bus/iio/devices/trigger0/trigger_now
-	chmod g+w /sys/bus/iio/devices/trigger0/trigger_now
-
-	modprobe iio-trig-hrtimer
-       	echo -n "1" > /sys/bus/iio/devices/iio_hrtimer_trigger/add_trigger
-
-        chgrp adc /sys/bus/iio/devices/trigger1/frequency
-        chmod g+rw /sys/bus/iio/devices/trigger1/frequency
-
-        chgrp adc /sys/bus/iio/devices/iio:device0/trigger/current_trigger
-	chmod g+rw /sys/bus/iio/devices/iio:device0/trigger/current_trigger
-
-	chgrp adc /dev/iio:device0
-	chmod g+r /dev/iio:device0
     	;;
     stop)
-	echo "\n" > /sys/bus/iio/devices/iio:device0/trigger/current_trigger
+	
+	#-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
+	# GPIO
+	#-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
+	
+	# IO2
+	echo -n "1" > /sys/class/gpio/gpio34/value
+	echo -n "13" > /sys/class/gpio/unexport
+	echo -n "34" > /sys/class/gpio/unexport
+	echo -n "35" > /sys/class/gpio/unexport
+	echo -n "77" > /sys/class/gpio/unexport
 
-	echo -n "1" > /sys/bus/iio/devices/iio_hrtimer_trigger/remove_trigger
-	rmmod iio-trig-hrtimer
-	echo -n "0" > /sys/bus/iio/devices/iio_sysfs_trigger/remove_trigger
-	rmmod iio-trig-sysfs
+	# IO4
+	echo -n "1" > /sys/class/gpio/gpio36/value
+	echo -n "6" > /sys/class/gpio/unexport
+	echo -n "36" > /sys/class/gpio/unexport
+	echo -n "37" > /sys/class/gpio/unexport
+	
+	#-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
+	# PWM
+	#-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
+	
+	# IO3
+	echo -n "0" > /sys/class/pwm/pwmchip0/pwm1/enable
+	echo -n "1" > /sys/class/gpio/gpio16/value
+	echo -n "76" > /sys/class/gpio/unexport
+    echo -n "64" > /sys/class/gpio/unexport
+	echo -n "17" > /sys/class/gpio/unexport
+	echo -n "16" > /sys/class/gpio/unexport
+	echo -n "1" > /sys/class/pwm/pwmchip0/unexport
 
-	echo -n "49" > /sys/class/gpio/unexport
-	echo -n "51" > /sys/class/gpio/unexport
-	echo -n "53" > /sys/class/gpio/unexport
-	echo -n "55" > /sys/class/gpio/unexport
+	#-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
+	# SPI
+	#-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
+	# gpio13
+	# gpio16
+	# gpio17
+	# gpio34
+	# gpio35
+	# gpio36
+	# gpio37
+	# gpio6
+	# gpio64
+	# gpio76
+	# gpio77
 	;;
     status)
-    	cat /sys/bus/iio/devices/iio:device0/trigger/current_trigger
 	;;
     *)
 	echo -n "Usage: $0 "

@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:shield-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -494,29 +495,18 @@ F 3 "" H 4750 6650 50  0001 C CNN
 	1    4750 6650
 	1    0    0    -1  
 $EndComp
-Text GLabel 4750 6050 2    50   Input ~ 0
+Text GLabel 4750 5750 2    50   Input ~ 0
 EN_PWM_R
-Text GLabel 4750 6200 2    50   Input ~ 0
+Text GLabel 4750 5900 2    50   Input ~ 0
 EN_PWM_L
 Wire Wire Line
 	4500 6800 4750 6800
 Wire Wire Line
 	4500 6650 4750 6650
-Wire Wire Line
-	4500 6050 4750 6050
-Wire Wire Line
-	4500 6200 4750 6200
-Text GLabel 4750 5750 2    50   Input ~ 0
+Text GLabel 4750 6200 2    50   Input ~ 0
 PWM
-Connection ~ 4600 5750
 Wire Wire Line
-	4750 5750 4600 5750
-Wire Wire Line
-	4600 5750 4500 5750
-Wire Wire Line
-	4600 5900 4600 5750
-Wire Wire Line
-	4500 5900 4600 5900
+	4500 5900 4750 5900
 $Comp
 L micros:IBT-2 U4
 U 1 1 5DB6BC25
@@ -715,4 +705,15 @@ Text Notes 5500 3150 2    50   ~ 0
 ENCODER/COUNTER 2
 Text Notes 5250 5400 2    50   ~ 0
 H-BRIDGE
+Wire Wire Line
+	4500 5750 4750 5750
+Wire Wire Line
+	4500 6200 4600 6200
+Wire Wire Line
+	4500 6050 4600 6050
+Wire Wire Line
+	4600 6050 4600 6200
+Connection ~ 4600 6200
+Wire Wire Line
+	4600 6200 4750 6200
 $EndSCHEMATC

@@ -444,7 +444,6 @@ F 3 "~" H 8900 1650 50  0001 C CNN
 	1    8900 1650
 	1    0    0    -1  
 $EndComp
-NoConn ~ 850  4650
 Wire Wire Line
 	9100 1850 9100 2100
 Wire Wire Line

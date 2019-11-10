@@ -1,7 +1,7 @@
 /*
-  i2cutil.h: I2C utility functions
+  quanserio.c: helper functions to use the quanser flexible joint robot
   
-  Copyright (c) 2016 Walter Fetter Lages <w.fetter@ieee.org>
+  Copyright (c) 2019 Gustavo Santana <gmsantana@inf.ufrgs.br>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,18 +22,41 @@
 
 */
 
-#ifndef I2CUTIL_H
-#define I2CUTIL_H
 
-#ifdef __cplusplus
-extern "C"
+#define PI 3.14159
+
+int quanser_open(QUANSER *quanser)
 {
-#endif
+    // open quanser files for:
+    // counter_open
+    // motor_open
+    // 
 
-extern int i2c_write_reg(int fd,unsigned char reg,unsigned char data);
+    return 0;
+}
 
-#ifdef __cplusplus
-};
-#endif
+int quanser_motor_enable()
+{
+    return 0;
+}
 
-#endif
+int quanser_motor_write_volts()
+{
+    return 0;
+}
+
+
+float quanser_counter_enable()
+{
+    return 0;
+}
+
+float quanser_counter_read()
+{
+    return 0;
+}
+
+int quanser_limit_read()
+{
+    return 0;
+}

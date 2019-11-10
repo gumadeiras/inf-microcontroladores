@@ -25,86 +25,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+
+#include <fcntl.h>
+#include <stdint.h>
 #include <unistd.h>
+#include <string.h>
+
+#include <sys/ioctl.h>
+#include <linux/spi/spidev.h>
 
 #include <galileo2io.h>
-
-#define PWM_PERIOD "1000000" // 1kHz
-#define PWM_HALF_P "500000"
-
-#define PIN_PWM_PERIOD  "/sys/class/pwm/pwmchip0/device/pwm_period"
-#define PIN_PWM_ENABLE  "/sys/class/pwm/pwmchip0/pwm1/enable"
-#define PIN_PWM_DUTY    "/sys/class/pwm/pwmchip0/pwm1/duty_cycle"
-#define PIN_PWM_EN_L    "/sys/class/gpio/gpio6/value"
-#define PIN_PWM_EN_R    "/sys/class/gpio/gpio13/value"
-
+#include "motor.h"
+#include "counter.h"
 
 int main(int argc, char const *argv[])
 {
-    int duty_cycle;
-    char str[100];
-    int scale;
-        
-    if(argc != 2)
-    {
-        puts("usage: main <duty cycle [0-100]>");
-        return -1;
+    unsigned char md1r;
+    unsigned char md2r;
+
+    COUNTER counter;
+
+    counter_open(&counter, SPI_PATH, SPI_SS_PATH);
+    counter_init(counter);
+
+    md1r = counter_byte_read(counter, READ_MDR0);
+    md2r = counter_byte_read(counter, READ_MDR1);
+    printf("md1r: %d\nmd2r: %d\n", md1r, md2r);
+
+    counter_reset(counter);
+
+    while(1) {
+        printf("Counter: %d\n", counter_read(counter)/4);
+        usleep(1000000);
     }
-
-    duty_cycle = atof(argv[1]);
-    scale      = 10000.;
-
-    if (duty_cycle < 0)
-    {
-        puts("duty cycle value has to be in the range (0-100); setting to 0");
-        duty_cycle = 0;
-    } else if (duty_cycle > 100 )
-    {
-        puts("duty cycle value has to be in the range (0-100); setting to 100");
-        duty_cycle = 100;
-    }
-
-    pputs(PIN_PWM_PERIOD, PWM_PERIOD);
-
-    /* SET DUTY TO ZERO (OPEN CIRCUIT)*/
-    /* SET ENABLE SIGNALS*/
-    /* SET REAL DUTY*/
-
-    pputs(PIN_PWM_ENABLE,"1");
-    if (duty_cycle < 50)
-    {
-        /* set motor_ccw */
-
-        snprintf(str, sizeof str, "%d\n", duty_cycle * 2 * scale);
-        pputs(PIN_PWM_DUTY, "0");
-        pputs(PIN_PWM_EN_L, "0");
-        pputs(PIN_PWM_EN_R, "1");
-        pputs(PIN_PWM_DUTY, str);
-        sleep(5);
-
-    } else if (duty_cycle > 50)
-    {
-        /* set motor_cw */
-
-        snprintf(str, sizeof str, "%d\n", (duty_cycle - 51) * 2 * scale);
-        pputs(PIN_PWM_DUTY, "0");
-        pputs(PIN_PWM_EN_R, "0");
-        pputs(PIN_PWM_EN_L, "1");
-        pputs(PIN_PWM_DUTY, str);
-        sleep(5);
-
-    } else
-    {
-        /* set motor_stop */
-
-        snprintf(str, sizeof str, "%d\n", 0);
-        pputs(PIN_PWM_DUTY, "0");
-        pputs(PIN_PWM_EN_L, "0");
-        pputs(PIN_PWM_EN_R, "0");
-        pputs(PIN_PWM_DUTY, str);
-        sleep(5);
-    }
-    pputs(PIN_PWM_ENABLE,"0");
 
     return 0;
 }

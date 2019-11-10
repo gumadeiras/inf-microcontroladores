@@ -1,7 +1,7 @@
 /*
   motor.c: helper functions to operate the motor using the IBT-2 H-Bridge
   
-  Copyright (c) 2019 Gustavo Santana <wgmsantana@inf.ufrgs.br>
+  Copyright (c) 2019 Gustavo Santana <gmsantana@inf.ufrgs.br>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -62,7 +62,7 @@ int set_pwm_duty_cycle_percentage(int percentage)
     {
         puts("duty cycle value has to be in the range (0-100); setting to 0");
         duty_cycle = 0;
-    } else if (duty_cycle > 100 )
+    } else if (duty_cycle > 100)
     {
         puts("duty cycle value has to be in the range (0-100); setting to 100");
         duty_cycle = 100;
@@ -74,31 +74,31 @@ int set_pwm_duty_cycle_percentage(int percentage)
 	if (duty_cycle > 50)
 	{
 		snprintf(str, sizeof str, "%d\n", (duty_cycle - 50) * 2 * scale);
-		if(set_motor_cw() < 0)
+		if(set_motor_cw(str) < 0)
 		{
 			printf("error setting motor to clockwise directionwith duty cycle %s\n", str);
-			return -1
+			return -1;
 		}
 	} else if (duty_cycle < 50)
 	{
 		snprintf(str, sizeof str, "%d\n", duty_cycle * 2 * scale);
-		if(set_motor_ccw() < 0)
+		if(set_motor_ccw(str) < 0)
 		{
 			printf("error setting motor to counterclockwise direction with duty cycle %s\n", str);
-			return -1
+			return -1;
 		}
 	} else if (duty_cycle == 50)
 	{
 		snprintf(str, sizeof str, "%d\n", 0);
-		if(set_motor_stop() < 0)
+		if(set_motor_stop(str) < 0)
 		{
 			printf("error stopping motor with duty cycle %s\n", str);
-			return -1
+			return -1;
 		}
 	} else
 	{
 		printf("invalid duty cycle percentage\n");
-		return -1
+		return -1;
 	}
 	return 0;
 }
@@ -106,20 +106,21 @@ int set_pwm_duty_cycle_percentage(int percentage)
 // set motor voltage
 int set_motor_voltage(int voltage)
 {
+	int duty_cycle_percentage;
 	int max_voltage = 27;
 	
 	if (voltage > 27 | voltage < 0)
 	{
 		printf("error: voltage has to be in the range (0,27)\n");
-		return -1
+		return -1;
 	}
 
 	// 0V  -> 0%
 	// 27V -> 100%
 	// scale = 100/27 = 3.703703704
 
-	duty_cycle_percentage = floor(voltage * 3.703703704)
-	set_pwm_duty_cycle_percentage(duty_cycle_percentage)
+	duty_cycle_percentage = floor(voltage * 3.703703704);
+	set_pwm_duty_cycle_percentage(duty_cycle_percentage);
 
 	return 0;
 }

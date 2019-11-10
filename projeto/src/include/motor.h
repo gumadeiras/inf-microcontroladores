@@ -42,13 +42,17 @@
 int set_motor_stop();
 
 // set motor direction to clockwise
-int set_motor_cw(char str)
+int set_motor_cw(char str);
 
 // set motor direction to counterclockwise
-int set_motor_ccw(char str)
+int set_motor_ccw(char str);
 
 // set duty cycle
-int set_pwm_duty_cycle_percentage(int percentage)
+int set_pwm_duty_cycle_percentage(int percentage);
 
 // set motor voltage
-int set_motor_voltage(int voltage)
+int set_motor_voltage(int voltage);
+
+typedef struct struct_motor {
+    int fd_motor;
+} DECODER;

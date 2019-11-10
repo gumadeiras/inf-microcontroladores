@@ -1,5 +1,5 @@
 TARGET=libgalileo2.a
-SRCS=pputs.c pgets.c i2c_write_reg.c i2c_read_reg.c
+SRCS=pputs.c pgets.c motor.c counter.c
 
 FLAGS=-O2 -Wall -MMD
 INCLUDE=-I. -I../include
@@ -23,7 +23,7 @@ $(TARGET): $(SRCS:.c=.o)
 -include $(SRCS:.c=.d)
 
 clean:
-	rm -f *~ *.bak *.o *.d
+	rm -f *~ *.bak *.o *.d .a
 
 distclean: clean
 	rm -f $(TARGET)

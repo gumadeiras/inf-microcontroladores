@@ -28,9 +28,8 @@ int set_motor_stop()
 {
     pputs(PIN_PWM_DUTY, "0");
     pputs(PIN_PWM_EN_L, "0");
-    pputs(PIN_PWM_EN_R, "1");
-    pputs(PIN_PWM_DUTY, "0");
-	return 0;
+    pputs(PIN_PWM_EN_R, "0");
+    return 0;
 }
 
 int set_motor_cw(char str)
@@ -39,16 +38,16 @@ int set_motor_cw(char str)
     pputs(PIN_PWM_EN_R, "0");
     pputs(PIN_PWM_EN_L, "1");
     pputs(PIN_PWM_DUTY, str);
-	return 0;
+    return 0;
 }
 
 int set_motor_ccw(char str)
 {
-	pputs(PIN_PWM_DUTY, "0");
-	pputs(PIN_PWM_EN_L, "0");
-	pputs(PIN_PWM_EN_R, "0");
-	pputs(PIN_PWM_DUTY, str);
-	return 0;
+    pputs(PIN_PWM_DUTY, "0");
+    pputs(PIN_PWM_EN_L, "0");
+    pputs(PIN_PWM_EN_R, "1");
+    pputs(PIN_PWM_DUTY, str);
+    return 0;
 }
 
 // set duty cycle by percentage
@@ -69,58 +68,64 @@ int set_pwm_duty_cycle_percentage(int percentage)
     }
 
 
-	// convert % to linear range and apply duty cycle
+    // convert % to linear range and apply duty cycle
 
-	if (duty_cycle > 50)
-	{
-		snprintf(str, sizeof str, "%d\n", (duty_cycle - 50) * 2 * scale);
-		if(set_motor_cw(str) < 0)
-		{
-			printf("error setting motor to clockwise directionwith duty cycle %s\n", str);
-			return -1;
-		}
-	} else if (duty_cycle < 50)
-	{
-		snprintf(str, sizeof str, "%d\n", duty_cycle * 2 * scale);
-		if(set_motor_ccw(str) < 0)
-		{
-			printf("error setting motor to counterclockwise direction with duty cycle %s\n", str);
-			return -1;
-		}
-	} else if (duty_cycle == 50)
-	{
-		snprintf(str, sizeof str, "%d\n", 0);
-		if(set_motor_stop(str) < 0)
-		{
-			printf("error stopping motor with duty cycle %s\n", str);
-			return -1;
-		}
-	} else
-	{
-		printf("invalid duty cycle percentage\n");
-		return -1;
-	}
-	return 0;
+    if (duty_cycle > 50)
+    {
+        snprintf(str, sizeof str, "%d\n", (duty_cycle - 50) * 2 * scale);
+        if(set_motor_cw(str) < 0)
+        {
+            printf("error setting motor to clockwise directionwith duty cycle %s\n", str);
+            return -1;
+        }
+    } else if (duty_cycle < 50)
+    {
+        snprintf(str, sizeof str, "%d\n", duty_cycle * 2 * scale);
+        if(set_motor_ccw(str) < 0)
+        {
+            printf("error setting motor to counterclockwise direction with duty cycle %s\n", str);
+            return -1;
+        }
+    } else if (duty_cycle == 50)
+    {
+        snprintf(str, sizeof str, "%d\n", 0);
+        if(set_motor_stop(str) < 0)
+        {
+            printf("error stopping motor with duty cycle %s\n", str);
+            return -1;
+        }
+    } else
+    {
+        printf("invalid duty cycle percentage\n");
+        return -1;
+    }
+    return 0;
 }
 
 // set motor voltage
 int set_motor_voltage(int voltage)
 {
-	int duty_cycle_percentage;
-	int max_voltage = 27;
-	
-	if (voltage > 27 | voltage < 0)
-	{
-		printf("error: voltage has to be in the range (0,27)\n");
-		return -1;
-	}
+    int duty_cycle_percentage;
+    int max_voltage = 27;
+    
+    if (voltage > 27 | voltage < -27)
+    {
+        printf("error: voltage has to be in the range (-27,27)\n");
+        return -1;
+    }
 
-	// 0V  -> 0%
-	// 27V -> 100%
-	// scale = 100/27 = 3.703703704
+    // 0 -> 0%
+    // 54V  -> 100% (-27 to 27)
+    // scale = 100/54 = 1.851851852
 
-	duty_cycle_percentage = floor(voltage * 3.703703704);
-	set_pwm_duty_cycle_percentage(duty_cycle_percentage);
+    if (voltage == 27)
+    {
+        set_pwm_duty_cycle_percentage(50);
+    } else {
+        voltage = voltage + max_voltage;
+        duty_cycle_percentage = floor(voltage * 1.851851852);
+        set_pwm_duty_cycle_percentage(duty_cycle_percentage);
+    }
 
-	return 0;
+    return 0;
 }

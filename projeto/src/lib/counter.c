@@ -22,18 +22,7 @@
 */
 
 
-#include <stdio.h>
-#include <stdlib.h>
-
-#include <fcntl.h>
-// #include <stdint.h>
-// #include <unistd.h>
-// #include <string.h>
-
-#include <sys/ioctl.h>
-#include <linux/spi/spidev.h>
-
-#include <encoder.h>
+#include <counter.h>
 
 
 int counter_open(COUNTER *counter, char *spi, char *ss)
@@ -57,31 +46,31 @@ int counter_byte_write(COUNTER counter, unsigned char data, unsigned char op_cod
     // slave select high
     lseek(counter.fd_ss, 0, SEEK_SET);
     if(write(counter.fd_ss, "1", 1) < 0) {
-        printf("Can't set SS HIGH\n");
+        printf("error setting SS HIGH\n");
         return -1;
     }
     // slave select low
     lseek(counter.fd_ss, 0, SEEK_SET);
     if(write(counter.fd_ss, "0", 1) < 0) {
-        printf("Can't set SS LOW\n");
+        printf("error setting SS LOW\n");
         return -1;
     }
 
     // send command
     if(write(counter.fd_spi, &op_code, sizeof op_code) < 0) {
-        printf("Can't write to counter.\n");
+        printf("error writing to counter.\n");
         return -1;
     }
     // send data
     if(write(counter.fd_spi, &data, sizeof data) < 0) {
-        printf("Can't write to counter.\n");
+        printf("error writing to counter.\n");
         return -1;
     }
 
     // slave select high
     lseek(counter.fd_ss, 0, SEEK_SET);
     if(write(counter.fd_ss, "1", 1) < 0) {
-        printf("Can't set SS HIGH\n");
+        printf("error setting SS HIGH\n");
         return -1;
     }
 
@@ -117,7 +106,7 @@ int counter_init(COUNTER counter)
     }
     
     mdr0 = QUADRX4|FREE_RUN|DISABLE_INDX|FILTER_2;
-    mdr1 = data_2|EN_CNTR|NO_FLAGS;
+    mdr1 = BYTE_4|EN_CNTR|NO_FLAGS;
     if(counter_byte_write(counter, mdr0, WRITE_MDR0) < 0){
         printf("Error in WRITE_MDR0.\n");
         return -1;
@@ -138,19 +127,19 @@ unsigned char counter_byte_read(COUNTER counter, unsigned char op_code)
     // slave select high
     lseek(counter.fd_ss, 0, SEEK_SET);
     if(write(counter.fd_ss, "1", 1) < 0) {
-        printf("Can't set SS HIGH\n");
+        printf("error setting SS HIGH\n");
         return -1;
     }
     // slave select low
     lseek(counter.fd_ss, 0, SEEK_SET);
     if(write(counter.fd_ss, "0", 1) < 0) {
-        printf("Can't set SS LOW\n");
+        printf("error setting SS LOW\n");
         return -1;
     }
 
     // send command
     if(write(counter.fd_spi, &op_code, sizeof op_code) < 0) {
-        printf("Can't write to counter.\n");
+        printf("error writing to counter.\n");
         return -1;
     }
 
@@ -161,7 +150,7 @@ unsigned char counter_byte_read(COUNTER counter, unsigned char op_code)
     // slave select high
     lseek(counter.fd_ss, 0, SEEK_SET);
     if(write(counter.fd_ss, "1", 1) < 0) {
-        printf("Can't set SS LOW\n");
+        printf("error setting SS LOW\n");
         return -1;
     }
 
@@ -175,13 +164,13 @@ int counter_reset(COUNTER counter)
     // slave select high
     lseek(counter.fd_ss, 0, SEEK_SET);
     if(write(counter.fd_ss, "1", 1) < 0) {
-        printf("Can't set SS HIGH\n");
+        printf("error setting SS HIGH\n");
         return -1;
     }
     // slave select low
     lseek(counter.fd_ss, 0, SEEK_SET);
     if(write(counter.fd_ss, "0", 1) < 0) {
-        printf("Can't set SS LOW\n");
+        printf("error setting SS LOW\n");
         return -1;
     }
 
@@ -193,7 +182,7 @@ int counter_reset(COUNTER counter)
     // slave select high
     lseek(counter.fd_ss, 0, SEEK_SET);
     if(write(counter.fd_ss, "1", 1) < 0) {
-        printf("Can't set SS LOW\n");
+        printf("error setting SS LOW\n");
         return -1;
     }
 
@@ -202,43 +191,63 @@ int counter_reset(COUNTER counter)
 
 int counter_read(COUNTER counter)
 {
-    unsigned char lsbyte, msbyte;
-    int ctr;
+    unsigned char c1, c2, c3, c4;
+    int counter_value;
     char read_opcode = READ_CNTR;
 
-    // slave select high
+    // SS high
     lseek(counter.fd_ss, 0, SEEK_SET);
     if(write(counter.fd_ss, "1", 1) < 0) {
-        printf("Can't set SS HIGH\n");
+        printf("error setting SS HIGH\n");
         return -1;
     }
-    // slave select low
+    // SS low
     lseek(counter.fd_ss, 0, SEEK_SET);
     if(write(counter.fd_ss, "0", 1) < 0) {
-        printf("Can't set SS LOW\n");
+        printf("error setting SS LOW\n");
         return -1;
     }
 
     // send command to read counter
     if(write(counter.fd_spi, &read_opcode, 1) < 0) {
-        printf("Can't write to counter.\n");
+        printf("error writing to counter.\n");
         return -1;
     }
 
     // read most significant byte
     lseek(counter.fd_spi, 0, SEEK_SET);
-    while(read(counter.fd_spi, &msbyte, 1) != 1);
-    // read most significant byte
+    while(read(counter.fd_spi, &c1, 1) != 1);
+    // read least significant byte
     lseek(counter.fd_spi, 0, SEEK_SET);
-    while(read(counter.fd_spi, &lsbyte, 1) != 1);
+    while(read(counter.fd_spi, &c2, 1) != 1);
+// read least significant byte
+    lseek(counter.fd_spi, 0, SEEK_SET);
+    while(read(counter.fd_spi, &c3, 1) != 1);
+// read least significant byte
+    lseek(counter.fd_spi, 0, SEEK_SET);
+    while(read(counter.fd_spi, &c4, 1) != 1);
 
     // slave select high
     lseek(counter.fd_ss, 0, SEEK_SET);
     if(write(counter.fd_ss, "1", 1) < 0) {
-        printf("Can't set SS LOW\n");
+        printf("error setting SS HIGH\n");
         return -1;
     }
+    
+    counter_value = 0;
+    counter_value = counter_value | c1;
+    counter_value = (counter_value << 8);
+    counter_value = counter_value | c2;
+    counter_value = (counter_value << 8);
+    counter_value = counter_value | c3;
+    counter_value = (counter_value << 8);
+    counter_value = counter_value | c4;
+    return counter_value/4;
+}
 
-    ctr = (msbyte << 8) | lsbyte;
-    return ctr;   
+float counter_read_rad(COUNTER counter)
+{
+    float counter_value;
+    counter_value = counter_read(counter) * 1.;
+    return counter_value * 2 * PI_CONST / 4096; // encoder has 4096 counts/rev
 }

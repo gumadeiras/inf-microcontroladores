@@ -27,7 +27,7 @@
 
 #include <galileo2io.h>
 
-char *pgets(char *s,int size,const char path[])
+char *pgets(char *s, int size, const char path[])
 {
 	int fd;
 	
@@ -35,4 +35,24 @@ char *pgets(char *s,int size,const char path[])
 	read(fd,s,size);
 	close(fd);
 	return s;
+}
+
+int pread_gpio(const char path[])
+{
+    int fd;
+    if((fd=open(path, O_RDONLY)) == -1) return -1;
+
+    char c;
+    lseek(fd, 0, SEEK_SET);
+    if(read(fd, &c, sizeof(c)) < 0)
+    {
+        return -1;
+    }
+
+    if(c == '0')
+    {
+        return 0;
+    } else {
+        return 1;
+    }
 }

@@ -1,6 +1,6 @@
 /*
-  quanserio.c: helper functions to use the quanser flexible joint robot
-  
+  limit.h: helper functions to read quanser position limit switches
+
   Copyright (c) 2019 Gustavo Santana <gmsantana@inf.ufrgs.br>
 
     This program is free software; you can redistribute it and/or modify
@@ -19,44 +19,24 @@
 
     You can also obtain a copy of the GNU General Public License
     at <http://www.gnu.org/licenses>.
-
 */
 
+#include <stdio.h>
+#include <stdlib.h>
 
-#define PI 3.14159
+#include <fcntl.h>
+#include <stdint.h>
+#include <unistd.h>
+#include <string.h>
+#include <poll.h>
 
-int quanser_open(QUANSER *quanser)
-{
-    // open quanser files for:
-    // counter_open
-    // motor_open
-    // 
+#define PIN_LIMIT1 "/sys/class/gpio/gpio0/value" // IO5
+#define PIN_LIMIT1_EDGE "/sys/class/gpio/gpio0/edge"
+#define PIN_LIMIT2 "/sys/class/gpio/gpio1/value" // IO6
+#define PIN_LIMIT2_EDGE "/sys/class/gpio/gpio1/edge"
 
-    return 0;
-}
+// read limit switch
+extern int limit_read(int switch_limit);
 
-int quanser_motor_enable()
-{
-    return 0;
-}
-
-int quanser_motor_write_volts()
-{
-    return 0;
-}
-
-
-float quanser_counter_enable()
-{
-    return 0;
-}
-
-float quanser_counter_read()
-{
-    return 0;
-}
-
-int quanser_limit_read()
-{
-    return 0;
-}
+// poll limit switch
+extern int limit_poll(int switch_limit);

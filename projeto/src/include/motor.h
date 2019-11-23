@@ -31,6 +31,7 @@
 
 #define PWM_PERIOD "1000000" // 1kHz
 #define PWM_HALF_P "500000"
+#define PWM_SCALE 10000
 
 #define PIN_PWM_PERIOD  "/sys/class/pwm/pwmchip0/device/pwm_period"
 #define PIN_PWM_ENABLE  "/sys/class/pwm/pwmchip0/pwm1/enable"
@@ -39,20 +40,16 @@
 #define PIN_PWM_EN_R    "/sys/class/gpio/gpio13/value"
 
 // set motor direction as stop
-int set_motor_stop();
+extern int set_motor_stop();
 
 // set motor direction to clockwise
-int set_motor_cw(char str);
+extern int set_motor_cw(char str);
 
 // set motor direction to counterclockwise
-int set_motor_ccw(char str);
+extern int set_motor_ccw(char str);
 
 // set duty cycle
-int set_pwm_duty_cycle_percentage(int percentage);
+extern int set_pwm_duty_cycle_percentage(int percentage);
 
 // set motor voltage
-int set_motor_voltage(int voltage);
-
-typedef struct struct_motor {
-    int fd_motor;
-} DECODER;
+extern int set_motor_voltage(int voltage);

@@ -7,7 +7,7 @@ BINDIR=$(PREFIX)
 TARGET=main
 SRCS=$(TARGET).c
 
-FLAGS=-Wall -g -MMD
+FLAGS=-Wall
 INCLUDE=-I. -I../include
 LIBDIR=-L../lib
 LIBS=-lgalileo2
@@ -23,8 +23,6 @@ $(TARGET): $(SRCS:.c=.o) ../lib/libgalileo2.a
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
-
--include $(SRCS:.c=.d)
 
 clean:
 	rm -f *~ *.bak *.o *.d

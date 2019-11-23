@@ -21,6 +21,16 @@
     at <http://www.gnu.org/licenses>.
 */
 
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <fcntl.h>
+#include <stdint.h>
+#include <unistd.h>
+#include <string.h>
+
+#include <sys/ioctl.h>
+#include <linux/spi/spidev.h>
 
 // --
 // -- defines from the LS7366 datasheet
@@ -69,10 +79,10 @@
 #define CY_FLAG  0x80 //CY flag
 
 //1 to 4 datas data-width
-#define data_4 0x00 //four data mode
-#define data_3 0x01 //three data mode
-#define data_2 0x02 //two data mode
-#define data_1 0x03 //one data mode
+#define BYTE_4 0x00 //four data mode
+#define BYTE_3 0x01 //three data mode
+#define BYTE_2 0x02 //two data mode
+#define BYTE_1 0x03 //one data mode
 
 //Enable/disable counter
 #define EN_CNTR  0x00 //counting enabled
@@ -99,30 +109,34 @@
 
 #define SPI_PATH "/dev/spidev1.0"
 #define SPI_EN_C_PATH "/sys/class/gpio/gpio10/value" // enable counter
-#define SPI_SS_PATH "/sys/class/gpio/gpio4/value"
+#define SPI_SS_PATH "/sys/class/gpio/gpio4/value" //IO9 
 
 #define SPI_FREQUENCY 5000000
+#define PI_CONST 3.14159
 
-typedef struct struct_decoder {
+typedef struct struct_counter {
     int fd_spi;
     int fd_ss;
-} DECODER;
+} COUNTER;
 
 
 // open file descriptors for the counter
-int counter_open(COUNTER *counter, char *spi, char *ss);
+extern int counter_open(COUNTER *counter, char *spi, char *ss);
 
 // write one byte
-int counter_byte_write(COUNTER counter, unsigned char data, unsigned char op_code);
+extern int counter_byte_write(COUNTER counter, unsigned char data, unsigned char op_code);
 
 // initialize MDR0 and MDR1 registers on the LS7366
-int counter_init(COUNTER counter);
+extern int counter_init(COUNTER counter);
 
 // read one byte
-unsigned char counter_byte_read(COUNTER counter, unsigned char op_code);
+extern unsigned char counter_byte_read(COUNTER counter, unsigned char op_code);
 
 // reset counter
-int counter_reset(COUNTER counter);
+extern int counter_reset(COUNTER counter);
 
 // read counter value
-int counter_read(COUNTER counter);
+extern int counter_read(COUNTER counter);
+
+// read counter value in radians
+extern float counter_read_rad(COUNTER counter);

@@ -1,7 +1,7 @@
 TARGET=libgalileo2.a
-SRCS=pputs.c pgets.c motor.c counter.c
+SRCS=pputs.c pgets.c motor.c counter.c limit.c
 
-FLAGS=-O2 -Wall -MMD
+FLAGS=-Wall
 INCLUDE=-I. -I../include
 LIBDIR=
 LIBS=
@@ -19,8 +19,6 @@ $(TARGET): $(SRCS:.c=.o)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
-
--include $(SRCS:.c=.d)
 
 clean:
 	rm -f *~ *.bak *.o *.d .a

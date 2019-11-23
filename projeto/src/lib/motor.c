@@ -24,6 +24,14 @@
 
 #include <motor.h>
 
+int pwm_init()
+{
+    pputs(PIN_PWM_PERIOD, PWM_PERIOD); // set PWM period
+    pputs(PIN_PWM_DUTY, "0"); // set duty_cycle to 0
+    pputs(PIN_PWM_ENABLE,"1"); // enable PWM
+    return 0;
+}
+
 int set_motor_stop()
 {
     pputs(PIN_PWM_DUTY, "0");

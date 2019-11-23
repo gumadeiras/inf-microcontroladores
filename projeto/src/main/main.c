@@ -38,68 +38,60 @@
 #include "motor.h"
 #include "counter.h"
 #include "limit.h"
+#include "pid.h"
 
 int main(int argc, char const *argv[])
 {
     int duty_cycle;
     char str[100];
-    unsigned char md0r;
-    unsigned char md1r;
     unsigned char str_register;
     COUNTER counter;
 
     puts("initializing PWM\n");
- 
-    pputs(PIN_PWM_PERIOD, PWM_PERIOD); // set PWM period
-    pputs(PIN_PWM_DUTY, "0"); // set duty_cycle to 0
-    pputs(PIN_PWM_ENABLE,"1"); // enable PWM
+    pwm_init();
     
     puts("slowly moving arm to left limit\n");
     duty_cycle = 15; // choose duty cycle to be 15%
     snprintf(str, sizeof str, "%d\n", duty_cycle * 2 * PWM_SCALE);
-    pputs(PIN_PWM_EN_L, "0"); // set H-bridge to
-    pputs(PIN_PWM_EN_R, "1"); // ccw direction
-    pputs(PIN_PWM_DUTY, str); // set duty cycle
+    set_motor_ccw(str) // set motor to ccw diretion with 15% duty cycle
 
-    if (limit_poll(1) < 0)
+    if (limit_poll(1) < 0) // poll limit1 switch and stop motor and limit is reached
     {
-        pputs(PIN_PWM_DUTY, "0"); // set duty_cycle to 0
+        set_motor_stop();
         pputs(PIN_PWM_ENABLE,"0"); // disable PWM
-        puts("polling limit switch failed, aborting\n");
+        puts("polling limit1 switch failed, aborting\n");
     }
 
-    pputs(PIN_PWM_EN_L, "0"); // set H-bridge to
-    pputs(PIN_PWM_EN_R, "0"); // "stop" position
-    pputs(PIN_PWM_DUTY, "0"); // set duty_cycle to 0 and stop motor
-
+    set_motor_stop();
     puts("arm reached its limit\n");
     
-    puts("initializing decoder counter\n");
+    puts("initializing counter\n");
 
     counter_open(&counter, SPI_PATH, SPI_SS_PATH);
     counter_init(counter);
-
-    md0r = counter_byte_read(counter, READ_MDR0);
-    md1r = counter_byte_read(counter, READ_MDR1);
-    printf("md0r (131): %d; md1r (0): %d\n", md0r, md1r);
-    pputs(SPI_EN_C_PATH, "1");
-
+    counter_mode_read(counter);
     counter_reset(counter); 
-    str_register = counter_byte_read(counter, READ_MDR0);
-    printf("STR: %d; Counter: %d\n", str_register, counter_read(counter)/4);
 
-    puts("slowly moving arm to center");
-    // TODO
-    printf("Counter: %d\n", counter_read(counter));
+    pputs(SPI_EN_C_PATH, "1"); // enable counter
+    str_register = counter_byte_read(counter, READ_MDR0); // status register
+    printf("Status Register STR: %d\n", str_register); 
+    printf("Counter: %d; Rad: %d\n", counter_read(counter), counter_read_rad(counter));
 
     puts("slowly moving arm to right limit");
-    // TODO
+    set_motor_cw(str) // set motor to ccw diretion with 15% duty cycle
 
-    puts("slowly moving arm to 45 degrees right");
-    // TODO
+    if (limit_poll(2) < 0) // poll limit1 switch and stop motor and limit is reached
+    {
+        set_motor_stop();
+        pputs(PIN_PWM_ENABLE,"0"); // disable PWM
+        puts("polling limit2 switch failed, aborting\n");
+    }
+    printf("Counter: %d; Rad: %d\n", str_register, counter_read(counter), counter_read_rad(counter));
 
-    puts("slowly moving arm to 45 degrees left");
-    // TODO
-
+    puts("initializing PID");
+    printf("chosen position: %d rad; %d degrees", atoi(argv[1]), atoi(argv[1])*180/PI_CONST);
+    
+    pid_control(atoi(argv[1]), 3, 0.1, 10); // (position, kp, ki, kd)
+    
     return 0;
 }

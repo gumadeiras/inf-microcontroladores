@@ -140,3 +140,6 @@ extern int counter_read(COUNTER counter);
 
 // read counter value in radians
 extern float counter_read_rad(COUNTER counter);
+
+// read MODE registers
+extern int counter_mode_read(COUNTER counter);

@@ -175,7 +175,7 @@ int counter_reset(COUNTER counter)
     }
 
     if(write(counter.fd_spi, &op_code, sizeof op_code) < 0){
-        printf("Error reseting counter.\n");
+        printf("error reseting counter.\n");
         return -1;
     }
 
@@ -250,4 +250,13 @@ float counter_read_rad(COUNTER counter)
     float counter_value;
     counter_value = counter_read(counter) * 1.;
     return counter_value * 2 * PI_CONST / 4096; // encoder has 4096 counts/rev
+}
+
+int counter_mode_read(COUNTER counter)
+{
+    unsigned char md0r, md1r;
+
+    md0r = counter_byte_read(counter, READ_MDR0);
+    md1r = counter_byte_read(counter, READ_MDR1);
+    printf("md0r (131): %d; md1r (0): %d\n", md0r, md1r);
 }

@@ -39,6 +39,9 @@
 #define PIN_PWM_EN_L    "/sys/class/gpio/gpio6/value"
 #define PIN_PWM_EN_R    "/sys/class/gpio/gpio13/value"
 
+// initialize PWM
+extern int pwm_init();
+
 // set motor direction as stop
 extern int set_motor_stop();
 

@@ -407,6 +407,10 @@ case "$1" in
     echo -n "6" > /sys/class/gpio/unexport
     echo -n "36" > /sys/class/gpio/unexport
     echo -n "37" > /sys/class/gpio/unexport
+
+    # IO5
+
+    # IO6
     
     #-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
     # PWM
@@ -455,10 +459,6 @@ case "$1" in
     echo -n "30" > /sys/class/gpio/unexport
     echo -n "31" > /sys/class/gpio/unexport
     echo -n "46" > /sys/class/gpio/unexport
-
-    #-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
-    # ENCODER
-    #-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
 
     ;;
     status)

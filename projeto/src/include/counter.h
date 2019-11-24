@@ -36,11 +36,6 @@
 // -- defines from the LS7366 datasheet
 // --
 
-#define PIN_SPI_MISO
-#define PIN_SPI_MOSI
-#define PIN_SPI_SCK
-#define PIN_SPI_SS
-
 /***MDR0 configuration data - the configuration data is formed with***
  ***single segments taken from each group and ORing all together.***/
 
@@ -67,6 +62,8 @@
 //Clock filter modes
 #define FILTER_1 0x00 //filter clock frequncy division factor 1
 #define FILTER_2 0x80 //filter clock frequncy division factor 2
+
+#define COUNTS_REV 300
 
 /***MDR1 configuration data; any of these***
  ***data segments can be ORed together***/

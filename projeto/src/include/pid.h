@@ -28,4 +28,4 @@
 extern unsigned long long time_ms(void);
 
 // control PID given some arm position
-extern double pid_control(double desired_value, int actual_value, float kp, float ki, float kd, double error_prior, long long duration, int update_period);
+extern double pid_control(double desired_value, int actual_value, float kp, float ki, float kd, double error_prior, unsigned long long duration, int update_period);

@@ -49,6 +49,12 @@ int main(int argc, char const *argv[])
     unsigned long long duration, current_time, start_time;
     double error_prior, desired_value, output;
 
+    if (argc < 3)
+    {
+        puts("usage: ./main [position in rads] [run duration in seconds]");
+        exit(-1);
+    }
+
     puts("initializing PWM\n");
     pwm_init();
     
@@ -99,14 +105,14 @@ int main(int argc, char const *argv[])
 
     puts("initializing PID\n");
     desired_value = atof(argv[1]);
-    duration = atoi(argv[2]);
+    duration      = atoi(argv[2]);
     printf("chosen position: %f rad; %f degrees; run duration: %llu\n", desired_value, desired_value*180/PI_CONST, duration);
     
-    start_time = time_ms();
-    current_time = time_ms();
-    update_period = 100;
-    error_prior = 0;
-    if (desired_value > 3.142)
+    start_time    = time_ms();
+    current_time  = start_time;
+    update_period = 100; // in ms
+    error_prior   = 0;
+    if (desired_value > 3.142) // 3.142 rad = 180 degrees
     {
         puts("desired value is bigger than 3.142, or 180 degrees, aborting...\n");
         exit(-1);
@@ -118,23 +124,29 @@ int main(int argc, char const *argv[])
 
     puts("beginning PID tunning");
     int print_counter = 0;
-    while((limit_read(1) == 1) && (limit_read(2) == 1))
+    while(1)
     {
         // if chosen duration is up, stop
-        if ((time_ms() - start_time) > (duration * 1000 + start_time))
+        if ((time_ms() - start_time) > (duration * 1000))
         {
             puts("duration reached, exiting...");
             break;
+        }
+        if ((limit_read(1) == 0) | (limit_read(2) == 0))
+        {
+            puts("stopping, arm reached a limit:\n");
+            printf("limit1: %d\n", (limit_read(1)));
+            printf("limit2: %d\n", (limit_read(2)));
         }
 
         // only update if period is up
         if (time_ms() > current_time + update_period)
         {
-            current_time = time_ms();
+            current_time  = time_ms();
             counter_value = counter_read_rad(counter);
             
             // pid_control(desired, actual, kp, ki, kd, error prior pid, duration in seconds)
-            output = pid_control(desired_value, counter_value, 3, 0.1, 10, error_prior, duration, update_period);
+            output      = pid_control(desired_value, counter_value, 3, 0.1, 10, error_prior, duration, update_period);
             error_prior = desired_value - counter_value;
 
             // check if output is bigger than voltage limit

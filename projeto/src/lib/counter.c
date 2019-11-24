@@ -245,15 +245,14 @@ int counter_read(COUNTER counter)
 float counter_read_rad(COUNTER counter)
 {
     float counter_value;
-    counter_value = counter_read(counter) * 1.;
+    counter_value = counter_read(counter) / COUNTS_REV;
 
     // 1 rev = 360 degrees
     // 1024 pulses / rev
     // 4096 counts / rev
     // 2.84 pulses = 1 degree
     // 11.36 counts = 1 degree
-    counter_value = counter_read(counter);
-    return counter_value * PI_CONST / 1024;
+    return counter_value * PI_CONST / 180;
 }
 
 int counter_mode_read(COUNTER counter)

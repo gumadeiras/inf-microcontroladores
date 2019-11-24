@@ -39,12 +39,15 @@ char *pgets(char *s, int size, const char path[])
 
 int pread_gpio(const char path[])
 {
-    int fd;
+    int fd, n;
     if((fd=open(path, O_RDONLY)) == -1) return -1;
 
     char c;
     lseek(fd, 0, SEEK_SET);
-    if(read(fd, &c, sizeof(c)) < 0)
+    n = read(fd, &c, sizeof(c));
+    close(fd);
+
+    if(n < 0)
     {
         return -1;
     }

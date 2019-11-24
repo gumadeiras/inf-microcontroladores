@@ -42,16 +42,16 @@
 
 int main(int argc, char const *argv[])
 {
-    int duty_cycle;
     unsigned char str_register;
-    COUNTER counter;
-    int update_period, counter_value;
     unsigned long long duration, current_time, start_time;
-    double error_prior, desired_value, output;
+    int duty_cycle, update_period;
+    float kp, ki, kd;
+    double error_prior, desired_value, counter_value, output;
+    COUNTER counter;
 
-    if (argc < 3)
+    if (argc < 6)
     {
-        puts("usage: ./main [position in rads] [run duration in seconds]");
+        puts("usage: ./main [position in rads] [kp] [ki] [kd] [run duration in seconds]");
         exit(-1);
     }
 
@@ -105,8 +105,12 @@ int main(int argc, char const *argv[])
 
     puts("initializing PID\n");
     desired_value = atof(argv[1]);
-    duration      = atoi(argv[2]);
+    kp            = atof(argv[2]);
+    ki            = atof(argv[3]);
+    kd            = atof(argv[4]);
+    duration      = atoi(argv[5]);
     printf("chosen position: %f rad; %f degrees; run duration: %llu\n", desired_value, desired_value*180/PI_CONST, duration);
+    printf("chosen constants: kp=%f; ki=%f; kd=%f\n", kp, ki, kd);
     
     start_time    = time_ms();
     current_time  = start_time;
@@ -122,14 +126,14 @@ int main(int argc, char const *argv[])
     printf("limit1: %d\n", (limit_read(1)));
     printf("limit2: %d\n", (limit_read(2)));
 
-    puts("beginning PID tunning");
+    puts("beginning PID");
     int print_counter = 0;
     while(1)
     {
         // if chosen duration is up, stop
         if ((time_ms() - start_time) > (duration * 1000))
         {
-            puts("duration reached, exiting...");
+            puts("duration reached\n");
             break;
         }
         if ((limit_read(1) == 0) | (limit_read(2) == 0))
@@ -137,6 +141,7 @@ int main(int argc, char const *argv[])
             puts("stopping, arm reached a limit:\n");
             printf("limit1: %d\n", (limit_read(1)));
             printf("limit2: %d\n", (limit_read(2)));
+            break;
         }
 
         // only update if period is up
@@ -146,7 +151,7 @@ int main(int argc, char const *argv[])
             counter_value = counter_read_rad(counter);
             
             // pid_control(desired, actual, kp, ki, kd, error prior pid, duration in seconds)
-            output      = pid_control(desired_value, counter_value, 3, 0.1, 10, error_prior, duration, update_period);
+            output      = pid_control(desired_value, counter_value, kp, ki, kd, error_prior, update_period);
             error_prior = desired_value - counter_value;
 
             // check if output is bigger than voltage limit
@@ -166,9 +171,13 @@ int main(int argc, char const *argv[])
         printf("Counter: %d; Rad: %f; Voltage: %f\n", counter_read(counter), counter_read_rad(counter), output);
         }
     }
-    
-    set_motor_stop();
-    pputs(PIN_PWM_ENABLE,"0"); // disable PWM
-        
+
+    puts("stopping motor and exiting...\n");
+    set_motor_stop(); // stop motor
+    if(pputs(PIN_PWM_ENABLE,"0") < 1) // disable PWM
+    {
+        perror("error disabling PWM\n");
+    }
+
     return 0;
 }

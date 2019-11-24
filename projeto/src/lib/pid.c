@@ -35,7 +35,7 @@ unsigned long long time_ms(void)
     return (((unsigned long long)tv.tv_sec) * 1000) + (tv.tv_usec / 1000);
 }
 
-double pid_control(double desired_value, int actual_value, float kp, float ki, float kd, double error_prior, long long duration, int update_period)
+double pid_control(double desired_value, double actual_value, float kp, float ki, float kd, double error_prior, int update_period)
 {
     double ki_sensitivity;
     double integral = 0;
@@ -44,6 +44,7 @@ double pid_control(double desired_value, int actual_value, float kp, float ki, f
     bias = 0.00000000001; // avoid output = 0
 
     // DOES: error = desired_value – actual_value
+    // printf("desired value: %f; actual_value: %f\n", desired_value, actual_value);
     error = desired_value - actual_value;
 
     // DOES: integral = integral + (error*update_period)
@@ -61,6 +62,7 @@ double pid_control(double desired_value, int actual_value, float kp, float ki, f
     
     // DOES: output = kp*error + ki*integral + kd*derivative + bias
     output = kp * error + ki * integral + kd * derivative + bias;
+    // printf("error: %f; error_prior: %f; integral: %f; derivative: %f\n", error, error_prior, integral, derivative);
 
     // save error for next iteration
     return output;

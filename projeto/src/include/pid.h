@@ -25,7 +25,7 @@
 #include <sys/time.h>
 
 // read current time in ms
-extern long long time_ms(void);
+extern unsigned long long time_ms(void);
 
 // control PID given some arm position
 extern double pid_control(double desired_value, int actual_value, float kp, float ki, float kd, double error_prior, long long duration, int update_period);

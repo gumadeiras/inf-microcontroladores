@@ -27,12 +27,12 @@
 // #define ki 1 // accumulating errors over time, integral
 // #define kd 1 // dampening constant, derivative
 
-long long time_ms(void)
+unsigned long long time_ms(void)
 {
     struct timeval tv;
 
     gettimeofday(&tv, NULL); // NULL = timezone
-    return (((long long)tv.tv_sec) * 1000) + (tv.tv_usec / 1000);
+    return (((unsigned long long)tv.tv_sec) * 1000) + (tv.tv_usec / 1000);
 }
 
 double pid_control(double desired_value, int actual_value, float kp, float ki, float kd, double error_prior, long long duration, int update_period)

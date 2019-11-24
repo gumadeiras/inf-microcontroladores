@@ -46,15 +46,15 @@ int main(int argc, char const *argv[])
     unsigned char str_register;
     COUNTER counter;
     int update_period, counter_value;
-    long long duration, current_time, start_time;
+    unsigned long long duration, current_time, start_time;
     double error_prior, desired_value, output;
 
     puts("initializing PWM\n");
     pwm_init();
     
     puts("slowly moving arm to left limit\n");
-    duty_cycle = 15; // choose duty cycle to be 15%
-    set_motor_ccw(duty_cycle); // set motor to ccw diretion with 15% duty cycle
+    duty_cycle = 18; // choose duty cycle %
+    set_pwm_duty_cycle_percentage(duty_cycle); // set motor to ccw diretion with 15% duty cycle
 
     if (limit_poll(1) < 0) // poll limit1 switch and stop motor and limit is reached
     {
@@ -77,8 +77,9 @@ int main(int argc, char const *argv[])
     printf("Status Register STR: %d\n", str_register); 
     printf("Counter: %d; Rad: %f\n", counter_read(counter), counter_read_rad(counter));
 
-    puts("slowly moving arm to right limit");
-    set_motor_cw(duty_cycle); // set motor to ccw diretion with 15% duty cycle
+    puts("slowly moving arm to right limit\n");
+    duty_cycle = 68; // choose duty cycle %
+    set_pwm_duty_cycle_percentage(duty_cycle); // set motor to ccw diretion with 15% duty cycle
 
     if (limit_poll(2) < 0) // poll limit1 switch and stop motor and limit is reached
     {
@@ -90,10 +91,16 @@ int main(int argc, char const *argv[])
     puts("arm reached its limit\n");
     printf("Counter: %d; Rad: %f\n", counter_read(counter), counter_read_rad(counter));
 
-    puts("initializing PID");
+    puts("moving arm back a bit\n");
+    duty_cycle = 18; // choose duty cycle %
+    set_pwm_duty_cycle_percentage(duty_cycle); // set motor to ccw diretion with 15% duty cycle
+    usleep(500 * 1000); // 500ms
+    set_motor_stop();
+
+    puts("initializing PID\n");
     desired_value = atof(argv[1]);
     duration = atoi(argv[2]);
-    printf("chosen position: %f rad; %f degrees; duration: %d", desired_value, desired_value*180/PI_CONST, duration);
+    printf("chosen position: %f rad; %f degrees; run duration: %llu\n", desired_value, desired_value*180/PI_CONST, duration);
     
     start_time = time_ms();
     current_time = time_ms();
@@ -101,14 +108,22 @@ int main(int argc, char const *argv[])
     error_prior = 0;
     if (desired_value > 3.142)
     {
-        puts("desired value is bigger than 3.142, or 180 degrees, aborting...");
+        puts("desired value is bigger than 3.142, or 180 degrees, aborting...\n");
         exit(-1);
     }
-    while((limit_read(1) > 0) && (limit_read(2) > 0))
+
+    puts("checking if arm is not at the limits\n");
+    printf("limit1: %d\n", (limit_read(1)));
+    printf("limit2: %d\n", (limit_read(2)));
+
+    puts("beginning PID tunning");
+    int print_counter = 0;
+    while((limit_read(1) == 1) && (limit_read(2) == 1))
     {
         // if chosen duration is up, stop
-        if ((time_ms() - start_time) > (duration * 1000))
+        if ((time_ms() - start_time) > (duration * 1000 + start_time))
         {
+            puts("duration reached, exiting...");
             break;
         }
 
@@ -131,14 +146,17 @@ int main(int argc, char const *argv[])
                 output = -15;
             }
             set_motor_voltage(output);
-            printf("Counter: %d; Rad: %f\n", counter_read(counter), counter_read_rad(counter));
-            sleep(update_period);
+            usleep(update_period * 1000);
+        }
+        print_counter = print_counter + 1;
+        if ((print_counter % 10) == 0)
+        {
+        printf("Counter: %d; Rad: %f; Voltage: %f\n", counter_read(counter), counter_read_rad(counter), output);
         }
     }
     
     set_motor_stop();
     pputs(PIN_PWM_ENABLE,"0"); // disable PWM
-    puts("duration reached, exiting...");
         
     return 0;
 }

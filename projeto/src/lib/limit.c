@@ -71,7 +71,7 @@ int limit_poll(int switch_limit)
         }
         read(pfd.fd, &c, 1);
         pfd.events=POLLPRI;
-        puts("waiting for interrupt (F) on LIMIT1");
+        puts("waiting for interrupt (F) on LIMIT2");
         pputs(PIN_LIMIT2_EDGE, "falling");
         poll(&pfd, 1, -1);
         pputs(PIN_LIMIT2_EDGE,"none");

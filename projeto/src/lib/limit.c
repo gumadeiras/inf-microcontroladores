@@ -50,7 +50,7 @@ int limit_poll(int switch_limit)
     {
         if((pfd.fd=open(PIN_LIMIT1, O_RDONLY)) < 0)
         {
-            perror("opening LIMIT1:");
+            perror("opening LIMIT1");
             return -1;
         }
         read(pfd.fd, &c, 1);
@@ -64,9 +64,9 @@ int limit_poll(int switch_limit)
     }
     else if (switch_limit == 2)
     {
-    if((pfd.fd=open(PIN_LIMIT2, O_RDONLY)) < 0)
+        if((pfd.fd=open(PIN_LIMIT2, O_RDONLY)) < 0)
         {
-            perror("opening LIMIT2:");
+            perror("opening LIMIT2");
             return -1;
         }
         read(pfd.fd, &c, 1);

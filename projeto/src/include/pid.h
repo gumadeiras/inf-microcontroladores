@@ -1,7 +1,7 @@
 /*
-  galileo2io.h: Helper functions for Galileo I/O
-  
-  Copyright (c) 2016 Walter Fetter Lages <w.fetter@ieee.org>
+  pid.h: helper functions for the PID control algorithm
+
+  Copyright (c) 2019 Gustavo Santana <gmsantana@inf.ufrgs.br>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,23 +19,13 @@
 
     You can also obtain a copy of the GNU General Public License
     at <http://www.gnu.org/licenses>.
-
 */
 
-#ifndef GALILEO2IO_H
-#define GALILEO2IO_H
+#include <stdio.h>
+#include <sys/time.h>
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
+// read current time in ms
+extern long long time_ms(void);
 
-extern char * pgets(char *s,int size,const char path[]);
-extern int pputs(const char path[],const char s[]);
-extern int pread_gpio(const char path[]);
-
-#ifdef __cplusplus
-};
-#endif
-
-#endif
+// control PID given some arm position
+extern double pid_control(double desired_value, int actual_value, float kp, float ki, float kd, double error_prior, long long duration, int update_period);

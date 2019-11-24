@@ -86,34 +86,34 @@ int counter_init(COUNTER counter)
     unsigned char mdr0, mdr1;
 
     if(ioctl(counter.fd_spi, SPI_IOC_WR_MODE, &mode) < 0){
-        printf("Error setting SPI write mode.\n");
+        printf("error setting SPI write mode.\n");
         return -1;
     }
 
     if(ioctl(counter.fd_spi, SPI_IOC_WR_LSB_FIRST, &lsb)){
-        printf("Error setting SPI LSB first.\n");
+        printf("error setting SPI LSB first.\n");
         return -1;
     }
 
     if(ioctl(counter.fd_spi, SPI_IOC_WR_BITS_PER_WORD, &bpw)){
-        printf("Error setting SPI bits per word.\n");
+        printf("error setting SPI bits per word.\n");
         return -1;
     }
 
     if(ioctl(counter.fd_spi, SPI_IOC_WR_MAX_SPEED_HZ, &rate)){
-        printf("Error setting SPI max speed.\n");
+        printf("error setting SPI max speed.\n");
         return -1;
     }
     
     mdr0 = QUADRX4|FREE_RUN|DISABLE_INDX|FILTER_2;
     mdr1 = BYTE_4|EN_CNTR|NO_FLAGS;
     if(counter_byte_write(counter, mdr0, WRITE_MDR0) < 0){
-        printf("Error in WRITE_MDR0.\n");
+        printf("Error writing to MDR0.\n");
         return -1;
     }
 
     if(counter_byte_write(counter, mdr1, WRITE_MDR1)){
-        printf("Error in WRITE_MDR1.\n");
+        printf("Error writing to MDR1.\n");
         return -1;
     }
 
@@ -192,7 +192,7 @@ int counter_reset(COUNTER counter)
 int counter_read(COUNTER counter)
 {
     unsigned char c1, c2, c3, c4;
-    int counter_value;
+    unsigned long counter_value;
     char read_opcode = READ_CNTR;
 
     // SS high
@@ -236,12 +236,9 @@ int counter_read(COUNTER counter)
     
     counter_value = 0;
     counter_value = counter_value | c1;
-    counter_value = (counter_value << 8);
-    counter_value = counter_value | c2;
-    counter_value = (counter_value << 8);
-    counter_value = counter_value | c3;
-    counter_value = (counter_value << 8);
-    counter_value = counter_value | c4;
+    counter_value = (counter_value << 8) | c2;
+    counter_value = (counter_value << 8) | c3;
+    counter_value = (counter_value << 8) | c4;
     return counter_value/4;
 }
 
@@ -249,7 +246,14 @@ float counter_read_rad(COUNTER counter)
 {
     float counter_value;
     counter_value = counter_read(counter) * 1.;
-    return counter_value * 2 * PI_CONST / 4096; // encoder has 4096 counts/rev
+
+    // 1 rev = 360 degrees
+    // 1024 pulses / rev
+    // 4096 counts / rev
+    // 2.84 pulses = 1 degree
+    // 11.36 counts = 1 degree
+    counter_value = counter_read(counter);
+    return counter_value * PI_CONST / 1024;
 }
 
 int counter_mode_read(COUNTER counter)
@@ -259,4 +263,5 @@ int counter_mode_read(COUNTER counter)
     md0r = counter_byte_read(counter, READ_MDR0);
     md1r = counter_byte_read(counter, READ_MDR1);
     printf("md0r (131): %d; md1r (0): %d\n", md0r, md1r);
+    return 0;
 }

@@ -35,25 +35,26 @@
 #include <linux/spi/spidev.h>
 
 #include <galileo2io.h>
+#include "pid.h"
 #include "motor.h"
 #include "counter.h"
 #include "limit.h"
-#include "pid.h"
 
 int main(int argc, char const *argv[])
 {
     int duty_cycle;
-    char str[100];
     unsigned char str_register;
     COUNTER counter;
+    int update_period, counter_value;
+    long long duration, current_time, start_time;
+    double error_prior, desired_value, output;
 
     puts("initializing PWM\n");
     pwm_init();
     
     puts("slowly moving arm to left limit\n");
     duty_cycle = 15; // choose duty cycle to be 15%
-    snprintf(str, sizeof str, "%d\n", duty_cycle * 2 * PWM_SCALE);
-    set_motor_ccw(str) // set motor to ccw diretion with 15% duty cycle
+    set_motor_ccw(duty_cycle); // set motor to ccw diretion with 15% duty cycle
 
     if (limit_poll(1) < 0) // poll limit1 switch and stop motor and limit is reached
     {
@@ -66,19 +67,18 @@ int main(int argc, char const *argv[])
     puts("arm reached its limit\n");
     
     puts("initializing counter\n");
-
     counter_open(&counter, SPI_PATH, SPI_SS_PATH);
     counter_init(counter);
     counter_mode_read(counter);
     counter_reset(counter); 
-
     pputs(SPI_EN_C_PATH, "1"); // enable counter
+
     str_register = counter_byte_read(counter, READ_MDR0); // status register
     printf("Status Register STR: %d\n", str_register); 
-    printf("Counter: %d; Rad: %d\n", counter_read(counter), counter_read_rad(counter));
+    printf("Counter: %d; Rad: %f\n", counter_read(counter), counter_read_rad(counter));
 
     puts("slowly moving arm to right limit");
-    set_motor_cw(str) // set motor to ccw diretion with 15% duty cycle
+    set_motor_cw(duty_cycle); // set motor to ccw diretion with 15% duty cycle
 
     if (limit_poll(2) < 0) // poll limit1 switch and stop motor and limit is reached
     {
@@ -86,12 +86,59 @@ int main(int argc, char const *argv[])
         pputs(PIN_PWM_ENABLE,"0"); // disable PWM
         puts("polling limit2 switch failed, aborting\n");
     }
-    printf("Counter: %d; Rad: %d\n", str_register, counter_read(counter), counter_read_rad(counter));
+    set_motor_stop();
+    puts("arm reached its limit\n");
+    printf("Counter: %d; Rad: %f\n", counter_read(counter), counter_read_rad(counter));
 
     puts("initializing PID");
-    printf("chosen position: %d rad; %d degrees", atoi(argv[1]), atoi(argv[1])*180/PI_CONST);
+    desired_value = atof(argv[1]);
+    duration = atoi(argv[2]);
+    printf("chosen position: %f rad; %f degrees; duration: %d", desired_value, desired_value*180/PI_CONST, duration);
     
-    pid_control(atoi(argv[1]), 3, 0.1, 10); // (position, kp, ki, kd)
+    start_time = time_ms();
+    current_time = time_ms();
+    update_period = 100;
+    error_prior = 0;
+    if (desired_value > 3.142)
+    {
+        puts("desired value is bigger than 3.142, or 180 degrees, aborting...");
+        exit(-1);
+    }
+    while((limit_read(1) > 0) && (limit_read(2) > 0))
+    {
+        // if chosen duration is up, stop
+        if ((time_ms() - start_time) > (duration * 1000))
+        {
+            break;
+        }
+
+        // only update if period is up
+        if (time_ms() > current_time + update_period)
+        {
+            current_time = time_ms();
+            counter_value = counter_read_rad(counter);
+            
+            // pid_control(desired, actual, kp, ki, kd, error prior pid, duration in seconds)
+            output = pid_control(desired_value, counter_value, 3, 0.1, 10, error_prior, duration, update_period);
+            error_prior = desired_value - counter_value;
+
+            // check if output is bigger than voltage limit
+            // using max voltage +-15V, just to be safe
+            if (output > 15)
+            {
+                output = 15;
+            } else if (output < -15){
+                output = -15;
+            }
+            set_motor_voltage(output);
+            printf("Counter: %d; Rad: %f\n", counter_read(counter), counter_read_rad(counter));
+            sleep(update_period);
+        }
+    }
     
+    set_motor_stop();
+    pputs(PIN_PWM_ENABLE,"0"); // disable PWM
+    puts("duration reached, exiting...");
+        
     return 0;
 }

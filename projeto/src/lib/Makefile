@@ -1,5 +1,5 @@
 TARGET=libgalileo2.a
-SRCS=pputs.c pgets.c motor.c counter.c limit.c
+SRCS=pputs.c pgets.c motor.c counter.c limit.c pid.c
 
 FLAGS=-Wall
 INCLUDE=-I. -I../include

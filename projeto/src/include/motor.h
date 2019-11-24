@@ -24,14 +24,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <unistd.h>
 
 #include <galileo2io.h>
 
 #define PWM_PERIOD "1000000" // 1kHz
 #define PWM_HALF_P "500000"
-#define PWM_SCALE 10000
+#define PWM_SCALE 10000.
 
 #define PIN_PWM_PERIOD  "/sys/class/pwm/pwmchip0/device/pwm_period"
 #define PIN_PWM_ENABLE  "/sys/class/pwm/pwmchip0/pwm1/enable"
@@ -46,10 +45,10 @@ extern int pwm_init();
 extern int set_motor_stop();
 
 // set motor direction to clockwise
-extern int set_motor_cw(char str);
+extern int set_motor_cw(int duty_cycle);
 
 // set motor direction to counterclockwise
-extern int set_motor_ccw(char str);
+extern int set_motor_ccw(int duty_cycle);
 
 // set duty cycle
 extern int set_pwm_duty_cycle_percentage(int percentage);

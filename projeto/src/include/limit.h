@@ -29,6 +29,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <poll.h>
+#include <galileo2io.h>
 
 #define PIN_LIMIT1 "/sys/class/gpio/gpio0/value" // IO5
 #define PIN_LIMIT1_EDGE "/sys/class/gpio/gpio0/edge"

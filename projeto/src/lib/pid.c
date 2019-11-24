@@ -21,76 +21,47 @@
     at <http://www.gnu.org/licenses>.
 */
 
-#include <stdio.h>
-#include <sys/time.h>
-
-#include "motor.h"
-#include "counter.h"
-#include "limit.h"
+#include "pid.h"
 
 // #define kp 1 // proportional constant, "step size"
 // #define ki 1 // accumulating errors over time, integral
 // #define kd 1 // dampening constant, derivative
 
-long long time_ms(void) 
+long long time_ms(void)
 {
     struct timeval tv;
 
-    gettimeofday(&tv,NULL);
-    return (((long long)tv.tv_sec) * 1000) + (tv.tv_usec/1000);
+    gettimeofday(&tv, NULL); // NULL = timezone
+    return (((long long)tv.tv_sec) * 1000) + (tv.tv_usec / 1000);
 }
 
-int pid_control(double desired_value, float kp, float ki, float kd)
+double pid_control(double desired_value, int actual_value, float kp, float ki, float kd, double error_prior, long long duration, int update_period)
 {
     double ki_sensitivity;
-    double update_period = 100;
-    double error_prior = 0;
     double integral = 0;
-    long long current_time;
-    double error, actual_value, derivative, output, bias;
+    double error, derivative, output, bias;
 
-    bias = 0.00000000001 // avoid output = 0
+    bias = 0.00000000001; // avoid output = 0
 
-    while (1)
+    // DOES: error = desired_value – actual_value
+    error = desired_value - actual_value;
+
+    // DOES: integral = integral + (error*update_period)
+    // if error is within 5 degrees, start computing the integral part
+    ki_sensitivity = 0.0872665; // 5 degrees in radians
+    if ((error > -ki_sensitivity) && (error < ki_sensitivity))
     {
-        if (time_ms() > current_time + update_period)
-        {
-            current_time = time_ms();
-
-            // DOES: error = desired_value – actual_value
-            actual_value = counter_read_rad(counter);
-            error = desired_value - actual_value;
-
-            // DOES: integral = integral + (error*update_period)
-            // if error is within 5 degrees
-            ki_sensitivity = 0.0872665; // 5 degrees in radians
-            if (error > -ki_sensitivity && error < ki_sensitivity)
-            {
-                integral = integral + (error * update_period);
-            } else {
-                integral = 0;
-            }
-
-            // DOES: derivative = (error – error_prior)/update_period
-            derivative = (error – error_prior) / update_period;
-            
-            // DOES: output = kp*error + ki*integral + kd*derivative + bias
-            output = kp * error + ki * integral + kd * derivative + bias;
-            
-            // check for limit voltage in the output
-            if (voltage > 15)
-            {
-                output = 15;
-            } else if (voltage < -15){
-                output = -15;
-            }
-            set_motor_voltage(output);
-
-            // save error for next iteration
-            error_prior = error;
-
-            // wait before updating again
-            sleep(update_period);
-        }
+        integral = integral + (error * update_period);
+    } else {
+        integral = 0;
     }
+
+    // DOES: derivative = (error – error_prior)/update_period
+    derivative = (error - error_prior) / update_period;
+    
+    // DOES: output = kp*error + ki*integral + kd*derivative + bias
+    output = kp * error + ki * integral + kd * derivative + bias;
+
+    // save error for next iteration
+    return output;
 }

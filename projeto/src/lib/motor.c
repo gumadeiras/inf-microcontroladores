@@ -27,16 +27,19 @@
 int pwm_init()
 {
     pputs(PIN_PWM_PERIOD, PWM_PERIOD); // set PWM period
-    pputs(PIN_PWM_DUTY, "0"); // set duty_cycle to 0
-    pputs(PIN_PWM_ENABLE,"1"); // enable PWM
+    pputs(PIN_PWM3_DUTY, "0");
+    pputs(PIN_PWM5_DUTY, "0");
+    pputs(PIN_PWM3_ENABLE,"1"); // enable PWM
+    pputs(PIN_PWM5_ENABLE,"1"); // enable PWM
+    pputs(PIN_PWM_EN_R, "1");
+    pputs(PIN_PWM_EN_L, "1");
     return 0;
 }
 
 int set_motor_stop()
 {
-    pputs(PIN_PWM_DUTY, "0");
-    pputs(PIN_PWM_EN_L, "0");
-    pputs(PIN_PWM_EN_R, "0");
+    pputs(PIN_PWM3_DUTY, "0");
+    pputs(PIN_PWM5_DUTY, "0");
     return 0;
 }
 
@@ -45,10 +48,9 @@ int set_motor_cw(int duty_cycle)
     char str[100];
     snprintf(str, sizeof str, "%d\n", duty_cycle * (int)PWM_SCALE);
 
-    pputs(PIN_PWM_DUTY, "0");
-    pputs(PIN_PWM_EN_R, "0");
-    pputs(PIN_PWM_EN_L, "1");
-    pputs(PIN_PWM_DUTY, str);
+    pputs(PIN_PWM3_DUTY, "0");
+    pputs(PIN_PWM5_DUTY, "0");
+    pputs(PIN_PWM5_DUTY, str);
     return 0;
 }
 
@@ -57,10 +59,9 @@ int set_motor_ccw(int duty_cycle)
     char str[100];
     snprintf(str, sizeof str, "%d\n", duty_cycle * (int)PWM_SCALE);
 
-    pputs(PIN_PWM_DUTY, "0");
-    pputs(PIN_PWM_EN_L, "0");
-    pputs(PIN_PWM_EN_R, "1");
-    pputs(PIN_PWM_DUTY, str);
+    pputs(PIN_PWM5_DUTY, "0");
+    pputs(PIN_PWM3_DUTY, "0");
+    pputs(PIN_PWM3_DUTY, str);
     return 0;
 }
 
@@ -116,7 +117,6 @@ int set_pwm_duty_cycle_percentage(int percentage)
 int set_motor_voltage(int voltage)
 {
     int duty_cycle_percentage;
-    int max_voltage = 27;
     
     if ((voltage > 27) | (voltage < -27))
     {
@@ -124,17 +124,20 @@ int set_motor_voltage(int voltage)
         return -1;
     }
 
-    // 0 -> 0%
-    // 54V  -> 100% (-27 to 27)
-    // scale = 100/54 = 1.851851852
-
-    if (voltage == 27)
+    if (voltage == 0)
     {
         set_pwm_duty_cycle_percentage(50);
-    } else {
-        voltage = voltage + max_voltage;
-        duty_cycle_percentage = voltage * 1.851851852;
-        set_pwm_duty_cycle_percentage(duty_cycle_percentage);
+        return 0;
+    } else if (voltage < 0)
+    {
+        duty_cycle_percentage = voltage * -3.703703704; // linear scale between 0 and -27V
+        set_motor_ccw(duty_cycle_percentage);
+        return 0;
+    } else if (voltage > 0)
+    {
+        duty_cycle_percentage = voltage * 3.703703704; // linear scale between 0 and 27V
+        set_motor_cw(duty_cycle_percentage);
+        return 0;
     }
 
     return 0;

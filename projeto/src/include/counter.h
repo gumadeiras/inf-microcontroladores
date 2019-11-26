@@ -63,7 +63,7 @@
 #define FILTER_1 0x00 //filter clock frequncy division factor 1
 #define FILTER_2 0x80 //filter clock frequncy division factor 2
 
-#define COUNTS_REV 300
+#define COUNTS_REV 276
 
 /***MDR1 configuration data; any of these***
  ***data segments can be ORed together***/

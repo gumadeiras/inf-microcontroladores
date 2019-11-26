@@ -25,48 +25,134 @@ case "$1" in
     #x
     #-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
 
-    #######      ___ ___ ___
-    #######     |_ _/ _ \_  )
-    #######      | | (_) / /
-    #######     |___\___/___|
+    #######      ___ ___  _ 
+    #######     |_ _/ _ \/ |
+    #######      | | (_) | |
+    #######     |___\___/|_|
+    #######            
+    #######     LIMIT_1 signal from quanser (final de curso)
     #######
-    #######     ENABLE signal for REVERSE (R_PWM) pin in the H-Bridge
+    # IO1 = gpio12
+    if [ ! -d /sys/class/gpio/gpio12 ] ; then
+        echo -n "12" > /sys/class/gpio/export
+    fi
+    echo -n "in" > /sys/class/gpio/gpio12/direction
+    echo -n "1" > /sys/class/gpio/gpio12/value
+    chgrp gpio /sys/class/gpio/gpio12/value
+    chmod g+rw /sys/class/gpio/gpio12/value
+    chgrp gpio /sys/class/gpio/gpio12/edge
+    chmod g+rw /sys/class/gpio/gpio12/edge
+
+    
+    if [ ! -d /sys/class/gpio/gpio28 ] ; then
+        echo -n "28" > /sys/class/gpio/export
+    fi
+    echo -n "out" > /sys/class/gpio/gpio28/direction
+    echo -n "1" > /sys/class/gpio/gpio28/value
+    
+    # pull-up resistor
+    if [ ! -d /sys/class/gpio/gpio29 ] ; then
+        echo -n "29" > /sys/class/gpio/export
+    fi
+    echo -n "out" > /sys/class/gpio/gpio29/direction
+    echo -n "1" > /sys/class/gpio/gpio29/value
+    
+    # mux
+    if [ ! -d /sys/class/gpio/gpio45 ] ; then
+        echo -n "45" > /sys/class/gpio/export
+    fi
+    echo -n "out" > /sys/class/gpio/gpio45/direction
+    echo -n "0" > /sys/class/gpio/gpio45/value
+
+    #######      ___ ___ ___ 
+    #######     |_ _/ _ \_  )
+    #######      | | (_) / / 
+    #######     |___\___/___|
+    #######                  
+    #######     LIMIT_2 signal from quanser (final de curso)
     #######
     # IO2 = gpio13
     if [ ! -d /sys/class/gpio/gpio13 ] ; then
         echo -n "13" > /sys/class/gpio/export
     fi
-    echo -n "out" > /sys/class/gpio/gpio13/direction
+    echo -n "in" > /sys/class/gpio/gpio13/direction
+    echo -n "1" > /sys/class/gpio/gpio13/value
     chgrp gpio /sys/class/gpio/gpio13/value
     chmod g+rw /sys/class/gpio/gpio13/value
     chgrp gpio /sys/class/gpio/gpio13/edge
     chmod g+rw /sys/class/gpio/gpio13/edge
 
-    # gpio34 = 0 => IO2 = out
+    
     if [ ! -d /sys/class/gpio/gpio34 ] ; then
         echo -n "34" > /sys/class/gpio/export
     fi
     echo -n "out" > /sys/class/gpio/gpio34/direction
-    echo -n "0" > /sys/class/gpio/gpio34/value
-
-    # gpio35 = in = no pull resistor
+    echo -n "1" > /sys/class/gpio/gpio34/value
+    
+    # pull-up resistor
     if [ ! -d /sys/class/gpio/gpio35 ] ; then
         echo -n "35" > /sys/class/gpio/export
     fi
-    echo -n "in" > /sys/class/gpio/gpio35/direction
-
-    #gpio77 = 0 = mux
+    echo -n "out" > /sys/class/gpio/gpio35/direction
+    echo -n "1" > /sys/class/gpio/gpio35/value
+    
+    # mux
     if [ ! -d /sys/class/gpio/gpio77 ] ; then
         echo -n "77" > /sys/class/gpio/export
     fi
+    echo -n "out" > /sys/class/gpio/gpio77/direction
     echo -n "0" > /sys/class/gpio/gpio77/value
+    
+    #######      ___ ___ ____
+    #######     |_ _/ _ \__ /
+    #######      | | (_) |_ \
+    #######     |___\___/___/
+    #######
+    #######     R_EN Signal
+    #######
+
+    # gpio62 = 0 = out
+    if [ ! -d /sys/class/gpio/gpio62 ] ; then
+        echo -n "62" > /sys/class/gpio/export
+    fi
+    echo -n "out" > /sys/class/gpio/gpio62/direction
+
+    chgrp gpio /sys/class/gpio/gpio62/value
+    chmod g+rw /sys/class/gpio/gpio62/value
+    
+    # # gpio16 = 0 = out
+    # if [ ! -d /sys/class/gpio/gpio16 ] ; then
+    #     echo -n "16" > /sys/class/gpio/export
+    # fi
+    # echo -n "out" > /sys/class/gpio/gpio16/direction
+    # echo -n "0" > /sys/class/gpio/gpio16/value
+
+    # # gpio17 = in = no pull resistor
+    # if [ ! -d /sys/class/gpio/gpio17 ] ; then
+    #     echo -n "17" > /sys/class/gpio/export
+    # fi
+    # echo -n "in" > /sys/class/gpio/gpio17/direction
+
+    # gpio76 = 0 = mux
+    if [ ! -d /sys/class/gpio/gpio76 ] ; then
+        echo -n "76" > /sys/class/gpio/export
+    fi
+    echo -n "out" > /sys/class/gpio/gpio76/direction
+    echo -n "0" > /sys/class/gpio/gpio76/value
+
+    # gpio64 = 0 = mux
+    if [ ! -d /sys/class/gpio/gpio64 ] ; then
+        echo -n "64" > /sys/class/gpio/export
+    fi
+    echo -n "out" > /sys/class/gpio/gpio64/direction
+    echo -n "0" > /sys/class/gpio/gpio64/value
 
     #######      ___ ___  _ _
     #######     |_ _/ _ \| | |
     #######      | | (_) |_  _|
     #######     |___\___/  |_|
     #######
-    #######     ENABLE signal for FORWARD (L_PWM) pin in the H-Bridge
+    #######     L_EN Signal
     #######
     # IO4 = gpio6
     if [ ! -d /sys/class/gpio/gpio6 ] ; then
@@ -91,79 +177,6 @@ case "$1" in
     fi
     echo -n "in" > /sys/class/gpio/gpio37/direction
 
-    #######      ___ ___  ___ 
-    #######     |_ _/ _ \| __|
-    #######      | | (_) |__ \
-    #######     |___\___/|___/
-    #######
-    #######     LIMIT_1 signal from quanser (final de curso)
-    #######
-    # IO5 = gpio0
-    if [ ! -d /sys/class/gpio/gpio0 ] ; then
-        echo -n "0" > /sys/class/gpio/export
-    fi
-    echo -n "in" > /sys/class/gpio/gpio0/direction
-    echo -n "0" > /sys/class/gpio/gpio0/value
-    chgrp gpio /sys/class/gpio/gpio0/value
-    chmod g+rw /sys/class/gpio/gpio0/value
-    chgrp gpio /sys/class/gpio/gpio0/edge
-    chmod g+rw /sys/class/gpio/gpio0/edge
-
-    
-    if [ ! -d /sys/class/gpio/gpio18 ] ; then
-        echo -n "18" > /sys/class/gpio/export
-    fi
-    echo -n "out" > /sys/class/gpio/gpio18/direction
-    echo -n "1" > /sys/class/gpio/gpio18/value
-
-    if [ ! -d /sys/class/gpio/gpio19 ] ; then
-        echo -n "19" > /sys/class/gpio/export
-    fi
-    echo -n "out" > /sys/class/gpio/gpio19/direction
-    echo -n "0" > /sys/class/gpio/gpio19/value
-
-    if [ ! -d /sys/class/gpio/gpio66 ] ; then
-        echo -n "66" > /sys/class/gpio/export
-    fi
-    echo -n "out" > /sys/class/gpio/gpio66/direction
-    echo -n "0" > /sys/class/gpio/gpio66/value
-
-    #######      ___ ___   __ 
-    #######     |_ _/ _ \ / / 
-    #######      | | (_) / _ \
-    #######     |___\___/\___/
-    #######                   
-    #######     LIMIT_2 signal from quanser (final de curso)
-    #######
-    # IO6 = gpio1
-    if [ ! -d /sys/class/gpio/gpio1 ] ; then
-        echo -n "1" > /sys/class/gpio/export
-    fi
-    echo -n "in" > /sys/class/gpio/gpio1/direction
-    echo -n "0" > /sys/class/gpio/gpio1/value
-    chgrp gpio /sys/class/gpio/gpio1/value
-    chmod g+rw /sys/class/gpio/gpio1/value
-    chgrp gpio /sys/class/gpio/gpio1/edge
-    chmod g+rw /sys/class/gpio/gpio1/edge
-
-    
-    if [ ! -d /sys/class/gpio/gpio20 ] ; then
-        echo -n "20" > /sys/class/gpio/export
-    fi
-    echo -n "out" > /sys/class/gpio/gpio20/direction
-    echo -n "1" > /sys/class/gpio/gpio20/value
-
-    if [ ! -d /sys/class/gpio/gpio21 ] ; then
-        echo -n "21" > /sys/class/gpio/export
-    fi
-    echo -n "out" > /sys/class/gpio/gpio21/direction
-    echo -n "0" > /sys/class/gpio/gpio21/value
-
-    if [ ! -d /sys/class/gpio/gpio68 ] ; then
-        echo -n "68" > /sys/class/gpio/export
-    fi
-    echo -n "out" > /sys/class/gpio/gpio68/direction
-    echo -n "0" > /sys/class/gpio/gpio68/value
     #-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
     #x
     #x      _______          ____  __
@@ -176,47 +189,77 @@ case "$1" in
     #x
     #-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
 
-    #######      ___ ___ ____
-    #######     |_ _/ _ \__ /
-    #######      | | (_) |_ \
-    #######     |___\___/___/
+    #######      ___ ___  ___ 
+    #######     |_ _/ _ \| __|
+    #######      | | (_) |__ \
+    #######     |___\___/|___/
     #######
-    #######     PWM port connects to the H-Bridge to drive the motor signal
+    #######     R_PWM Signal
     #######
-    if [ ! -d /sys/class/pwm/pwmchip0/pwm1 ] ; then
-        echo -n "1" > /sys/class/pwm/pwmchip0/export
+    if [ ! -d /sys/class/pwm/pwmchip0/pwm3 ] ; then
+        echo -n "3" > /sys/class/pwm/pwmchip0/export
     fi
     chgrp pwm /sys/class/pwm/pwmchip0/device/pwm_period
     chmod g+rw /sys/class/pwm/pwmchip0/device/pwm_period
-    chgrp pwm /sys/class/pwm/pwmchip0/pwm1/duty_cycle
-    chmod g+rw /sys/class/pwm/pwmchip0/pwm1/duty_cycle
-    chgrp pwm /sys/class/pwm/pwmchip0/pwm1/enable
-    chmod g+rw /sys/class/pwm/pwmchip0/pwm1/enable
+    chgrp pwm /sys/class/pwm/pwmchip0/pwm3/duty_cycle
+    chmod g+rw /sys/class/pwm/pwmchip0/pwm3/duty_cycle
+    chgrp pwm /sys/class/pwm/pwmchip0/pwm3/enable
+    chmod g+rw /sys/class/pwm/pwmchip0/pwm3/enable
 
-    # gpio16 = 0 = out
-    if [ ! -d /sys/class/gpio/gpio16 ] ; then
-        echo -n "16" > /sys/class/gpio/export
+    
+    # gpio18 = 0 = out
+    if [ ! -d /sys/class/gpio/gpio18 ] ; then
+        echo -n "18" > /sys/class/gpio/export
     fi
-    echo -n "out" > /sys/class/gpio/gpio16/direction
-    echo -n "0" > /sys/class/gpio/gpio16/value
+    echo -n "out" > /sys/class/gpio/gpio18/direction
+    echo -n "0" > /sys/class/gpio/gpio18/value
 
-    # gpio17 = in = no pull resistor
-    if [ ! -d /sys/class/gpio/gpio17 ] ; then
-        echo -n "17" > /sys/class/gpio/export
+    # gpio19 = in = no pull resistor
+    if [ ! -d /sys/class/gpio/gpio19 ] ; then
+        echo -n "19" > /sys/class/gpio/export
     fi
-    echo -n "in" > /sys/class/gpio/gpio17/direction
+    echo -n "in" > /sys/class/gpio/gpio19/direction
 
-    # gpio76 = 0 = mux
-    if [ ! -d /sys/class/gpio/gpio76 ] ; then
-        echo -n "76" > /sys/class/gpio/export
+    # gpio66 = 1 = mux
+    if [ ! -d /sys/class/gpio/gpio66 ] ; then
+        echo -n "66" > /sys/class/gpio/export
     fi
-    echo -n "0" > /sys/class/gpio/gpio76/value
+    echo -n "1" > /sys/class/gpio/gpio66/value
 
-    # gpio64 = 1 = mux
-    if [ ! -d /sys/class/gpio/gpio64 ] ; then
-        echo -n "64" > /sys/class/gpio/export
+    #######      ___ ___   __ 
+    #######     |_ _/ _ \ / / 
+    #######      | | (_) / _ \
+    #######     |___\___/\___/
+    #######                   
+    #######     L_PWM Signal
+    #######
+    if [ ! -d /sys/class/pwm/pwmchip0/pwm5 ] ; then
+        echo -n "5" > /sys/class/pwm/pwmchip0/export
     fi
-    echo -n "1" > /sys/class/gpio/gpio64/value
+    chgrp pwm /sys/class/pwm/pwmchip0/pwm5/duty_cycle
+    chmod g+rw /sys/class/pwm/pwmchip0/pwm5/duty_cycle
+    chgrp pwm /sys/class/pwm/pwmchip0/pwm5/enable
+    chmod g+rw /sys/class/pwm/pwmchip0/pwm5/enable
+
+    
+    # gpio20 = 0 = out
+    if [ ! -d /sys/class/gpio/gpio20 ] ; then
+        echo -n "20" > /sys/class/gpio/export
+    fi
+    echo -n "out" > /sys/class/gpio/gpio20/direction
+    echo -n "0" > /sys/class/gpio/gpio20/value
+
+    # gpio21 = in = no pull resistor
+    if [ ! -d /sys/class/gpio/gpio21 ] ; then
+        echo -n "21" > /sys/class/gpio/export
+    fi
+    echo -n "in" > /sys/class/gpio/gpio21/direction
+
+    # gpio68 = 1 = mux
+    if [ ! -d /sys/class/gpio/gpio68 ] ; then
+        echo -n "68" > /sys/class/gpio/export
+    fi
+    echo -n "1" > /sys/class/gpio/gpio68/value
 
     #-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
     #x

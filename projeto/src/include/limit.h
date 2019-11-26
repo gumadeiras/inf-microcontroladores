@@ -31,10 +31,10 @@
 #include <poll.h>
 #include <galileo2io.h>
 
-#define PIN_LIMIT1 "/sys/class/gpio/gpio0/value" // IO5
-#define PIN_LIMIT1_EDGE "/sys/class/gpio/gpio0/edge"
-#define PIN_LIMIT2 "/sys/class/gpio/gpio1/value" // IO6
-#define PIN_LIMIT2_EDGE "/sys/class/gpio/gpio1/edge"
+#define PIN_LIMIT1 "/sys/class/gpio/gpio12/value" // IO7
+#define PIN_LIMIT1_EDGE "/sys/class/gpio/gpio12/edge"
+#define PIN_LIMIT2 "/sys/class/gpio/gpio13/value" // IO8
+#define PIN_LIMIT2_EDGE "/sys/class/gpio/gpio13/edge"
 
 // read limit switch
 extern int limit_read(int switch_limit);

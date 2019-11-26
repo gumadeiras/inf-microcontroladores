@@ -44,7 +44,7 @@ int main(int argc, char const *argv[])
 {
     unsigned char str_register;
     unsigned long long duration, current_time, start_time;
-    int duty_cycle, update_period;
+    int duty_cycle, update_period, limit1_switch, limit2_switch;
     float kp, ki, kd;
     double error_prior, desired_value, counter_value, output;
     COUNTER counter;
@@ -59,13 +59,13 @@ int main(int argc, char const *argv[])
     pwm_init();
     
     puts("slowly moving arm to left limit\n");
-    duty_cycle = 18; // choose duty cycle %
-    set_pwm_duty_cycle_percentage(duty_cycle); // set motor to ccw diretion with 15% duty cycle
+    set_motor_voltage(-2);
 
     if (limit_poll(1) < 0) // poll limit1 switch and stop motor and limit is reached
     {
         set_motor_stop();
-        pputs(PIN_PWM_ENABLE,"0"); // disable PWM
+        pputs(PIN_PWM3_ENABLE,"0"); // disable PWM
+        pputs(PIN_PWM5_ENABLE,"0"); // disable PWM
         puts("polling limit1 switch failed, aborting\n");
     }
 
@@ -81,16 +81,16 @@ int main(int argc, char const *argv[])
 
     str_register = counter_byte_read(counter, READ_MDR0); // status register
     printf("Status Register STR: %d\n", str_register); 
-    printf("Counter: %d; Rad: %f\n", counter_read(counter), counter_read_rad(counter));
+    // printf("Counter: %d; Rad: %f\n", counter_read(counter), counter_read_rad(counter));
 
     puts("slowly moving arm to right limit\n");
-    duty_cycle = 68; // choose duty cycle %
-    set_pwm_duty_cycle_percentage(duty_cycle); // set motor to ccw diretion with 15% duty cycle
+    set_motor_voltage(2);
 
     if (limit_poll(2) < 0) // poll limit1 switch and stop motor and limit is reached
     {
         set_motor_stop();
-        pputs(PIN_PWM_ENABLE,"0"); // disable PWM
+        pputs(PIN_PWM3_ENABLE,"0"); // disable PWM
+        pputs(PIN_PWM5_ENABLE,"0"); // disable PWM
         puts("polling limit2 switch failed, aborting\n");
     }
     set_motor_stop();
@@ -98,10 +98,14 @@ int main(int argc, char const *argv[])
     printf("Counter: %d; Rad: %f\n", counter_read(counter), counter_read_rad(counter));
 
     puts("moving arm back a bit\n");
-    duty_cycle = 18; // choose duty cycle %
-    set_pwm_duty_cycle_percentage(duty_cycle); // set motor to ccw diretion with 15% duty cycle
+    set_motor_voltage(-8);
     usleep(500 * 1000); // 500ms
     set_motor_stop();
+
+    puts("checking if arm is not at the limits\n");
+    printf("limit1: %d\n", (limit_read(1)));
+    printf("limit2: %d\n", (limit_read(2)));
+
 
     puts("initializing PID\n");
     desired_value = atof(argv[1]);
@@ -122,11 +126,7 @@ int main(int argc, char const *argv[])
         exit(-1);
     }
 
-    puts("checking if arm is not at the limits\n");
-    printf("limit1: %d\n", (limit_read(1)));
-    printf("limit2: %d\n", (limit_read(2)));
-
-    puts("beginning PID");
+    puts("beginning PID\n");
     int print_counter = 0;
     while(1)
     {
@@ -136,11 +136,15 @@ int main(int argc, char const *argv[])
             puts("duration reached\n");
             break;
         }
-        if ((limit_read(1) == 0) | (limit_read(2) == 0))
+
+        // check if arm is at its limit
+        limit1_switch = limit_read(1);
+        limit2_switch = limit_read(2);
+        if ((limit1_switch == 0) | (limit2_switch == 0))
         {
             puts("stopping, arm reached a limit:\n");
-            printf("limit1: %d\n", (limit_read(1)));
-            printf("limit2: %d\n", (limit_read(2)));
+            printf("limit1: %d\n", limit1_switch);
+            printf("limit2: %d\n", limit2_switch);
             break;
         }
 
@@ -168,15 +172,19 @@ int main(int argc, char const *argv[])
         print_counter = print_counter + 1;
         if ((print_counter % 10) == 0)
         {
-        printf("Counter: %d; Rad: %f; Voltage: %f\n", counter_read(counter), counter_read_rad(counter), output);
+        printf("Rad: %f; Angle: %f; Voltage: %f\n", counter_read_rad(counter), counter_read_rad(counter)*180/PI_CONST, output);
         }
     }
 
     puts("stopping motor and exiting...\n");
     set_motor_stop(); // stop motor
-    if(pputs(PIN_PWM_ENABLE,"0") < 1) // disable PWM
+    if(pputs(PIN_PWM3_ENABLE,"0") < 1) // disable PWM
     {
-        perror("error disabling PWM\n");
+        perror("error disabling PWM3\n");
+    }
+    if(pputs(PIN_PWM5_ENABLE,"0") < 1) // disable PWM
+    {
+        perror("error disabling PWM5\n");
     }
 
     return 0;

@@ -29,14 +29,15 @@
 #include <galileo2io.h>
 
 #define PWM_PERIOD "1000000" // 1kHz
-#define PWM_HALF_P "500000"
 #define PWM_SCALE 10000.
 
 #define PIN_PWM_PERIOD  "/sys/class/pwm/pwmchip0/device/pwm_period"
-#define PIN_PWM_ENABLE  "/sys/class/pwm/pwmchip0/pwm1/enable"
-#define PIN_PWM_DUTY    "/sys/class/pwm/pwmchip0/pwm1/duty_cycle"
-#define PIN_PWM_EN_L    "/sys/class/gpio/gpio6/value"
-#define PIN_PWM_EN_R    "/sys/class/gpio/gpio13/value"
+#define PIN_PWM3_ENABLE "/sys/class/pwm/pwmchip0/pwm3/enable"       // IO5 R_PWM
+#define PIN_PWM3_DUTY   "/sys/class/pwm/pwmchip0/pwm3/duty_cycle"
+#define PIN_PWM5_ENABLE "/sys/class/pwm/pwmchip0/pwm5/enable"       // IO6 L_PWM
+#define PIN_PWM5_DUTY   "/sys/class/pwm/pwmchip0/pwm5/duty_cycle"
+#define PIN_PWM_EN_R    "/sys/class/gpio/gpio14/value"              // IO3
+#define PIN_PWM_EN_L    "/sys/class/gpio/gpio6/value"               // IO4
 
 // initialize PWM
 extern int pwm_init();

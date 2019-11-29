@@ -8,5 +8,5 @@ var searchData=
   ['pwm_5finit_22',['pwm_init',['../d8/dc3/motor_8h.html#ae3d148f659679557b399c8831089550f',1,'motor.c']]],
   ['pwm_5fperiod_23',['PWM_PERIOD',['../d8/dc3/motor_8h.html#aacaca0988244bd3a888ca5befa89f44b',1,'motor.h']]],
   ['pwm_5fscale_24',['PWM_SCALE',['../d8/dc3/motor_8h.html#a160391b62b18958565163d23550d0a5d',1,'motor.h']]],
-  ['pwm_5fstop_25',['pwm_stop',['../d8/dc3/motor_8h.html#a6969db790a802cf7e2f7845d7c8a95fc',1,'motor.c']]]
+  ['pwm_5fstop_25',['pwm_stop',['../d8/dc3/motor_8h.html#a587a6839689989e73ada8493c90d9059',1,'motor.c']]]
 ];

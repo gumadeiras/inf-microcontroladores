@@ -38,8 +38,10 @@ helper functions to operate the motor using the H-\/\+Bridge
 \item 
 int \mbox{\hyperlink{motor_8h_ae3d148f659679557b399c8831089550f}{pwm\+\_\+init}} ()
 \begin{DoxyCompactList}\small\item\em open and initialize P\+WM pins, period, and duty cycle. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{motor_8h_a6969db790a802cf7e2f7845d7c8a95fc}{pwm\+\_\+stop}} () extern int set\+\_\+motor\+\_\+stop()
+int \mbox{\hyperlink{motor_8h_a587a6839689989e73ada8493c90d9059}{pwm\+\_\+stop}} ()
 \begin{DoxyCompactList}\small\item\em disables P\+WM related functions. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{motor_8h_a1f2324bfbcf11d9435150ce9bc9f9ff6}{set\+\_\+motor\+\_\+stop}} ()
+\begin{DoxyCompactList}\small\item\em applies 0V to the DC motor, effectively stopping the motor. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{motor_8h_ac1433aad433a294c1b1ec68745b1442c}{set\+\_\+motor\+\_\+cw}} (int duty\+\_\+cycle)
 \begin{DoxyCompactList}\small\item\em sets the given duty cycle value. Motor motion will be in the clockwise direction. Converts 0-\/100\% value to be in the equivalent value, given that 0\% is -\/27V and 100\% is 27V. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{motor_8h_aff611300524ae8b6c5ea9ded51438e89}{set\+\_\+motor\+\_\+ccw}} (int duty\+\_\+cycle)
@@ -84,7 +86,7 @@ open and initialize P\+WM pins, period, and duty cycle.
 \begin{DoxyReturn}{Returns}
 -\/1 in case of error, 0 otherwise. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{motor_8h_a6969db790a802cf7e2f7845d7c8a95fc}\label{motor_8h_a6969db790a802cf7e2f7845d7c8a95fc}} 
+\mbox{\Hypertarget{motor_8h_a587a6839689989e73ada8493c90d9059}\label{motor_8h_a587a6839689989e73ada8493c90d9059}} 
 \index{motor.h@{motor.h}!pwm\_stop@{pwm\_stop}}
 \index{pwm\_stop@{pwm\_stop}!motor.h@{motor.h}}
 \doxysubsubsection{\texorpdfstring{pwm\_stop()}{pwm\_stop()}}
@@ -95,9 +97,6 @@ open and initialize P\+WM pins, period, and duty cycle.
 disables P\+WM related functions. 
 
 \begin{DoxyReturn}{Returns}
--\/1 in case of error, 0 otherwise.
-\end{DoxyReturn}
-applies 0V to the DC motor, effectively stopping the motor. \begin{DoxyReturn}{Returns}
 -\/1 in case of error, 0 otherwise. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{motor_8h_aff611300524ae8b6c5ea9ded51438e89}\label{motor_8h_aff611300524ae8b6c5ea9ded51438e89}} 
@@ -133,6 +132,19 @@ sets the given duty cycle value. Motor motion will be in the clockwise direction
 {\em duty\+\_\+cycle} & duty cycle percentage (0-\/100\%) \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 in case of error, 0 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{motor_8h_a1f2324bfbcf11d9435150ce9bc9f9ff6}\label{motor_8h_a1f2324bfbcf11d9435150ce9bc9f9ff6}} 
+\index{motor.h@{motor.h}!set\_motor\_stop@{set\_motor\_stop}}
+\index{set\_motor\_stop@{set\_motor\_stop}!motor.h@{motor.h}}
+\doxysubsubsection{\texorpdfstring{set\_motor\_stop()}{set\_motor\_stop()}}
+{\footnotesize\ttfamily int set\+\_\+motor\+\_\+stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+applies 0V to the DC motor, effectively stopping the motor. 
+
 \begin{DoxyReturn}{Returns}
 -\/1 in case of error, 0 otherwise. 
 \end{DoxyReturn}

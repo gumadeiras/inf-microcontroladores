@@ -111,9 +111,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ae3d148f659679557b399c8831089550f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dc3/motor_8h.html#ae3d148f659679557b399c8831089550f">pwm_init</a> ()</td></tr>
 <tr class="memdesc:ae3d148f659679557b399c8831089550f"><td class="mdescLeft">&#160;</td><td class="mdescRight">open and initialize PWM pins, period, and duty cycle.  <a href="../../d8/dc3/motor_8h.html#ae3d148f659679557b399c8831089550f">More...</a><br /></td></tr>
 <tr class="separator:ae3d148f659679557b399c8831089550f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6969db790a802cf7e2f7845d7c8a95fc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dc3/motor_8h.html#a6969db790a802cf7e2f7845d7c8a95fc">pwm_stop</a> () extern int set_motor_stop()</td></tr>
-<tr class="memdesc:a6969db790a802cf7e2f7845d7c8a95fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">disables PWM related functions.  <a href="../../d8/dc3/motor_8h.html#a6969db790a802cf7e2f7845d7c8a95fc">More...</a><br /></td></tr>
-<tr class="separator:a6969db790a802cf7e2f7845d7c8a95fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a587a6839689989e73ada8493c90d9059"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dc3/motor_8h.html#a587a6839689989e73ada8493c90d9059">pwm_stop</a> ()</td></tr>
+<tr class="memdesc:a587a6839689989e73ada8493c90d9059"><td class="mdescLeft">&#160;</td><td class="mdescRight">disables PWM related functions.  <a href="../../d8/dc3/motor_8h.html#a587a6839689989e73ada8493c90d9059">More...</a><br /></td></tr>
+<tr class="separator:a587a6839689989e73ada8493c90d9059"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f2324bfbcf11d9435150ce9bc9f9ff6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dc3/motor_8h.html#a1f2324bfbcf11d9435150ce9bc9f9ff6">set_motor_stop</a> ()</td></tr>
+<tr class="memdesc:a1f2324bfbcf11d9435150ce9bc9f9ff6"><td class="mdescLeft">&#160;</td><td class="mdescRight">applies 0V to the DC motor, effectively stopping the motor.  <a href="../../d8/dc3/motor_8h.html#a1f2324bfbcf11d9435150ce9bc9f9ff6">More...</a><br /></td></tr>
+<tr class="separator:a1f2324bfbcf11d9435150ce9bc9f9ff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1433aad433a294c1b1ec68745b1442c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dc3/motor_8h.html#ac1433aad433a294c1b1ec68745b1442c">set_motor_cw</a> (int duty_cycle)</td></tr>
 <tr class="memdesc:ac1433aad433a294c1b1ec68745b1442c"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the given duty cycle value. Motor motion will be in the clockwise direction. Converts 0-100% value to be in the equivalent value, given that 0% is -27V and 100% is 27V.  <a href="../../d8/dc3/motor_8h.html#ac1433aad433a294c1b1ec68745b1442c">More...</a><br /></td></tr>
 <tr class="separator:ac1433aad433a294c1b1ec68745b1442c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,8 +184,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6969db790a802cf7e2f7845d7c8a95fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6969db790a802cf7e2f7845d7c8a95fc">&#9670;&nbsp;</a></span>pwm_stop()</h2>
+<a id="a587a6839689989e73ada8493c90d9059"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a587a6839689989e73ada8493c90d9059">&#9670;&nbsp;</a></span>pwm_stop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -197,8 +200,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>disables PWM related functions. </p>
-<dl class="section return"><dt>Returns</dt><dd>-1 in case of error, 0 otherwise.</dd></dl>
-<p>applies 0V to the DC motor, effectively stopping the motor. </p><dl class="section return"><dt>Returns</dt><dd>-1 in case of error, 0 otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>-1 in case of error, 0 otherwise. </dd></dl>
 
 </div>
 </div>
@@ -252,6 +254,26 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>-1 in case of error, 0 otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a1f2324bfbcf11d9435150ce9bc9f9ff6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f2324bfbcf11d9435150ce9bc9f9ff6">&#9670;&nbsp;</a></span>set_motor_stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int set_motor_stop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>applies 0V to the DC motor, effectively stopping the motor. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 in case of error, 0 otherwise. </dd></dl>
 
 </div>

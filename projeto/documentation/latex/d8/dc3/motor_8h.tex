@@ -47,7 +47,7 @@ int \mbox{\hyperlink{motor_8h_aff611300524ae8b6c5ea9ded51438e89}{set\+\_\+motor\
 int \mbox{\hyperlink{motor_8h_a93b70ab296f1694d7a803e594d1c8d89}{set\+\_\+pwm\+\_\+duty\+\_\+cycle\+\_\+percentage}} (float percentage)
 \begin{DoxyCompactList}\small\item\em sets the given duty cycle value. 0\% is -\/27V and 100\% is 27V. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{motor_8h_a983d24d1abe929f51024dadec5a28ae1}{set\+\_\+motor\+\_\+voltage}} (double voltage)
-\begin{DoxyCompactList}\small\item\em applies the given voltage to the motor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em applies the given voltage to the motor. Converts the given voltage to an appropriate duty cycle percentage, given that 0\% is -\/27V and 100\% is 27V. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -144,7 +144,7 @@ sets the given duty cycle value. Motor motion will be in the clockwise direction
 
 
 
-applies the given voltage to the motor. 
+applies the given voltage to the motor. Converts the given voltage to an appropriate duty cycle percentage, given that 0\% is -\/27V and 100\% is 27V. 
 
 
 \begin{DoxyParams}{Parameters}

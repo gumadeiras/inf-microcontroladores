@@ -39,7 +39,7 @@ extern "C"
  *  @param *s pointer to char.
  *  @param size string size.
  *  @param path to pseudo-file.
- *  @return chat read value as a char.
+ *  @return read value as a *char.
  */
 extern char * pgets(char *s, int size, const char path[]);
 
@@ -52,7 +52,7 @@ extern int pputs(const char path[], const char s[]);
 
 /** @brief reads the value from a pseudo-file (galileo pin) but returns an integer value (0 or 1).
  *  @param path to pseudo-file.
- *  @return value integer value. 0 for low and 1 for high. -1 if an error occur.
+ *  @return integer value. 0 for low (0V) and 1 for high (5V). -1 if an error occurs.
  */
 extern int pread_gpio(const char path[]);
 

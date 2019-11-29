@@ -85,7 +85,7 @@ extern int set_motor_ccw(int duty_cycle);
 extern int set_pwm_duty_cycle_percentage(float percentage);
 
 
-/** @brief applies the given voltage to the motor.
+/** @brief applies the given voltage to the motor. Converts the given voltage to an appropriate duty cycle percentage, given that 0% is -27V and 100% is 27V.
  *  @param voltage voltage value in the range -27V and 27V.
  *  @return -1 in case of error, 0 otherwise.
  */

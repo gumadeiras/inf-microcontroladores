@@ -124,7 +124,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a93b70ab296f1694d7a803e594d1c8d89"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the given duty cycle value. 0% is -27V and 100% is 27V.  <a href="../../d8/dc3/motor_8h.html#a93b70ab296f1694d7a803e594d1c8d89">More...</a><br /></td></tr>
 <tr class="separator:a93b70ab296f1694d7a803e594d1c8d89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a983d24d1abe929f51024dadec5a28ae1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dc3/motor_8h.html#a983d24d1abe929f51024dadec5a28ae1">set_motor_voltage</a> (double voltage)</td></tr>
-<tr class="memdesc:a983d24d1abe929f51024dadec5a28ae1"><td class="mdescLeft">&#160;</td><td class="mdescRight">applies the given voltage to the motor.  <a href="../../d8/dc3/motor_8h.html#a983d24d1abe929f51024dadec5a28ae1">More...</a><br /></td></tr>
+<tr class="memdesc:a983d24d1abe929f51024dadec5a28ae1"><td class="mdescLeft">&#160;</td><td class="mdescRight">applies the given voltage to the motor. Converts the given voltage to an appropriate duty cycle percentage, given that 0% is -27V and 100% is 27V.  <a href="../../d8/dc3/motor_8h.html#a983d24d1abe929f51024dadec5a28ae1">More...</a><br /></td></tr>
 <tr class="separator:a983d24d1abe929f51024dadec5a28ae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -272,7 +272,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>applies the given voltage to the motor. </p>
+<p>applies the given voltage to the motor. Converts the given voltage to an appropriate duty cycle percentage, given that 0% is -27V and 100% is 27V. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">voltage</td><td>voltage value in the range -27V and 27V. </td></tr>

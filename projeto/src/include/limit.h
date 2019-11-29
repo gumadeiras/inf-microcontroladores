@@ -41,7 +41,7 @@ extern "C"
 
 /** @brief read limit switch.
  *  @param switch_limit indicates which switch to read (1 or 2)
- *  @return 0 if arm is at the limit, 1 otherwise
+ *  @return 0 if arm is at the limit, 1 otherwise. -1 if there is an error.
  */
 extern int limit_read(int switch_limit);
 

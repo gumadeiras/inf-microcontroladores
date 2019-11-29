@@ -134,8 +134,8 @@ extern int counter_open(COUNTER *counter, char *spi, char *ss);
 
 /** @brief writes one byte to a register in the LS7366 IC using SPI.
  *  @param counter COUNTER structure instance.
- *  @param spi SPI path.
- *  @param ss pseudo-file path for the slave select pin.
+ *  @param data data to write.
+ *  @param op_code operation code available in one of the #define headers.
  *  @return -1 in case of error, 0 otherwise.
  */
 extern int counter_byte_write(COUNTER counter, unsigned char data, unsigned char op_code);
@@ -149,8 +149,7 @@ extern int counter_init(COUNTER counter);
 
 /** @brief reads one byte from the LS7366 IC using SPI.
  *  @param counter COUNTER structure instance.
- *  @param spi SPI path.
- *  @param ss pseudo-file path for the slave select pin.
+ *  @param op_code operation code available in one of the #define headers.
  *  @return -1 in case of error, 0 otherwise.
  */
 extern unsigned char counter_byte_read(COUNTER counter, unsigned char op_code);
@@ -168,15 +167,15 @@ extern int counter_reset(COUNTER counter);
 extern int counter_read(COUNTER counter);
 
 
-/** @brief reads the counter register in the LS7366.
+/** @brief reads the counter register in the LS7366 and converts the value to radians.
  *  @param counter COUNTER structure instance.
  *  @return arm position in radians.
  */
 extern float counter_read_rad(COUNTER counter);
 
-/** @brief reads the mode register in the LS7366.
+/** @brief reads and prints the mode registers in the LS7366.
  *  @param counter COUNTER structure instance.
- *  @return arm position in radians.
+ *  @return -1 in case of error, 0 otherwise.
  */
 extern int counter_mode_read(COUNTER counter);
 

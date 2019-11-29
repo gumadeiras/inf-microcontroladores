@@ -176,9 +176,9 @@ int \mbox{\hyperlink{counter_8h_a86019d0064bf19900c8e28665ff85ba9}{counter\+\_\+
 int \mbox{\hyperlink{counter_8h_a3ba86aa2b73ce36619fe34378e8ce776}{counter\+\_\+read}} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter)
 \begin{DoxyCompactList}\small\item\em reads the counter register in the L\+S7366. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{counter_8h_a5e8d9bbcb6cddb59f184f493b2c3abc4}{counter\+\_\+read\+\_\+rad}} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter)
-\begin{DoxyCompactList}\small\item\em reads the counter register in the L\+S7366. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em reads the counter register in the L\+S7366 and converts the value to radians. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{counter_8h_ae81ec9ca16ca7d5035e546ac97cd9719}{counter\+\_\+mode\+\_\+read}} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter)
-\begin{DoxyCompactList}\small\item\em reads the mode register in the L\+S7366. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em reads and prints the mode registers in the L\+S7366. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -201,9 +201,7 @@ reads one byte from the L\+S7366 IC using S\+PI.
 \begin{DoxyParams}{Parameters}
 {\em counter} & C\+O\+U\+N\+T\+ER structure instance. \\
 \hline
-{\em spi} & S\+PI path. \\
-\hline
-{\em ss} & pseudo-\/file path for the slave select pin. \\
+{\em op\+\_\+code} & operation code available in one of the \#define headers. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -223,9 +221,9 @@ writes one byte to a register in the L\+S7366 IC using S\+PI.
 \begin{DoxyParams}{Parameters}
 {\em counter} & C\+O\+U\+N\+T\+ER structure instance. \\
 \hline
-{\em spi} & S\+PI path. \\
+{\em data} & data to write. \\
 \hline
-{\em ss} & pseudo-\/file path for the slave select pin. \\
+{\em op\+\_\+code} & operation code available in one of the \#define headers. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -257,7 +255,7 @@ initialize M\+D\+R0 and M\+D\+R1 registers on the L\+S7366.
 
 
 
-reads the mode register in the L\+S7366. 
+reads and prints the mode registers in the L\+S7366. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -265,7 +263,7 @@ reads the mode register in the L\+S7366.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-arm position in radians. 
+-\/1 in case of error, 0 otherwise. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{counter_8h_a0bef3686c40059d03640047660c68464}\label{counter_8h_a0bef3686c40059d03640047660c68464}} 
 \index{counter.h@{counter.h}!counter\_open@{counter\_open}}
@@ -315,7 +313,7 @@ value absolute counter value
 
 
 
-reads the counter register in the L\+S7366. 
+reads the counter register in the L\+S7366 and converts the value to radians. 
 
 
 \begin{DoxyParams}{Parameters}

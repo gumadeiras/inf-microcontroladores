@@ -257,11 +257,11 @@ float counter_read_rad(COUNTER counter)
     float counter_value;
     counter_value = counter_read(counter) / COUNTS_REV;
 
-    // 1 rev = 360 degrees
+    // from datasheet
     // 1024 pulses / rev
     // 4096 counts / rev
-    // 2.84 pulses = 1 degree
-    // 11.36 counts = 1 degree
+    // 2.84 pulses = 1 degree = 0.0174533 rad
+    // 11.36 counts = 1 degree = 0.0174533 rad
     return counter_value * PI_CONST / 180;
 }
 

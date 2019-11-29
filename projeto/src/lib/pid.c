@@ -36,7 +36,6 @@ unsigned long long time_ms(void)
 
 double pid_control(double desired_value, double actual_value, float kp, float ki, float kd, double error_prior, int update_period)
 {
-    double ki_sensitivity;
     double integral = 0;
     double error, derivative, output;
 

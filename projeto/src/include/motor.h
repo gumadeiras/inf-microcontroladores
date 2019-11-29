@@ -58,7 +58,7 @@ extern int pwm_init();
 /** @brief disables PWM related functions.
  *  @return -1 in case of error, 0 otherwise.
  */
-extern int pwm_stop()
+extern int pwm_stop();
 
 /** @brief applies 0V to the DC motor, effectively stopping the motor.
  *  @return -1 in case of error, 0 otherwise.

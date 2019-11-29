@@ -123,28 +123,61 @@ typedef struct struct_counter {
 } COUNTER;
 
 
-// open file descriptors for the counter
+
+/** @brief open file descriptors for the counter.
+ *  @param counter COUNTER structure instance
+ *  @param spi SPI path
+ *  @param ss pseudo-file path for the slave select pin
+ *  @return -1 in case of error, 0 otherwise.
+ */
 extern int counter_open(COUNTER *counter, char *spi, char *ss);
 
-// write one byte
+/** @brief writes one byte to a register in the LS7366 IC using SPI.
+ *  @param counter COUNTER structure instance.
+ *  @param spi SPI path.
+ *  @param ss pseudo-file path for the slave select pin.
+ *  @return -1 in case of error, 0 otherwise.
+ */
 extern int counter_byte_write(COUNTER counter, unsigned char data, unsigned char op_code);
 
-// initialize MDR0 and MDR1 registers on the LS7366
+
+/** @brief initialize MDR0 and MDR1 registers on the LS7366.
+ *  @param counter COUNTER structure instance.
+ *  @return -1 in case of error, 0 otherwise.
+ */
 extern int counter_init(COUNTER counter);
 
-// read one byte
+/** @brief reads one byte from the LS7366 IC using SPI.
+ *  @param counter COUNTER structure instance.
+ *  @param spi SPI path.
+ *  @param ss pseudo-file path for the slave select pin.
+ *  @return -1 in case of error, 0 otherwise.
+ */
 extern unsigned char counter_byte_read(COUNTER counter, unsigned char op_code);
 
-// reset counter
+/** @brief resets the counter register in the LS7366.
+ *  @param counter COUNTER structure instance.
+ *  @return read byte, -1 in case of error.
+ */
 extern int counter_reset(COUNTER counter);
 
-// read counter value
+/** @brief reads the counter register in the LS7366.
+ *  @param counter COUNTER structure instance
+ *  @return value absolute counter value
+ */
 extern int counter_read(COUNTER counter);
 
-// read counter value in radians
+
+/** @brief reads the counter register in the LS7366.
+ *  @param counter COUNTER structure instance.
+ *  @return arm position in radians.
+ */
 extern float counter_read_rad(COUNTER counter);
 
-// read MODE registers
+/** @brief reads the mode register in the LS7366.
+ *  @param counter COUNTER structure instance.
+ *  @return arm position in radians.
+ */
 extern int counter_mode_read(COUNTER counter);
 
 #ifdef __cplusplus

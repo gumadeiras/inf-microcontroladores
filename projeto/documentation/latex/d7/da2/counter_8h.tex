@@ -163,32 +163,183 @@ typedef struct \mbox{\hyperlink{structstruct__counter}{struct\+\_\+counter}} \mb
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{counter_8h_a0bef3686c40059d03640047660c68464}\label{counter_8h_a0bef3686c40059d03640047660c68464}} 
-int {\bfseries counter\+\_\+open} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} $\ast$counter, char $\ast$spi, char $\ast$ss)
-\item 
-\mbox{\Hypertarget{counter_8h_a821b87e2b1a660348338e677a2272d42}\label{counter_8h_a821b87e2b1a660348338e677a2272d42}} 
-int {\bfseries counter\+\_\+byte\+\_\+write} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter, unsigned char data, unsigned char op\+\_\+code)
-\item 
-\mbox{\Hypertarget{counter_8h_a3dc2c87e4b91efbfa30c1c99f65964b5}\label{counter_8h_a3dc2c87e4b91efbfa30c1c99f65964b5}} 
-int {\bfseries counter\+\_\+init} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter)
-\item 
-\mbox{\Hypertarget{counter_8h_ad2b3a40cbf29cc15d62f983f4f4e1b14}\label{counter_8h_ad2b3a40cbf29cc15d62f983f4f4e1b14}} 
-unsigned char {\bfseries counter\+\_\+byte\+\_\+read} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter, unsigned char op\+\_\+code)
-\item 
-\mbox{\Hypertarget{counter_8h_a86019d0064bf19900c8e28665ff85ba9}\label{counter_8h_a86019d0064bf19900c8e28665ff85ba9}} 
-int {\bfseries counter\+\_\+reset} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter)
-\item 
-\mbox{\Hypertarget{counter_8h_a3ba86aa2b73ce36619fe34378e8ce776}\label{counter_8h_a3ba86aa2b73ce36619fe34378e8ce776}} 
-int {\bfseries counter\+\_\+read} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter)
-\item 
-\mbox{\Hypertarget{counter_8h_a5e8d9bbcb6cddb59f184f493b2c3abc4}\label{counter_8h_a5e8d9bbcb6cddb59f184f493b2c3abc4}} 
-float {\bfseries counter\+\_\+read\+\_\+rad} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter)
-\item 
-\mbox{\Hypertarget{counter_8h_ae81ec9ca16ca7d5035e546ac97cd9719}\label{counter_8h_ae81ec9ca16ca7d5035e546ac97cd9719}} 
-int {\bfseries counter\+\_\+mode\+\_\+read} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter)
-\end{DoxyCompactItemize}
+int \mbox{\hyperlink{counter_8h_a0bef3686c40059d03640047660c68464}{counter\+\_\+open}} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} $\ast$counter, char $\ast$spi, char $\ast$ss)
+\begin{DoxyCompactList}\small\item\em open file descriptors for the counter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{counter_8h_a821b87e2b1a660348338e677a2272d42}{counter\+\_\+byte\+\_\+write}} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter, unsigned char data, unsigned char op\+\_\+code)
+\begin{DoxyCompactList}\small\item\em writes one byte to a register in the L\+S7366 IC using S\+PI. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{counter_8h_a3dc2c87e4b91efbfa30c1c99f65964b5}{counter\+\_\+init}} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter)
+\begin{DoxyCompactList}\small\item\em initialize M\+D\+R0 and M\+D\+R1 registers on the L\+S7366. \end{DoxyCompactList}\item 
+unsigned char \mbox{\hyperlink{counter_8h_ad2b3a40cbf29cc15d62f983f4f4e1b14}{counter\+\_\+byte\+\_\+read}} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter, unsigned char op\+\_\+code)
+\begin{DoxyCompactList}\small\item\em reads one byte from the L\+S7366 IC using S\+PI. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{counter_8h_a86019d0064bf19900c8e28665ff85ba9}{counter\+\_\+reset}} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter)
+\begin{DoxyCompactList}\small\item\em resets the counter register in the L\+S7366. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{counter_8h_a3ba86aa2b73ce36619fe34378e8ce776}{counter\+\_\+read}} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter)
+\begin{DoxyCompactList}\small\item\em reads the counter register in the L\+S7366. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{counter_8h_a5e8d9bbcb6cddb59f184f493b2c3abc4}{counter\+\_\+read\+\_\+rad}} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter)
+\begin{DoxyCompactList}\small\item\em reads the counter register in the L\+S7366. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{counter_8h_ae81ec9ca16ca7d5035e546ac97cd9719}{counter\+\_\+mode\+\_\+read}} (\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} counter)
+\begin{DoxyCompactList}\small\item\em reads the mode register in the L\+S7366. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 helper functions for S\+PI communication with the L\+S7366 quadrature encoder 
 
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{counter_8h_ad2b3a40cbf29cc15d62f983f4f4e1b14}\label{counter_8h_ad2b3a40cbf29cc15d62f983f4f4e1b14}} 
+\index{counter.h@{counter.h}!counter\_byte\_read@{counter\_byte\_read}}
+\index{counter\_byte\_read@{counter\_byte\_read}!counter.h@{counter.h}}
+\doxysubsubsection{\texorpdfstring{counter\_byte\_read()}{counter\_byte\_read()}}
+{\footnotesize\ttfamily unsigned char counter\+\_\+byte\+\_\+read (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}}}]{counter,  }\item[{unsigned char}]{op\+\_\+code }\end{DoxyParamCaption})}
+
+
+
+reads one byte from the L\+S7366 IC using S\+PI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em counter} & C\+O\+U\+N\+T\+ER structure instance. \\
+\hline
+{\em spi} & S\+PI path. \\
+\hline
+{\em ss} & pseudo-\/file path for the slave select pin. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 in case of error, 0 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{counter_8h_a821b87e2b1a660348338e677a2272d42}\label{counter_8h_a821b87e2b1a660348338e677a2272d42}} 
+\index{counter.h@{counter.h}!counter\_byte\_write@{counter\_byte\_write}}
+\index{counter\_byte\_write@{counter\_byte\_write}!counter.h@{counter.h}}
+\doxysubsubsection{\texorpdfstring{counter\_byte\_write()}{counter\_byte\_write()}}
+{\footnotesize\ttfamily int counter\+\_\+byte\+\_\+write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}}}]{counter,  }\item[{unsigned char}]{data,  }\item[{unsigned char}]{op\+\_\+code }\end{DoxyParamCaption})}
+
+
+
+writes one byte to a register in the L\+S7366 IC using S\+PI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em counter} & C\+O\+U\+N\+T\+ER structure instance. \\
+\hline
+{\em spi} & S\+PI path. \\
+\hline
+{\em ss} & pseudo-\/file path for the slave select pin. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 in case of error, 0 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{counter_8h_a3dc2c87e4b91efbfa30c1c99f65964b5}\label{counter_8h_a3dc2c87e4b91efbfa30c1c99f65964b5}} 
+\index{counter.h@{counter.h}!counter\_init@{counter\_init}}
+\index{counter\_init@{counter\_init}!counter.h@{counter.h}}
+\doxysubsubsection{\texorpdfstring{counter\_init()}{counter\_init()}}
+{\footnotesize\ttfamily int counter\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}}}]{counter }\end{DoxyParamCaption})}
+
+
+
+initialize M\+D\+R0 and M\+D\+R1 registers on the L\+S7366. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em counter} & C\+O\+U\+N\+T\+ER structure instance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 in case of error, 0 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{counter_8h_ae81ec9ca16ca7d5035e546ac97cd9719}\label{counter_8h_ae81ec9ca16ca7d5035e546ac97cd9719}} 
+\index{counter.h@{counter.h}!counter\_mode\_read@{counter\_mode\_read}}
+\index{counter\_mode\_read@{counter\_mode\_read}!counter.h@{counter.h}}
+\doxysubsubsection{\texorpdfstring{counter\_mode\_read()}{counter\_mode\_read()}}
+{\footnotesize\ttfamily int counter\+\_\+mode\+\_\+read (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}}}]{counter }\end{DoxyParamCaption})}
+
+
+
+reads the mode register in the L\+S7366. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em counter} & C\+O\+U\+N\+T\+ER structure instance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+arm position in radians. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{counter_8h_a0bef3686c40059d03640047660c68464}\label{counter_8h_a0bef3686c40059d03640047660c68464}} 
+\index{counter.h@{counter.h}!counter\_open@{counter\_open}}
+\index{counter\_open@{counter\_open}!counter.h@{counter.h}}
+\doxysubsubsection{\texorpdfstring{counter\_open()}{counter\_open()}}
+{\footnotesize\ttfamily int counter\+\_\+open (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}} $\ast$}]{counter,  }\item[{char $\ast$}]{spi,  }\item[{char $\ast$}]{ss }\end{DoxyParamCaption})}
+
+
+
+open file descriptors for the counter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em counter} & C\+O\+U\+N\+T\+ER structure instance \\
+\hline
+{\em spi} & S\+PI path \\
+\hline
+{\em ss} & pseudo-\/file path for the slave select pin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 in case of error, 0 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{counter_8h_a3ba86aa2b73ce36619fe34378e8ce776}\label{counter_8h_a3ba86aa2b73ce36619fe34378e8ce776}} 
+\index{counter.h@{counter.h}!counter\_read@{counter\_read}}
+\index{counter\_read@{counter\_read}!counter.h@{counter.h}}
+\doxysubsubsection{\texorpdfstring{counter\_read()}{counter\_read()}}
+{\footnotesize\ttfamily int counter\+\_\+read (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}}}]{counter }\end{DoxyParamCaption})}
+
+
+
+reads the counter register in the L\+S7366. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em counter} & C\+O\+U\+N\+T\+ER structure instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value absolute counter value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{counter_8h_a5e8d9bbcb6cddb59f184f493b2c3abc4}\label{counter_8h_a5e8d9bbcb6cddb59f184f493b2c3abc4}} 
+\index{counter.h@{counter.h}!counter\_read\_rad@{counter\_read\_rad}}
+\index{counter\_read\_rad@{counter\_read\_rad}!counter.h@{counter.h}}
+\doxysubsubsection{\texorpdfstring{counter\_read\_rad()}{counter\_read\_rad()}}
+{\footnotesize\ttfamily float counter\+\_\+read\+\_\+rad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}}}]{counter }\end{DoxyParamCaption})}
+
+
+
+reads the counter register in the L\+S7366. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em counter} & C\+O\+U\+N\+T\+ER structure instance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+arm position in radians. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{counter_8h_a86019d0064bf19900c8e28665ff85ba9}\label{counter_8h_a86019d0064bf19900c8e28665ff85ba9}} 
+\index{counter.h@{counter.h}!counter\_reset@{counter\_reset}}
+\index{counter\_reset@{counter\_reset}!counter.h@{counter.h}}
+\doxysubsubsection{\texorpdfstring{counter\_reset()}{counter\_reset()}}
+{\footnotesize\ttfamily int counter\+\_\+reset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{counter_8h_a935a4cd99b18b2487a9bcf2f3dd3eaa4}{C\+O\+U\+N\+T\+ER}}}]{counter }\end{DoxyParamCaption})}
+
+
+
+resets the counter register in the L\+S7366. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em counter} & C\+O\+U\+N\+T\+ER structure instance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+read byte, -\/1 in case of error. 
+\end{DoxyReturn}

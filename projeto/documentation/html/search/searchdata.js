@@ -3,7 +3,7 @@ var indexSectionsWithContent =
   0: "cfglmpst",
   1: "s",
   2: "cglmp",
-  3: "lpst",
+  3: "clpst",
   4: "f",
   5: "c",
   6: "p"

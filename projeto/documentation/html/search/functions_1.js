@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['pgets_32',['pgets',['../d7/d3d/galileo2io_8h.html#ad16e554ffe1d97c054a2ebf35fc667c6',1,'pgets.c']]],
-  ['pid_5fcontrol_33',['pid_control',['../da/df0/pid_8h.html#a0ef1bf5c69fcfc1a71dda3056df35c2a',1,'pid.c']]],
-  ['pputs_34',['pputs',['../d7/d3d/galileo2io_8h.html#a2aa8acf1fd6b74e6126771c68a197724',1,'pputs.c']]],
-  ['pread_5fgpio_35',['pread_gpio',['../d7/d3d/galileo2io_8h.html#a12a8fc4e310a04f45040e32b2d3ce5d6',1,'pgets.c']]],
-  ['pwm_5finit_36',['pwm_init',['../d8/dc3/motor_8h.html#ae3d148f659679557b399c8831089550f',1,'motor.c']]],
-  ['pwm_5fstop_37',['pwm_stop',['../d8/dc3/motor_8h.html#a6969db790a802cf7e2f7845d7c8a95fc',1,'motor.c']]]
+  ['limit_5fpoll_46',['limit_poll',['../de/de9/limit_8h.html#a8412735e1fcdc3bcf6326e3778f84051',1,'limit.c']]],
+  ['limit_5fread_47',['limit_read',['../de/de9/limit_8h.html#afef8cd5d0b7c227911b00c74fa5dbc77',1,'limit.c']]]
 ];

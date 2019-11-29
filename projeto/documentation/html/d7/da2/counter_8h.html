@@ -239,34 +239,299 @@ typedef struct <a class="el" href="../../d1/d61/structstruct__counter.html">stru
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0bef3686c40059d03640047660c68464"><td class="memItemLeft" align="right" valign="top"><a id="a0bef3686c40059d03640047660c68464"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>counter_open</b> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> *counter, char *spi, char *ss)</td></tr>
+<tr class="memitem:a0bef3686c40059d03640047660c68464"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da2/counter_8h.html#a0bef3686c40059d03640047660c68464">counter_open</a> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> *counter, char *spi, char *ss)</td></tr>
+<tr class="memdesc:a0bef3686c40059d03640047660c68464"><td class="mdescLeft">&#160;</td><td class="mdescRight">open file descriptors for the counter.  <a href="../../d7/da2/counter_8h.html#a0bef3686c40059d03640047660c68464">More...</a><br /></td></tr>
 <tr class="separator:a0bef3686c40059d03640047660c68464"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a821b87e2b1a660348338e677a2272d42"><td class="memItemLeft" align="right" valign="top"><a id="a821b87e2b1a660348338e677a2272d42"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>counter_byte_write</b> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> counter, unsigned char data, unsigned char op_code)</td></tr>
+<tr class="memitem:a821b87e2b1a660348338e677a2272d42"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da2/counter_8h.html#a821b87e2b1a660348338e677a2272d42">counter_byte_write</a> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> counter, unsigned char data, unsigned char op_code)</td></tr>
+<tr class="memdesc:a821b87e2b1a660348338e677a2272d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes one byte to a register in the LS7366 IC using SPI.  <a href="../../d7/da2/counter_8h.html#a821b87e2b1a660348338e677a2272d42">More...</a><br /></td></tr>
 <tr class="separator:a821b87e2b1a660348338e677a2272d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dc2c87e4b91efbfa30c1c99f65964b5"><td class="memItemLeft" align="right" valign="top"><a id="a3dc2c87e4b91efbfa30c1c99f65964b5"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>counter_init</b> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> counter)</td></tr>
+<tr class="memitem:a3dc2c87e4b91efbfa30c1c99f65964b5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da2/counter_8h.html#a3dc2c87e4b91efbfa30c1c99f65964b5">counter_init</a> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> counter)</td></tr>
+<tr class="memdesc:a3dc2c87e4b91efbfa30c1c99f65964b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialize MDR0 and MDR1 registers on the LS7366.  <a href="../../d7/da2/counter_8h.html#a3dc2c87e4b91efbfa30c1c99f65964b5">More...</a><br /></td></tr>
 <tr class="separator:a3dc2c87e4b91efbfa30c1c99f65964b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2b3a40cbf29cc15d62f983f4f4e1b14"><td class="memItemLeft" align="right" valign="top"><a id="ad2b3a40cbf29cc15d62f983f4f4e1b14"></a>
-unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>counter_byte_read</b> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> counter, unsigned char op_code)</td></tr>
+<tr class="memitem:ad2b3a40cbf29cc15d62f983f4f4e1b14"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da2/counter_8h.html#ad2b3a40cbf29cc15d62f983f4f4e1b14">counter_byte_read</a> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> counter, unsigned char op_code)</td></tr>
+<tr class="memdesc:ad2b3a40cbf29cc15d62f983f4f4e1b14"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads one byte from the LS7366 IC using SPI.  <a href="../../d7/da2/counter_8h.html#ad2b3a40cbf29cc15d62f983f4f4e1b14">More...</a><br /></td></tr>
 <tr class="separator:ad2b3a40cbf29cc15d62f983f4f4e1b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86019d0064bf19900c8e28665ff85ba9"><td class="memItemLeft" align="right" valign="top"><a id="a86019d0064bf19900c8e28665ff85ba9"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>counter_reset</b> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> counter)</td></tr>
+<tr class="memitem:a86019d0064bf19900c8e28665ff85ba9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da2/counter_8h.html#a86019d0064bf19900c8e28665ff85ba9">counter_reset</a> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> counter)</td></tr>
+<tr class="memdesc:a86019d0064bf19900c8e28665ff85ba9"><td class="mdescLeft">&#160;</td><td class="mdescRight">resets the counter register in the LS7366.  <a href="../../d7/da2/counter_8h.html#a86019d0064bf19900c8e28665ff85ba9">More...</a><br /></td></tr>
 <tr class="separator:a86019d0064bf19900c8e28665ff85ba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ba86aa2b73ce36619fe34378e8ce776"><td class="memItemLeft" align="right" valign="top"><a id="a3ba86aa2b73ce36619fe34378e8ce776"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>counter_read</b> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> counter)</td></tr>
+<tr class="memitem:a3ba86aa2b73ce36619fe34378e8ce776"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da2/counter_8h.html#a3ba86aa2b73ce36619fe34378e8ce776">counter_read</a> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> counter)</td></tr>
+<tr class="memdesc:a3ba86aa2b73ce36619fe34378e8ce776"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the counter register in the LS7366.  <a href="../../d7/da2/counter_8h.html#a3ba86aa2b73ce36619fe34378e8ce776">More...</a><br /></td></tr>
 <tr class="separator:a3ba86aa2b73ce36619fe34378e8ce776"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e8d9bbcb6cddb59f184f493b2c3abc4"><td class="memItemLeft" align="right" valign="top"><a id="a5e8d9bbcb6cddb59f184f493b2c3abc4"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>counter_read_rad</b> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> counter)</td></tr>
+<tr class="memitem:a5e8d9bbcb6cddb59f184f493b2c3abc4"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da2/counter_8h.html#a5e8d9bbcb6cddb59f184f493b2c3abc4">counter_read_rad</a> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> counter)</td></tr>
+<tr class="memdesc:a5e8d9bbcb6cddb59f184f493b2c3abc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the counter register in the LS7366.  <a href="../../d7/da2/counter_8h.html#a5e8d9bbcb6cddb59f184f493b2c3abc4">More...</a><br /></td></tr>
 <tr class="separator:a5e8d9bbcb6cddb59f184f493b2c3abc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae81ec9ca16ca7d5035e546ac97cd9719"><td class="memItemLeft" align="right" valign="top"><a id="ae81ec9ca16ca7d5035e546ac97cd9719"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>counter_mode_read</b> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> counter)</td></tr>
+<tr class="memitem:ae81ec9ca16ca7d5035e546ac97cd9719"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da2/counter_8h.html#ae81ec9ca16ca7d5035e546ac97cd9719">counter_mode_read</a> (<a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> counter)</td></tr>
+<tr class="memdesc:ae81ec9ca16ca7d5035e546ac97cd9719"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the mode register in the LS7366.  <a href="../../d7/da2/counter_8h.html#ae81ec9ca16ca7d5035e546ac97cd9719">More...</a><br /></td></tr>
 <tr class="separator:ae81ec9ca16ca7d5035e546ac97cd9719"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>helper functions for SPI communication with the LS7366 quadrature encoder </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="ad2b3a40cbf29cc15d62f983f4f4e1b14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2b3a40cbf29cc15d62f983f4f4e1b14">&#9670;&nbsp;</a></span>counter_byte_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char counter_byte_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a>&#160;</td>
+          <td class="paramname"><em>counter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>op_code</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>reads one byte from the LS7366 IC using SPI. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">counter</td><td>COUNTER structure instance. </td></tr>
+    <tr><td class="paramname">spi</td><td>SPI path. </td></tr>
+    <tr><td class="paramname">ss</td><td>pseudo-file path for the slave select pin. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>-1 in case of error, 0 otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a821b87e2b1a660348338e677a2272d42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a821b87e2b1a660348338e677a2272d42">&#9670;&nbsp;</a></span>counter_byte_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int counter_byte_write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a>&#160;</td>
+          <td class="paramname"><em>counter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>op_code</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>writes one byte to a register in the LS7366 IC using SPI. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">counter</td><td>COUNTER structure instance. </td></tr>
+    <tr><td class="paramname">spi</td><td>SPI path. </td></tr>
+    <tr><td class="paramname">ss</td><td>pseudo-file path for the slave select pin. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>-1 in case of error, 0 otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a3dc2c87e4b91efbfa30c1c99f65964b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dc2c87e4b91efbfa30c1c99f65964b5">&#9670;&nbsp;</a></span>counter_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int counter_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a>&#160;</td>
+          <td class="paramname"><em>counter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>initialize MDR0 and MDR1 registers on the LS7366. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">counter</td><td>COUNTER structure instance. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>-1 in case of error, 0 otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="ae81ec9ca16ca7d5035e546ac97cd9719"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae81ec9ca16ca7d5035e546ac97cd9719">&#9670;&nbsp;</a></span>counter_mode_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int counter_mode_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a>&#160;</td>
+          <td class="paramname"><em>counter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>reads the mode register in the LS7366. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">counter</td><td>COUNTER structure instance. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>arm position in radians. </dd></dl>
+
+</div>
+</div>
+<a id="a0bef3686c40059d03640047660c68464"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bef3686c40059d03640047660c68464">&#9670;&nbsp;</a></span>counter_open()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int counter_open </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a> *&#160;</td>
+          <td class="paramname"><em>counter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>spi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>ss</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>open file descriptors for the counter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">counter</td><td>COUNTER structure instance </td></tr>
+    <tr><td class="paramname">spi</td><td>SPI path </td></tr>
+    <tr><td class="paramname">ss</td><td>pseudo-file path for the slave select pin </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>-1 in case of error, 0 otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a3ba86aa2b73ce36619fe34378e8ce776"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ba86aa2b73ce36619fe34378e8ce776">&#9670;&nbsp;</a></span>counter_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int counter_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a>&#160;</td>
+          <td class="paramname"><em>counter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>reads the counter register in the LS7366. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">counter</td><td>COUNTER structure instance </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>value absolute counter value </dd></dl>
+
+</div>
+</div>
+<a id="a5e8d9bbcb6cddb59f184f493b2c3abc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e8d9bbcb6cddb59f184f493b2c3abc4">&#9670;&nbsp;</a></span>counter_read_rad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float counter_read_rad </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a>&#160;</td>
+          <td class="paramname"><em>counter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>reads the counter register in the LS7366. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">counter</td><td>COUNTER structure instance. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>arm position in radians. </dd></dl>
+
+</div>
+</div>
+<a id="a86019d0064bf19900c8e28665ff85ba9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86019d0064bf19900c8e28665ff85ba9">&#9670;&nbsp;</a></span>counter_reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int counter_reset </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d7/da2/counter_8h.html#a935a4cd99b18b2487a9bcf2f3dd3eaa4">COUNTER</a>&#160;</td>
+          <td class="paramname"><em>counter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>resets the counter register in the LS7366. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">counter</td><td>COUNTER structure instance. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>read byte, -1 in case of error. </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

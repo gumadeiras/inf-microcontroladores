@@ -1,7 +1,7 @@
 /*
   motor.c: helper functions to operate the motor using the IBT-2 H-Bridge
   
-  Copyright (c) 2019 Gustavo Santana <gmsantana@inf.ufrgs.br>
+  Copyright (c) 2019 Gustavo Madeira Santana; Lúcio Pereira Franco; Rodrigo Franzoi Scroferneker
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

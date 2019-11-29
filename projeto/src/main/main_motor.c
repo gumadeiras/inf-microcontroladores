@@ -39,14 +39,13 @@ int main(int argc, char const *argv[])
         return -1;
     }
 
-    int duty_cycle = atof(argv[1]);
-    puts("initializing PWM");
+    float duty_cycle = atof(argv[1]);
+    puts("initializing PWM and setting desired duty cycle");
     pwm_init();
-    puts("5%");
     set_pwm_duty_cycle_percentage(duty_cycle);
-    sleep(5);
-    set_pwm_duty_cycle_percentage(50);
+    sleep(2);
     set_motor_stop();
+    pwm_stop();
 
     return 0;
 }

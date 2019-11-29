@@ -21,6 +21,17 @@
     at <http://www.gnu.org/licenses>.
 */
 
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <fcntl.h>
+#include <stdint.h>
+#include <unistd.h>
+#include <string.h>
+#include <poll.h>
+#include <galileo2io.h>
+
 #include <limit.h>
 
 
@@ -46,7 +57,7 @@ int limit_poll(int switch_limit)
     unsigned char c;
     struct pollfd pfd;
 
-    if (switch_limit == 1)
+    if ((switch_limit == 1) && (limit_read(1) == 1))
     {
         if((pfd.fd=open(PIN_LIMIT1, O_RDONLY)) < 0)
         {
@@ -62,7 +73,7 @@ int limit_poll(int switch_limit)
         // lseek(pfd.fd, 0, SEEK_SET);
         // read(pfd.fd, &c, 1);
     }
-    else if (switch_limit == 2)
+    else if ((switch_limit == 2) && (limit_read(2) == 1))
     {
         if((pfd.fd=open(PIN_LIMIT2, O_RDONLY)) < 0)
         {

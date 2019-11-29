@@ -1,0 +1,84 @@
+\hypertarget{galileo2io_8h}{}\doxysection{/\+Users/gustavo/\+Documents/ufrgs/materias/atual/microcontroladores/inf-\/microcontroladores/projeto/src/include/galileo2io.h File Reference}
+\label{galileo2io_8h}\index{/Users/gustavo/Documents/ufrgs/materias/atual/microcontroladores/inf-\/microcontroladores/projeto/src/include/galileo2io.h@{/Users/gustavo/Documents/ufrgs/materias/atual/microcontroladores/inf-\/microcontroladores/projeto/src/include/galileo2io.h}}
+
+
+Helper functions for Galileo I/O.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{galileo2io_8h_ad16e554ffe1d97c054a2ebf35fc667c6}{pgets}} (char $\ast$s, int size, const char path\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em reads the value from a pseudo-\/file (galileo pin). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{galileo2io_8h_a2aa8acf1fd6b74e6126771c68a197724}{pputs}} (const char path\mbox{[}$\,$\mbox{]}, const char s\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em writes a value to a pseudo-\/file (galileo pin). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{galileo2io_8h_a12a8fc4e310a04f45040e32b2d3ce5d6}{pread\+\_\+gpio}} (const char path\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em reads the value from a pseudo-\/file (galileo pin) but returns an integer value (0 or 1). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Helper functions for Galileo I/O. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{galileo2io_8h_ad16e554ffe1d97c054a2ebf35fc667c6}\label{galileo2io_8h_ad16e554ffe1d97c054a2ebf35fc667c6}} 
+\index{galileo2io.h@{galileo2io.h}!pgets@{pgets}}
+\index{pgets@{pgets}!galileo2io.h@{galileo2io.h}}
+\doxysubsubsection{\texorpdfstring{pgets()}{pgets()}}
+{\footnotesize\ttfamily char$\ast$ pgets (\begin{DoxyParamCaption}\item[{char $\ast$}]{s,  }\item[{int}]{size,  }\item[{const char}]{path\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+reads the value from a pseudo-\/file (galileo pin). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$s} & pointer to char. \\
+\hline
+{\em size} & string size. \\
+\hline
+{\em path} & to pseudo-\/file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+chat read value as a char. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{galileo2io_8h_a2aa8acf1fd6b74e6126771c68a197724}\label{galileo2io_8h_a2aa8acf1fd6b74e6126771c68a197724}} 
+\index{galileo2io.h@{galileo2io.h}!pputs@{pputs}}
+\index{pputs@{pputs}!galileo2io.h@{galileo2io.h}}
+\doxysubsubsection{\texorpdfstring{pputs()}{pputs()}}
+{\footnotesize\ttfamily int pputs (\begin{DoxyParamCaption}\item[{const char}]{path\mbox{[}$\,$\mbox{]},  }\item[{const char}]{s\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+writes a value to a pseudo-\/file (galileo pin). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & to pseudo-\/file. \\
+\hline
+{\em s} & char to write. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bytes written. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{galileo2io_8h_a12a8fc4e310a04f45040e32b2d3ce5d6}\label{galileo2io_8h_a12a8fc4e310a04f45040e32b2d3ce5d6}} 
+\index{galileo2io.h@{galileo2io.h}!pread\_gpio@{pread\_gpio}}
+\index{pread\_gpio@{pread\_gpio}!galileo2io.h@{galileo2io.h}}
+\doxysubsubsection{\texorpdfstring{pread\_gpio()}{pread\_gpio()}}
+{\footnotesize\ttfamily int pread\+\_\+gpio (\begin{DoxyParamCaption}\item[{const char}]{path\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+reads the value from a pseudo-\/file (galileo pin) but returns an integer value (0 or 1). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & to pseudo-\/file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value integer value. 0 for low and 1 for high. -\/1 if an error occur. 
+\end{DoxyReturn}

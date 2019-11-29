@@ -21,6 +21,16 @@
     at <http://www.gnu.org/licenses>.
 */
 
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <fcntl.h>
+#include <stdint.h>
+#include <unistd.h>
+#include <string.h>
+
+#include <sys/ioctl.h>
+#include <linux/spi/spidev.h>
 
 #include <counter.h>
 

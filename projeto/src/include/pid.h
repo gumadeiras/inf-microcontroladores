@@ -21,11 +21,39 @@
     at <http://www.gnu.org/licenses>.
 */
 
-#include <stdio.h>
-#include <sys/time.h>
+/**
+ * @file pid.h
+ * @brief helper functions for the PID control algorithm
+ */
 
-// read current time in ms
+#ifndef PID_H
+#define PID_H
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+
+/** @brief get current time in ms.
+ *  @return (unsigned long long) time in ms
+ */
 extern unsigned long long time_ms(void);
 
-// control PID given some arm position
+/** @brief PID control algorithm, computes the output voltage that minimizes the error (relative arm position given some target position).
+ *  @param desired_value desired arm position in radians
+ *  @param actual_value current arm position in radians
+ *  @param kp PID proportial constant
+ *  @param ki PID integral constant
+ *  @param kd PID derivative constant
+ *  @param error_prior error from the preivous iteration
+ *  @param update_period time since last iteration
+ *  @return (double) output returns the voltage to be applied
+ */
 extern double pid_control(double desired_value, double actual_value, float kp, float ki, float kd, double error_prior, int update_period);
+
+#ifdef __cplusplus
+};
+#endif
+
+#endif

@@ -1,5 +1,5 @@
 /*
-  motor.h: helper functions to operate the motor using the IBT-2 H-Bridge
+  motor.h: helper functions to operate the motor using the H-Bridge
   
   Copyright (c) 2019 Gustavo Madeira Santana <gmsantana@inf.ufrgs.br>
 
@@ -22,13 +22,22 @@
 
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+/**
+ * @file motor.h
+ * @brief helper functions to operate the motor using the H-Bridge
+ */
 
-#include <galileo2io.h>
+#ifndef MOTOR_H
+#define MOTOR_H
 
-#define PWM_PERIOD "1000000" // 1kHz
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+/** 1kHz */
+#define PWM_PERIOD "1000000"
+/** scales the duty cycle value */
 #define PWM_SCALE 10000.
 
 #define PIN_PWM_PERIOD  "/sys/class/pwm/pwmchip0/device/pwm_period"
@@ -40,19 +49,50 @@
 #define PIN_PWM_EN_L    "/sys/class/gpio/gpio6/value"               // IO4
 
 // initialize PWM
+
+/** @brief open and initialize PWM pins, period, and duty cycle.
+ *  @return -1 in case of error, 0 otherwise.
+ */
 extern int pwm_init();
 
-// set motor direction as stop
+/** @brief disables PWM related functions.
+ *  @return -1 in case of error, 0 otherwise.
+ */
+extern int pwm_stop()
+
+/** @brief applies 0V to the DC motor, effectively stopping the motor.
+ *  @return -1 in case of error, 0 otherwise.
+ */
 extern int set_motor_stop();
 
-// set motor direction to clockwise
+/** @brief sets the given duty cycle value. Motor motion will be in the clockwise direction. Converts 0-100% value to be in the equivalent value, given that 0% is -27V and 100% is 27V.
+ *  @param duty_cycle duty cycle percentage (0-100%)
+ *  @return -1 in case of error, 0 otherwise.
+ */
 extern int set_motor_cw(int duty_cycle);
 
-// set motor direction to counterclockwise
+/** @brief sets the given duty cycle value. Motor motion will be in the counter-clockwise direction. Converts 0-100% value to be in the equivalent value, given that 0% is -27V and 100% is 27V.
+ *  @param duty_cycle duty cycle percentage (0-100%)
+ *  @return -1 in case of error, 0 otherwise.
+ */
 extern int set_motor_ccw(int duty_cycle);
 
-// set duty cycle
-extern int set_pwm_duty_cycle_percentage(int percentage);
 
-// set motor voltage
-extern int set_motor_voltage(int voltage);
+/** @brief sets the given duty cycle value. 0% is -27V and 100% is 27V.
+ *  @param percentage duty cycle percentage (0-100%)
+ *  @return -1 in case of error, 0 otherwise.
+ */
+extern int set_pwm_duty_cycle_percentage(float percentage);
+
+
+/** @brief applies the given voltage to the motor.
+ *  @param voltage voltage value in the range -27V and 27V.
+ *  @return -1 in case of error, 0 otherwise.
+ */
+extern int set_motor_voltage(double voltage);
+
+#ifdef __cplusplus
+};
+#endif
+
+#endif

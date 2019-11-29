@@ -21,16 +21,18 @@
     at <http://www.gnu.org/licenses>.
 */
 
-#include <stdio.h>
-#include <stdlib.h>
+/**
+ * @file counter.h
+ * @brief helper functions for SPI communication with the LS7366 quadrature encoder
+ */
 
-#include <fcntl.h>
-#include <stdint.h>
-#include <unistd.h>
-#include <string.h>
+#ifndef COUNTER_H
+#define COUNTER_H
 
-#include <sys/ioctl.h>
-#include <linux/spi/spidev.h>
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 // --
 // -- defines from the LS7366 datasheet
@@ -62,8 +64,6 @@
 //Clock filter modes
 #define FILTER_1 0x00 //filter clock frequncy division factor 1
 #define FILTER_2 0x80 //filter clock frequncy division factor 2
-
-#define COUNTS_REV 276
 
 /***MDR1 configuration data; any of these***
  ***data segments can be ORed together***/
@@ -108,11 +108,17 @@
 #define SPI_EN_C_PATH "/sys/class/gpio/gpio10/value" // enable counter
 #define SPI_SS_PATH "/sys/class/gpio/gpio4/value" //IO9 
 
+#define COUNTS_REV 4096
+
 #define SPI_FREQUENCY 5000000
 #define PI_CONST 3.14159
 
+/** @brief struct with file descriptors for the decoder/counter
+ */
 typedef struct struct_counter {
+    /** SPI file descriptor (/dev/spidev1.0)  **/
     int fd_spi;
+    /** Slave Select file descriptor (Galileo IO9) **/
     int fd_ss;
 } COUNTER;
 
@@ -140,3 +146,9 @@ extern float counter_read_rad(COUNTER counter);
 
 // read MODE registers
 extern int counter_mode_read(COUNTER counter);
+
+#ifdef __cplusplus
+};
+#endif
+
+#endif

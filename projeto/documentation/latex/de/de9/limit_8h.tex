@@ -1,0 +1,73 @@
+\hypertarget{limit_8h}{}\doxysection{/\+Users/gustavo/\+Documents/ufrgs/materias/atual/microcontroladores/inf-\/microcontroladores/projeto/src/include/limit.h File Reference}
+\label{limit_8h}\index{/Users/gustavo/Documents/ufrgs/materias/atual/microcontroladores/inf-\/microcontroladores/projeto/src/include/limit.h@{/Users/gustavo/Documents/ufrgs/materias/atual/microcontroladores/inf-\/microcontroladores/projeto/src/include/limit.h}}
+
+
+helper functions to read quanser position limit switches  
+
+
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{limit_8h_aed187d0550b95dc616f9b9ea962ba1b6}\label{limit_8h_aed187d0550b95dc616f9b9ea962ba1b6}} 
+\#define {\bfseries P\+I\+N\+\_\+\+L\+I\+M\+I\+T1}~\char`\"{}/sys/class/gpio/gpio12/value\char`\"{}
+\item 
+\mbox{\Hypertarget{limit_8h_ade34e0011a83961d6cf9a4bc9dd56099}\label{limit_8h_ade34e0011a83961d6cf9a4bc9dd56099}} 
+\#define {\bfseries P\+I\+N\+\_\+\+L\+I\+M\+I\+T1\+\_\+\+E\+D\+GE}~\char`\"{}/sys/class/gpio/gpio12/edge\char`\"{}
+\item 
+\mbox{\Hypertarget{limit_8h_ae058c95f36c966bb4be8210c137a9018}\label{limit_8h_ae058c95f36c966bb4be8210c137a9018}} 
+\#define {\bfseries P\+I\+N\+\_\+\+L\+I\+M\+I\+T2}~\char`\"{}/sys/class/gpio/gpio13/value\char`\"{}
+\item 
+\mbox{\Hypertarget{limit_8h_a654dd5efbe8aad76d6b5d51baaa1deb9}\label{limit_8h_a654dd5efbe8aad76d6b5d51baaa1deb9}} 
+\#define {\bfseries P\+I\+N\+\_\+\+L\+I\+M\+I\+T2\+\_\+\+E\+D\+GE}~\char`\"{}/sys/class/gpio/gpio13/edge\char`\"{}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{limit_8h_afef8cd5d0b7c227911b00c74fa5dbc77}{limit\+\_\+read}} (int switch\+\_\+limit)
+\begin{DoxyCompactList}\small\item\em read limit switch. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{limit_8h_a8412735e1fcdc3bcf6326e3778f84051}{limit\+\_\+poll}} (int switch\+\_\+limit)
+\begin{DoxyCompactList}\small\item\em polls the limit switch. will return only when the arm reaches the limit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+helper functions to read quanser position limit switches 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{limit_8h_a8412735e1fcdc3bcf6326e3778f84051}\label{limit_8h_a8412735e1fcdc3bcf6326e3778f84051}} 
+\index{limit.h@{limit.h}!limit\_poll@{limit\_poll}}
+\index{limit\_poll@{limit\_poll}!limit.h@{limit.h}}
+\doxysubsubsection{\texorpdfstring{limit\_poll()}{limit\_poll()}}
+{\footnotesize\ttfamily int limit\+\_\+poll (\begin{DoxyParamCaption}\item[{int}]{switch\+\_\+limit }\end{DoxyParamCaption})}
+
+
+
+polls the limit switch. will return only when the arm reaches the limit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em switch\+\_\+limit} & indicates which switch to read (1 or 2) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 when arm is at the limit, -\/1 if there is an error 
+\end{DoxyReturn}
+\mbox{\Hypertarget{limit_8h_afef8cd5d0b7c227911b00c74fa5dbc77}\label{limit_8h_afef8cd5d0b7c227911b00c74fa5dbc77}} 
+\index{limit.h@{limit.h}!limit\_read@{limit\_read}}
+\index{limit\_read@{limit\_read}!limit.h@{limit.h}}
+\doxysubsubsection{\texorpdfstring{limit\_read()}{limit\_read()}}
+{\footnotesize\ttfamily int limit\+\_\+read (\begin{DoxyParamCaption}\item[{int}]{switch\+\_\+limit }\end{DoxyParamCaption})}
+
+
+
+read limit switch. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em switch\+\_\+limit} & indicates which switch to read (1 or 2) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if arm is at the limit, 1 otherwise 
+\end{DoxyReturn}

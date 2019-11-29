@@ -22,6 +22,11 @@
 
 */
 
+/**
+ * @file galileo2io.h
+ * @brief Helper functions for Galileo I/O
+ */
+
 #ifndef GALILEO2IO_H
 #define GALILEO2IO_H
 
@@ -30,8 +35,25 @@ extern "C"
 {
 #endif
 
-extern char * pgets(char *s,int size,const char path[]);
-extern int pputs(const char path[],const char s[]);
+/** @brief reads the value from a pseudo-file (galileo pin).
+ *  @param *s pointer to char.
+ *  @param size string size.
+ *  @param path to pseudo-file.
+ *  @return chat read value as a char.
+ */
+extern char * pgets(char *s, int size, const char path[]);
+
+/** @brief writes a value to a pseudo-file (galileo pin).
+ *  @param path to pseudo-file.
+ *  @param s char to write.
+ *  @return bytes written.
+ */
+extern int pputs(const char path[], const char s[]);
+
+/** @brief reads the value from a pseudo-file (galileo pin) but returns an integer value (0 or 1).
+ *  @param path to pseudo-file.
+ *  @return value integer value. 0 for low and 1 for high. -1 if an error occur.
+ */
 extern int pread_gpio(const char path[]);
 
 #ifdef __cplusplus

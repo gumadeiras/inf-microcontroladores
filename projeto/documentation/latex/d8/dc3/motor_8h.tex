@@ -1,0 +1,174 @@
+\hypertarget{motor_8h}{}\doxysection{/\+Users/gustavo/\+Documents/ufrgs/materias/atual/microcontroladores/inf-\/microcontroladores/projeto/src/include/motor.h File Reference}
+\label{motor_8h}\index{/Users/gustavo/Documents/ufrgs/materias/atual/microcontroladores/inf-\/microcontroladores/projeto/src/include/motor.h@{/Users/gustavo/Documents/ufrgs/materias/atual/microcontroladores/inf-\/microcontroladores/projeto/src/include/motor.h}}
+
+
+helper functions to operate the motor using the H-\/\+Bridge  
+
+
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{motor_8h_aacaca0988244bd3a888ca5befa89f44b}{P\+W\+M\+\_\+\+P\+E\+R\+I\+OD}}~\char`\"{}1000000\char`\"{}
+\item 
+\#define \mbox{\hyperlink{motor_8h_a160391b62b18958565163d23550d0a5d}{P\+W\+M\+\_\+\+S\+C\+A\+LE}}~10000.
+\item 
+\mbox{\Hypertarget{motor_8h_a869247c423dd4058b70fc0d82f681c90}\label{motor_8h_a869247c423dd4058b70fc0d82f681c90}} 
+\#define {\bfseries P\+I\+N\+\_\+\+P\+W\+M\+\_\+\+P\+E\+R\+I\+OD}~\char`\"{}/sys/class/pwm/pwmchip0/device/pwm\+\_\+period\char`\"{}
+\item 
+\mbox{\Hypertarget{motor_8h_acdb7ae7f5f1acce85ba879d1ea675dd4}\label{motor_8h_acdb7ae7f5f1acce85ba879d1ea675dd4}} 
+\#define {\bfseries P\+I\+N\+\_\+\+P\+W\+M3\+\_\+\+E\+N\+A\+B\+LE}~\char`\"{}/sys/class/pwm/pwmchip0/pwm3/enable\char`\"{}
+\item 
+\mbox{\Hypertarget{motor_8h_a95a826b30ec2f7a791c4a907c20fbf38}\label{motor_8h_a95a826b30ec2f7a791c4a907c20fbf38}} 
+\#define {\bfseries P\+I\+N\+\_\+\+P\+W\+M3\+\_\+\+D\+U\+TY}~\char`\"{}/sys/class/pwm/pwmchip0/pwm3/duty\+\_\+cycle\char`\"{}
+\item 
+\mbox{\Hypertarget{motor_8h_aa09561f72b12579d6cacc47d256a1b9d}\label{motor_8h_aa09561f72b12579d6cacc47d256a1b9d}} 
+\#define {\bfseries P\+I\+N\+\_\+\+P\+W\+M5\+\_\+\+E\+N\+A\+B\+LE}~\char`\"{}/sys/class/pwm/pwmchip0/pwm5/enable\char`\"{}
+\item 
+\mbox{\Hypertarget{motor_8h_a93a7313e38c0747a1181ee5f23e6628d}\label{motor_8h_a93a7313e38c0747a1181ee5f23e6628d}} 
+\#define {\bfseries P\+I\+N\+\_\+\+P\+W\+M5\+\_\+\+D\+U\+TY}~\char`\"{}/sys/class/pwm/pwmchip0/pwm5/duty\+\_\+cycle\char`\"{}
+\item 
+\mbox{\Hypertarget{motor_8h_a73950cfbad7511814840f0c5f2e26612}\label{motor_8h_a73950cfbad7511814840f0c5f2e26612}} 
+\#define {\bfseries P\+I\+N\+\_\+\+P\+W\+M\+\_\+\+E\+N\+\_\+R}~\char`\"{}/sys/class/gpio/gpio14/value\char`\"{}
+\item 
+\mbox{\Hypertarget{motor_8h_a35dcb1d326e88d517ddd2eb60c4bd7ae}\label{motor_8h_a35dcb1d326e88d517ddd2eb60c4bd7ae}} 
+\#define {\bfseries P\+I\+N\+\_\+\+P\+W\+M\+\_\+\+E\+N\+\_\+L}~\char`\"{}/sys/class/gpio/gpio6/value\char`\"{}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{motor_8h_ae3d148f659679557b399c8831089550f}{pwm\+\_\+init}} ()
+\begin{DoxyCompactList}\small\item\em open and initialize P\+WM pins, period, and duty cycle. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{motor_8h_a6969db790a802cf7e2f7845d7c8a95fc}{pwm\+\_\+stop}} () extern int set\+\_\+motor\+\_\+stop()
+\begin{DoxyCompactList}\small\item\em disables P\+WM related functions. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{motor_8h_ac1433aad433a294c1b1ec68745b1442c}{set\+\_\+motor\+\_\+cw}} (int duty\+\_\+cycle)
+\begin{DoxyCompactList}\small\item\em sets the given duty cycle value. Motor motion will be in the clockwise direction. Converts 0-\/100\% value to be in the equivalent value, given that 0\% is -\/27V and 100\% is 27V. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{motor_8h_aff611300524ae8b6c5ea9ded51438e89}{set\+\_\+motor\+\_\+ccw}} (int duty\+\_\+cycle)
+\begin{DoxyCompactList}\small\item\em sets the given duty cycle value. Motor motion will be in the counter-\/clockwise direction. Converts 0-\/100\% value to be in the equivalent value, given that 0\% is -\/27V and 100\% is 27V. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{motor_8h_a93b70ab296f1694d7a803e594d1c8d89}{set\+\_\+pwm\+\_\+duty\+\_\+cycle\+\_\+percentage}} (float percentage)
+\begin{DoxyCompactList}\small\item\em sets the given duty cycle value. 0\% is -\/27V and 100\% is 27V. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{motor_8h_a983d24d1abe929f51024dadec5a28ae1}{set\+\_\+motor\+\_\+voltage}} (double voltage)
+\begin{DoxyCompactList}\small\item\em applies the given voltage to the motor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+helper functions to operate the motor using the H-\/\+Bridge 
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{motor_8h_aacaca0988244bd3a888ca5befa89f44b}\label{motor_8h_aacaca0988244bd3a888ca5befa89f44b}} 
+\index{motor.h@{motor.h}!PWM\_PERIOD@{PWM\_PERIOD}}
+\index{PWM\_PERIOD@{PWM\_PERIOD}!motor.h@{motor.h}}
+\doxysubsubsection{\texorpdfstring{PWM\_PERIOD}{PWM\_PERIOD}}
+{\footnotesize\ttfamily \#define P\+W\+M\+\_\+\+P\+E\+R\+I\+OD~\char`\"{}1000000\char`\"{}}
+
+1k\+Hz \mbox{\Hypertarget{motor_8h_a160391b62b18958565163d23550d0a5d}\label{motor_8h_a160391b62b18958565163d23550d0a5d}} 
+\index{motor.h@{motor.h}!PWM\_SCALE@{PWM\_SCALE}}
+\index{PWM\_SCALE@{PWM\_SCALE}!motor.h@{motor.h}}
+\doxysubsubsection{\texorpdfstring{PWM\_SCALE}{PWM\_SCALE}}
+{\footnotesize\ttfamily \#define P\+W\+M\+\_\+\+S\+C\+A\+LE~10000.}
+
+scales the duty cycle value 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{motor_8h_ae3d148f659679557b399c8831089550f}\label{motor_8h_ae3d148f659679557b399c8831089550f}} 
+\index{motor.h@{motor.h}!pwm\_init@{pwm\_init}}
+\index{pwm\_init@{pwm\_init}!motor.h@{motor.h}}
+\doxysubsubsection{\texorpdfstring{pwm\_init()}{pwm\_init()}}
+{\footnotesize\ttfamily int pwm\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+open and initialize P\+WM pins, period, and duty cycle. 
+
+\begin{DoxyReturn}{Returns}
+-\/1 in case of error, 0 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{motor_8h_a6969db790a802cf7e2f7845d7c8a95fc}\label{motor_8h_a6969db790a802cf7e2f7845d7c8a95fc}} 
+\index{motor.h@{motor.h}!pwm\_stop@{pwm\_stop}}
+\index{pwm\_stop@{pwm\_stop}!motor.h@{motor.h}}
+\doxysubsubsection{\texorpdfstring{pwm\_stop()}{pwm\_stop()}}
+{\footnotesize\ttfamily int pwm\+\_\+stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+disables P\+WM related functions. 
+
+\begin{DoxyReturn}{Returns}
+-\/1 in case of error, 0 otherwise.
+\end{DoxyReturn}
+applies 0V to the DC motor, effectively stopping the motor. \begin{DoxyReturn}{Returns}
+-\/1 in case of error, 0 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{motor_8h_aff611300524ae8b6c5ea9ded51438e89}\label{motor_8h_aff611300524ae8b6c5ea9ded51438e89}} 
+\index{motor.h@{motor.h}!set\_motor\_ccw@{set\_motor\_ccw}}
+\index{set\_motor\_ccw@{set\_motor\_ccw}!motor.h@{motor.h}}
+\doxysubsubsection{\texorpdfstring{set\_motor\_ccw()}{set\_motor\_ccw()}}
+{\footnotesize\ttfamily int set\+\_\+motor\+\_\+ccw (\begin{DoxyParamCaption}\item[{int}]{duty\+\_\+cycle }\end{DoxyParamCaption})}
+
+
+
+sets the given duty cycle value. Motor motion will be in the counter-\/clockwise direction. Converts 0-\/100\% value to be in the equivalent value, given that 0\% is -\/27V and 100\% is 27V. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em duty\+\_\+cycle} & duty cycle percentage (0-\/100\%) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 in case of error, 0 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{motor_8h_ac1433aad433a294c1b1ec68745b1442c}\label{motor_8h_ac1433aad433a294c1b1ec68745b1442c}} 
+\index{motor.h@{motor.h}!set\_motor\_cw@{set\_motor\_cw}}
+\index{set\_motor\_cw@{set\_motor\_cw}!motor.h@{motor.h}}
+\doxysubsubsection{\texorpdfstring{set\_motor\_cw()}{set\_motor\_cw()}}
+{\footnotesize\ttfamily int set\+\_\+motor\+\_\+cw (\begin{DoxyParamCaption}\item[{int}]{duty\+\_\+cycle }\end{DoxyParamCaption})}
+
+
+
+sets the given duty cycle value. Motor motion will be in the clockwise direction. Converts 0-\/100\% value to be in the equivalent value, given that 0\% is -\/27V and 100\% is 27V. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em duty\+\_\+cycle} & duty cycle percentage (0-\/100\%) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 in case of error, 0 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{motor_8h_a983d24d1abe929f51024dadec5a28ae1}\label{motor_8h_a983d24d1abe929f51024dadec5a28ae1}} 
+\index{motor.h@{motor.h}!set\_motor\_voltage@{set\_motor\_voltage}}
+\index{set\_motor\_voltage@{set\_motor\_voltage}!motor.h@{motor.h}}
+\doxysubsubsection{\texorpdfstring{set\_motor\_voltage()}{set\_motor\_voltage()}}
+{\footnotesize\ttfamily int set\+\_\+motor\+\_\+voltage (\begin{DoxyParamCaption}\item[{double}]{voltage }\end{DoxyParamCaption})}
+
+
+
+applies the given voltage to the motor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em voltage} & voltage value in the range -\/27V and 27V. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 in case of error, 0 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{motor_8h_a93b70ab296f1694d7a803e594d1c8d89}\label{motor_8h_a93b70ab296f1694d7a803e594d1c8d89}} 
+\index{motor.h@{motor.h}!set\_pwm\_duty\_cycle\_percentage@{set\_pwm\_duty\_cycle\_percentage}}
+\index{set\_pwm\_duty\_cycle\_percentage@{set\_pwm\_duty\_cycle\_percentage}!motor.h@{motor.h}}
+\doxysubsubsection{\texorpdfstring{set\_pwm\_duty\_cycle\_percentage()}{set\_pwm\_duty\_cycle\_percentage()}}
+{\footnotesize\ttfamily int set\+\_\+pwm\+\_\+duty\+\_\+cycle\+\_\+percentage (\begin{DoxyParamCaption}\item[{float}]{percentage }\end{DoxyParamCaption})}
+
+
+
+sets the given duty cycle value. 0\% is -\/27V and 100\% is 27V. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em percentage} & duty cycle percentage (0-\/100\%) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 in case of error, 0 otherwise. 
+\end{DoxyReturn}

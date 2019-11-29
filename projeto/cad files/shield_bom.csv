@@ -1,0 +1,30 @@
+Component,Description,Part,References,Value,Footprint,Quantity Per PCB,Datasheet
+1,Unpolarized capacitor,C,C1 C2 C3 C4,22pF,C_Disc_D3.8mm_W2.6mm_P2.50mm,4,~
+2,"Unpolarized capacitor, small symbol",C_Small,C5 C6 C7,100uF,,3,~
+3,"Diode, small symbol",D_Small,D1,,,1,~
+4,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Male,J4,Conn_01x02_Male,PinHeader_1x02_P2.54mm_Vertical,1,~
+5,"Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x03_Male,J3,Conn_01x03_Male,PinHeader_1x03_P2.54mm_Vertical,1,~
+6,"Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x04_Male,J1 J2,Conn_01x04_Male,PinHeader_1x04_P2.54mm_Vertical,2,~
+7,"Resistor, small US symbol",R_Small_US,R3 R4 R8,10k,,3,~
+8,"Resistor, small US symbol",R_Small_US,R1 R2,1M,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal,2,~
+9,"Resistor, small US symbol",R_Small_US,R5 R6 R7,1k,,3,~
+10,Half-bridge ,BTS7960,U3 U4,BTS7960,,2,
+11,Decoder Counter,LS7366R,U1 U2,LS7366R,DIP-14_W7.62mm,2,
+12,PCB,Shield,U5,Shield,,1,
+13,"Two pin crystal, small symbol",Crystal_Small,Y1 Y2,30MHz,Crystal_HC49-U_Vertical,2,~
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+Component Groups:,13,,,,,,
+Component Count:,27,,,,,,
+Fitted Components:,27,,,,,,
+Number of PCBs:,1,,,,,,
+Total components:,27,,,,,,
+Schematic Version:,,,,,,,
+Schematic Date:,2019-10-17,,,,,,
+PCB Variant:,default,,,,,,
+BoM Date:,"Thursday, November 28, 2019 at 08:20:30 PM",,,,,,
+Schematic Source:,/Users/gustavo/Documents/ufrgs/materias/atual/microcontroladores/inf-microcontroladores/projeto/kidcad/shield.sch,,,,,,
+KiCad Version:,Eeschema (5.1.4-0-10_14),,,,,,

@@ -102,7 +102,7 @@ case "$1" in
     fi
     echo -n "out" > /sys/class/gpio/gpio77/direction
     echo -n "0" > /sys/class/gpio/gpio77/value
-    
+
     #######      ___ ___ ____
     #######     |_ _/ _ \__ /
     #######      | | (_) |_ \
@@ -120,20 +120,6 @@ case "$1" in
     chgrp gpio /sys/class/gpio/gpio62/value
     chmod g+rw /sys/class/gpio/gpio62/value
     
-    # # gpio16 = 0 = out
-    # if [ ! -d /sys/class/gpio/gpio16 ] ; then
-    #     echo -n "16" > /sys/class/gpio/export
-    # fi
-    # echo -n "out" > /sys/class/gpio/gpio16/direction
-    # echo -n "0" > /sys/class/gpio/gpio16/value
-
-    # # gpio17 = in = no pull resistor
-    # if [ ! -d /sys/class/gpio/gpio17 ] ; then
-    #     echo -n "17" > /sys/class/gpio/export
-    # fi
-    # echo -n "in" > /sys/class/gpio/gpio17/direction
-
-    # gpio76 = 0 = mux
     if [ ! -d /sys/class/gpio/gpio76 ] ; then
         echo -n "76" > /sys/class/gpio/export
     fi
@@ -437,36 +423,53 @@ case "$1" in
     #-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
     # GPIO
     #-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
-    
+
+    # IO1
+    echo -n "12" > /sys/class/gpio/unexport
+    echo -n "1" > /sys/class/gpio/gpio28/value
+    echo -n "28" > /sys/class/gpio/unexport
+    echo -n "29" > /sys/class/gpio/unexport
+    echo -n "45" > /sys/class/gpio/unexport
+
     # IO2
-    echo -n "1" > /sys/class/gpio/gpio34/value
     echo -n "13" > /sys/class/gpio/unexport
+    echo -n "1" > /sys/class/gpio/gpio34/value
     echo -n "34" > /sys/class/gpio/unexport
     echo -n "35" > /sys/class/gpio/unexport
     echo -n "77" > /sys/class/gpio/unexport
 
+    # IO3
+
+    echo -n "62" > /sys/class/gpio/unexport
+    echo -n "76" > /sys/class/gpio/unexport
+    echo -n "64" > /sys/class/gpio/unexport
+
     # IO4
-    echo -n "1" > /sys/class/gpio/gpio36/value
     echo -n "6" > /sys/class/gpio/unexport
+    echo -n "1" > /sys/class/gpio/gpio36/value
     echo -n "36" > /sys/class/gpio/unexport
     echo -n "37" > /sys/class/gpio/unexport
 
-    # IO5
-
-    # IO6
     
     #-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
     # PWM
     #-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
-    
-    # IO3
-    echo -n "0" > /sys/class/pwm/pwmchip0/pwm1/enable
-    echo -n "1" > /sys/class/gpio/gpio16/value
-    echo -n "76" > /sys/class/gpio/unexport
-    echo -n "64" > /sys/class/gpio/unexport
-    echo -n "17" > /sys/class/gpio/unexport
-    echo -n "16" > /sys/class/gpio/unexport
-    echo -n "1" > /sys/class/pwm/pwmchip0/unexport
+
+    # IO5
+    echo -n "0" > /sys/class/pwm/pwmchip0/pwm3/enable
+    echo -n "1" > /sys/class/gpio/gpio18/value
+    echo -n "18" > /sys/class/gpio/unexport
+    echo -n "19" > /sys/class/gpio/unexport
+    echo -n "66" > /sys/class/gpio/unexport
+    echo -n "3" > /sys/class/pwm/pwmchip0/unexport
+
+    # IO6
+    echo -n "0" > /sys/class/pwm/pwmchip0/pwm5/enable
+    echo -n "1" > /sys/class/gpio/gpio18/value
+    echo -n "18" > /sys/class/gpio/unexport
+    echo -n "19" > /sys/class/gpio/unexport
+    echo -n "66" > /sys/class/gpio/unexport
+    echo -n "5" > /sys/class/pwm/pwmchip0/unexport
 
     #-~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~--~.~-
     # SPI

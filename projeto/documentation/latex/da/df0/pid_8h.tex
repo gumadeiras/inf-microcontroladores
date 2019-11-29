@@ -1,0 +1,65 @@
+\hypertarget{pid_8h}{}\doxysection{/\+Users/gustavo/\+Documents/ufrgs/materias/atual/microcontroladores/inf-\/microcontroladores/projeto/src/include/pid.h File Reference}
+\label{pid_8h}\index{/Users/gustavo/Documents/ufrgs/materias/atual/microcontroladores/inf-\/microcontroladores/projeto/src/include/pid.h@{/Users/gustavo/Documents/ufrgs/materias/atual/microcontroladores/inf-\/microcontroladores/projeto/src/include/pid.h}}
+
+
+helper functions for the P\+ID control algorithm  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned long long \mbox{\hyperlink{pid_8h_a1249b858543f701bca629c57274f6393}{time\+\_\+ms}} (void)
+\begin{DoxyCompactList}\small\item\em get current time in ms. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{pid_8h_a0ef1bf5c69fcfc1a71dda3056df35c2a}{pid\+\_\+control}} (double desired\+\_\+value, double actual\+\_\+value, float kp, float ki, float kd, double error\+\_\+prior, int update\+\_\+period)
+\begin{DoxyCompactList}\small\item\em P\+ID control algorithm, computes the output voltage that minimizes the error (relative arm position given some target position). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+helper functions for the P\+ID control algorithm 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{pid_8h_a0ef1bf5c69fcfc1a71dda3056df35c2a}\label{pid_8h_a0ef1bf5c69fcfc1a71dda3056df35c2a}} 
+\index{pid.h@{pid.h}!pid\_control@{pid\_control}}
+\index{pid\_control@{pid\_control}!pid.h@{pid.h}}
+\doxysubsubsection{\texorpdfstring{pid\_control()}{pid\_control()}}
+{\footnotesize\ttfamily double pid\+\_\+control (\begin{DoxyParamCaption}\item[{double}]{desired\+\_\+value,  }\item[{double}]{actual\+\_\+value,  }\item[{float}]{kp,  }\item[{float}]{ki,  }\item[{float}]{kd,  }\item[{double}]{error\+\_\+prior,  }\item[{int}]{update\+\_\+period }\end{DoxyParamCaption})}
+
+
+
+P\+ID control algorithm, computes the output voltage that minimizes the error (relative arm position given some target position). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em desired\+\_\+value} & desired arm position in radians \\
+\hline
+{\em actual\+\_\+value} & current arm position in radians \\
+\hline
+{\em kp} & P\+ID proportial constant \\
+\hline
+{\em ki} & P\+ID integral constant \\
+\hline
+{\em kd} & P\+ID derivative constant \\
+\hline
+{\em error\+\_\+prior} & error from the preivous iteration \\
+\hline
+{\em update\+\_\+period} & time since last iteration \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+(double) output returns the voltage to be applied 
+\end{DoxyReturn}
+\mbox{\Hypertarget{pid_8h_a1249b858543f701bca629c57274f6393}\label{pid_8h_a1249b858543f701bca629c57274f6393}} 
+\index{pid.h@{pid.h}!time\_ms@{time\_ms}}
+\index{time\_ms@{time\_ms}!pid.h@{pid.h}}
+\doxysubsubsection{\texorpdfstring{time\_ms()}{time\_ms()}}
+{\footnotesize\ttfamily unsigned long long time\+\_\+ms (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+get current time in ms. 
+
+\begin{DoxyReturn}{Returns}
+(unsigned long long) time in ms 
+\end{DoxyReturn}

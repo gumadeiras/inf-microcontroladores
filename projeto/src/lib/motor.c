@@ -22,24 +22,29 @@
 
 */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+#include <galileo2io.h>
 #include "motor.h"
 
 int pwm_init()
 {
-    pputs(PIN_PWM_PERIOD, PWM_PERIOD); // set PWM period
-    pputs(PIN_PWM3_DUTY, "0");
-    pputs(PIN_PWM5_DUTY, "0");
-    pputs(PIN_PWM3_ENABLE,"1"); // enable PWM
-    pputs(PIN_PWM5_ENABLE,"1"); // enable PWM
-    pputs(PIN_PWM_EN_R, "1");
-    pputs(PIN_PWM_EN_L, "1");
+    if(pputs(PIN_PWM_PERIOD, PWM_PERIOD) < 0) {return -1;} // set PWM period
+    if(pputs(PIN_PWM3_DUTY, "0") < 0) {return -1;}
+    if(pputs(PIN_PWM5_DUTY, "0") < 0) {return -1;}
+    if(pputs(PIN_PWM3_ENABLE,"1") < 0) {return -1;} // enable PWM
+    if(pputs(PIN_PWM5_ENABLE,"1") < 0) {return -1;} // enable PWM
+    if(pputs(PIN_PWM_EN_R, "1") < 0) {return -1;}
+    if(pputs(PIN_PWM_EN_L, "1") < 0) {return -1;}
     return 0;
 }
 
 int set_motor_stop()
 {
-    pputs(PIN_PWM3_DUTY, "0");
-    pputs(PIN_PWM5_DUTY, "0");
+    if(pputs(PIN_PWM3_DUTY, "0") < 0) {return -1;};
+    if(pputs(PIN_PWM5_DUTY, "0") < 0) {return -1;};
     return 0;
 }
 
@@ -48,9 +53,9 @@ int set_motor_cw(int duty_cycle)
     char str[100];
     snprintf(str, sizeof str, "%d\n", duty_cycle * (int)PWM_SCALE);
 
-    pputs(PIN_PWM3_DUTY, "0");
-    pputs(PIN_PWM5_DUTY, "0");
-    pputs(PIN_PWM5_DUTY, str);
+    if(pputs(PIN_PWM3_DUTY, "0") < 0) {return -1;}
+    if(pputs(PIN_PWM5_DUTY, "0") < 0) {return -1;}
+    if(pputs(PIN_PWM5_DUTY, str) < 0) {return -1;}
     return 0;
 }
 
@@ -59,16 +64,16 @@ int set_motor_ccw(int duty_cycle)
     char str[100];
     snprintf(str, sizeof str, "%d\n", duty_cycle * (int)PWM_SCALE);
 
-    pputs(PIN_PWM5_DUTY, "0");
-    pputs(PIN_PWM3_DUTY, "0");
-    pputs(PIN_PWM3_DUTY, str);
+    if(pputs(PIN_PWM5_DUTY, "0") < 0) {return -1;}
+    if(pputs(PIN_PWM3_DUTY, "0") < 0) {return -1;}
+    if(pputs(PIN_PWM3_DUTY, str) < 0) {return -1;}
     return 0;
 }
 
 // set duty cycle by percentage
-int set_pwm_duty_cycle_percentage(int percentage)
+int set_pwm_duty_cycle_percentage(float percentage)
 {
-    int duty_cycle = percentage;
+    float duty_cycle = percentage;
 
     if (duty_cycle < 0)
     {
@@ -114,9 +119,9 @@ int set_pwm_duty_cycle_percentage(int percentage)
 }
 
 // set motor voltage
-int set_motor_voltage(int voltage)
+int set_motor_voltage(double voltage)
 {
-    int duty_cycle_percentage;
+    double duty_cycle_percentage;
     
     if ((voltage > 27) | (voltage < -27))
     {
@@ -140,5 +145,16 @@ int set_motor_voltage(int voltage)
         return 0;
     }
 
+    return 0;
+}
+
+int pwm_stop()
+{
+    if(pputs(PIN_PWM3_DUTY, "0") < 0) {return -1;}
+    if(pputs(PIN_PWM5_DUTY, "0") < 0) {return -1;}
+    if(pputs(PIN_PWM3_ENABLE,"0") < 0) {return -1;}
+    if(pputs(PIN_PWM5_ENABLE,"0") < 0) {return -1;}
+    if(pputs(PIN_PWM_EN_R, "0") < 0) {return -1;}
+    if(pputs(PIN_PWM_EN_L, "0") < 0) {return -1;}
     return 0;
 }

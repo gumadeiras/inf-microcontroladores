@@ -44,7 +44,7 @@ int main(int argc, char const *argv[])
 {
     unsigned char str_register;
     unsigned long long duration, current_time, start_time;
-    int duty_cycle, update_period, limit1_switch, limit2_switch;
+    int update_period, limit1_switch, limit2_switch;
     float kp, ki, kd;
     double error_prior, desired_value, counter_value, output;
     COUNTER counter;
@@ -59,13 +59,12 @@ int main(int argc, char const *argv[])
     pwm_init();
     
     puts("slowly moving arm to left limit\n");
-    set_motor_voltage(-2);
+    set_motor_voltage(-15);
 
-    if (limit_poll(1) < 0) // poll limit1 switch and stop motor and limit is reached
+    if (limit_poll(1) < 0) // poll limit1 switch and stop motor when limit is reached
     {
         set_motor_stop();
-        pputs(PIN_PWM3_ENABLE,"0"); // disable PWM
-        pputs(PIN_PWM5_ENABLE,"0"); // disable PWM
+        pwm_stop();
         puts("polling limit1 switch failed, aborting\n");
     }
 
@@ -73,10 +72,10 @@ int main(int argc, char const *argv[])
     puts("arm reached its limit\n");
     
     puts("initializing counter\n");
-    counter_open(&counter, SPI_PATH, SPI_SS_PATH);
-    counter_init(counter);
-    counter_mode_read(counter);
-    counter_reset(counter); 
+    counter_open(&counter, SPI_PATH, SPI_SS_PATH); // open file descriptors
+    counter_init(counter); // initialize LS7366 registers
+    counter_mode_read(counter); // read mode registers
+    counter_reset(counter);  // reset counter value
     pputs(SPI_EN_C_PATH, "1"); // enable counter
 
     str_register = counter_byte_read(counter, READ_MDR0); // status register
@@ -84,13 +83,12 @@ int main(int argc, char const *argv[])
     // printf("Counter: %d; Rad: %f\n", counter_read(counter), counter_read_rad(counter));
 
     puts("slowly moving arm to right limit\n");
-    set_motor_voltage(2);
+    set_motor_voltage(15);
 
-    if (limit_poll(2) < 0) // poll limit1 switch and stop motor and limit is reached
+    if (limit_poll(2) < 0) // poll limit2 switch and stop motor when limit is reached
     {
         set_motor_stop();
-        pputs(PIN_PWM3_ENABLE,"0"); // disable PWM
-        pputs(PIN_PWM5_ENABLE,"0"); // disable PWM
+        pwm_stop();
         puts("polling limit2 switch failed, aborting\n");
     }
     set_motor_stop();
@@ -98,7 +96,7 @@ int main(int argc, char const *argv[])
     printf("Counter: %d; Rad: %f\n", counter_read(counter), counter_read_rad(counter));
 
     puts("moving arm back a bit\n");
-    set_motor_voltage(-8);
+    set_motor_voltage(-15);
     usleep(500 * 1000); // 500ms
     set_motor_stop();
 
@@ -118,7 +116,7 @@ int main(int argc, char const *argv[])
     
     start_time    = time_ms();
     current_time  = start_time;
-    update_period = 100; // in ms
+    update_period = 10; // in ms
     error_prior   = 0;
     if (desired_value > 3.142) // 3.142 rad = 180 degrees
     {
@@ -140,7 +138,7 @@ int main(int argc, char const *argv[])
         // check if arm is at its limit
         limit1_switch = limit_read(1);
         limit2_switch = limit_read(2);
-        if ((limit1_switch == 0) | (limit2_switch == 0))
+        if ((limit1_switch == 0) || (limit2_switch == 0))
         {
             puts("stopping, arm reached a limit:\n");
             printf("limit1: %d\n", limit1_switch);
@@ -160,32 +158,26 @@ int main(int argc, char const *argv[])
 
             // check if output is bigger than voltage limit
             // using max voltage +-15V, just to be safe
-            if (output > 15)
+            if (output > 27)
             {
-                output = 15;
-            } else if (output < -15){
-                output = -15;
+                output = 27;
+            } else if (output < -27){
+                output = -27;
             }
             set_motor_voltage(output);
             usleep(update_period * 1000);
         }
+
         print_counter = print_counter + 1;
-        if ((print_counter % 10) == 0)
+        if ((print_counter % 100) == 0)
         {
-        printf("Rad: %f; Angle: %f; Voltage: %f\n", counter_read_rad(counter), counter_read_rad(counter)*180/PI_CONST, output);
+            printf("Rad: %f; Angle: %f; Voltage: %f\n", counter_read_rad(counter), counter_read_rad(counter)*180/PI_CONST, output);
         }
     }
 
     puts("stopping motor and exiting...\n");
     set_motor_stop(); // stop motor
-    if(pputs(PIN_PWM3_ENABLE,"0") < 1) // disable PWM
-    {
-        perror("error disabling PWM3\n");
-    }
-    if(pputs(PIN_PWM5_ENABLE,"0") < 1) // disable PWM
-    {
-        perror("error disabling PWM5\n");
-    }
+    pwm_stop();
 
     return 0;
 }

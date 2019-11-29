@@ -21,11 +21,10 @@
     at <http://www.gnu.org/licenses>.
 */
 
-#include "pid.h"
+#include <stdio.h>
+#include <sys/time.h>
 
-// #define kp 1 // proportional constant, "step size"
-// #define ki 1 // accumulating errors over time, integral
-// #define kd 1 // dampening constant, derivative
+#include "pid.h"
 
 unsigned long long time_ms(void)
 {
@@ -39,31 +38,13 @@ double pid_control(double desired_value, double actual_value, float kp, float ki
 {
     double ki_sensitivity;
     double integral = 0;
-    double error, derivative, output, bias;
+    double error, derivative, output;
 
-    bias = 0.00000000001; // avoid output = 0
-
-    // DOES: error = desired_value – actual_value
-    // printf("desired value: %f; actual_value: %f\n", desired_value, actual_value);
-    error = desired_value - actual_value;
-
-    // DOES: integral = integral + (error*update_period)
-    // if error is within 5 degrees, start computing the integral part
-    ki_sensitivity = 0.0872665; // 5 degrees in radians
-    if ((error > -ki_sensitivity) && (error < ki_sensitivity))
-    {
-        integral = integral + (error * update_period);
-    } else {
-        integral = 0;
-    }
-
-    // DOES: derivative = (error – error_prior)/update_period
+    error      = desired_value - actual_value;
+    integral   = integral + (error * update_period);
     derivative = (error - error_prior) / update_period;
-    
-    // DOES: output = kp*error + ki*integral + kd*derivative + bias
-    output = kp * error + ki * integral + kd * derivative + bias;
+    output     = kp * error + ki * integral + kd * derivative;
     // printf("error: %f; error_prior: %f; integral: %f; derivative: %f\n", error, error_prior, integral, derivative);
 
-    // save error for next iteration
     return output;
 }
